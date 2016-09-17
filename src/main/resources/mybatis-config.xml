@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration  
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 全局别名设置，在映射文件中只需写别名，而不必写出整个类路径 -->
+	<typeAliases>
+		<typeAlias type="com.taoxiuxia.model.Income" alias="Income" />
+	</typeAliases>
+	<mappers>
+		<mapper resource="com/taoxiuxia/mapping/IncomeMapper.xml" />
+	</mappers>
+</configuration> 

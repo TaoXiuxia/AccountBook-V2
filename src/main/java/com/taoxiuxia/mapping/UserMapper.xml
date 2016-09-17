@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taoxiuxia.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.taoxiuxia.model.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_age" property="userAge" jdbcType="INTEGER" />
+    <result column="user_sex" property="userSex" jdbcType="CHAR" />
+    <result column="user_remark" property="userRemark" jdbcType="VARCHAR" />
+    <result column="user_register_time" property="userRegisterTime" jdbcType="TIMESTAMP" />
+    <result column="user_last_login_time" property="userLastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="user_activation_code" property="userActivationCode" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, user_name, user_email, user_password, user_age, user_sex, user_remark, user_register_time, 
+    user_last_login_time, user_activation_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taoxiuxia.model.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.taoxiuxia.model.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.taoxiuxia.model.User" >
+    insert into user (user_id, user_name, user_email, 
+      user_password, user_age, user_sex, 
+      user_remark, user_register_time, user_last_login_time, 
+      user_activation_code)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{userAge,jdbcType=INTEGER}, #{userSex,jdbcType=CHAR}, 
+      #{userRemark,jdbcType=VARCHAR}, #{userRegisterTime,jdbcType=TIMESTAMP}, #{userLastLoginTime,jdbcType=TIMESTAMP}, 
+      #{userActivationCode,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.taoxiuxia.model.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userEmail != null" >
+        user_email,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userAge != null" >
+        user_age,
+      </if>
+      <if test="userSex != null" >
+        user_sex,
+      </if>
+      <if test="userRemark != null" >
+        user_remark,
+      </if>
+      <if test="userRegisterTime != null" >
+        user_register_time,
+      </if>
+      <if test="userLastLoginTime != null" >
+        user_last_login_time,
+      </if>
+      <if test="userActivationCode != null" >
+        user_activation_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userAge != null" >
+        #{userAge,jdbcType=INTEGER},
+      </if>
+      <if test="userSex != null" >
+        #{userSex,jdbcType=CHAR},
+      </if>
+      <if test="userRemark != null" >
+        #{userRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userRegisterTime != null" >
+        #{userRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userLastLoginTime != null" >
+        #{userLastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userActivationCode != null" >
+        #{userActivationCode,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.taoxiuxia.model.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmail != null" >
+        user_email = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPassword != null" >
+        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAge != null" >
+        user_age = #{record.userAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.userSex != null" >
+        user_sex = #{record.userSex,jdbcType=CHAR},
+      </if>
+      <if test="record.userRemark != null" >
+        user_remark = #{record.userRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userRegisterTime != null" >
+        user_register_time = #{record.userRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userLastLoginTime != null" >
+        user_last_login_time = #{record.userLastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userActivationCode != null" >
+        user_activation_code = #{record.userActivationCode,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_email = #{record.userEmail,jdbcType=VARCHAR},
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      user_age = #{record.userAge,jdbcType=INTEGER},
+      user_sex = #{record.userSex,jdbcType=CHAR},
+      user_remark = #{record.userRemark,jdbcType=VARCHAR},
+      user_register_time = #{record.userRegisterTime,jdbcType=TIMESTAMP},
+      user_last_login_time = #{record.userLastLoginTime,jdbcType=TIMESTAMP},
+      user_activation_code = #{record.userActivationCode,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.User" >
+    update user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userAge != null" >
+        user_age = #{userAge,jdbcType=INTEGER},
+      </if>
+      <if test="userSex != null" >
+        user_sex = #{userSex,jdbcType=CHAR},
+      </if>
+      <if test="userRemark != null" >
+        user_remark = #{userRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userRegisterTime != null" >
+        user_register_time = #{userRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userLastLoginTime != null" >
+        user_last_login_time = #{userLastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userActivationCode != null" >
+        user_activation_code = #{userActivationCode,jdbcType=CHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taoxiuxia.model.User" >
+    update user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_age = #{userAge,jdbcType=INTEGER},
+      user_sex = #{userSex,jdbcType=CHAR},
+      user_remark = #{userRemark,jdbcType=VARCHAR},
+      user_register_time = #{userRegisterTime,jdbcType=TIMESTAMP},
+      user_last_login_time = #{userLastLoginTime,jdbcType=TIMESTAMP},
+      user_activation_code = #{userActivationCode,jdbcType=CHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

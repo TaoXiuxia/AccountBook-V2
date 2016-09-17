@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taoxiuxia.dao.ExpenditureMapper" >
+  <resultMap id="BaseResultMap" type="com.taoxiuxia.model.Expenditure" >
+    <id column="expenditure_id" property="expenditureId" jdbcType="INTEGER" />
+    <result column="expenditure_user_id" property="expenditureUserId" jdbcType="INTEGER" />
+    <result column="expenditure_item_id" property="expenditureItemId" jdbcType="INTEGER" />
+    <result column="expenditure_money" property="expenditureMoney" jdbcType="REAL" />
+    <result column="expenditure_date" property="expenditureDate" jdbcType="TIMESTAMP" />
+    <result column="expenditure_remark" property="expenditureRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    expenditure_id, expenditure_user_id, expenditure_item_id, expenditure_money, expenditure_date, 
+    expenditure_remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taoxiuxia.model.ExpenditureExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from expenditure
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from expenditure
+    where expenditure_id = #{expenditureId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from expenditure
+    where expenditure_id = #{expenditureId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.taoxiuxia.model.ExpenditureExample" >
+    delete from expenditure
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.taoxiuxia.model.Expenditure" >
+    insert into expenditure (expenditure_id, expenditure_user_id, 
+      expenditure_item_id, expenditure_money, expenditure_date, 
+      expenditure_remark)
+    values (#{expenditureId,jdbcType=INTEGER}, #{expenditureUserId,jdbcType=INTEGER}, 
+      #{expenditureItemId,jdbcType=INTEGER}, #{expenditureMoney,jdbcType=REAL}, #{expenditureDate,jdbcType=TIMESTAMP}, 
+      #{expenditureRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.taoxiuxia.model.Expenditure" >
+    insert into expenditure
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="expenditureId != null" >
+        expenditure_id,
+      </if>
+      <if test="expenditureUserId != null" >
+        expenditure_user_id,
+      </if>
+      <if test="expenditureItemId != null" >
+        expenditure_item_id,
+      </if>
+      <if test="expenditureMoney != null" >
+        expenditure_money,
+      </if>
+      <if test="expenditureDate != null" >
+        expenditure_date,
+      </if>
+      <if test="expenditureRemark != null" >
+        expenditure_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="expenditureId != null" >
+        #{expenditureId,jdbcType=INTEGER},
+      </if>
+      <if test="expenditureUserId != null" >
+        #{expenditureUserId,jdbcType=INTEGER},
+      </if>
+      <if test="expenditureItemId != null" >
+        #{expenditureItemId,jdbcType=INTEGER},
+      </if>
+      <if test="expenditureMoney != null" >
+        #{expenditureMoney,jdbcType=REAL},
+      </if>
+      <if test="expenditureDate != null" >
+        #{expenditureDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expenditureRemark != null" >
+        #{expenditureRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.taoxiuxia.model.ExpenditureExample" resultType="java.lang.Integer" >
+    select count(*) from expenditure
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update expenditure
+    <set >
+      <if test="record.expenditureId != null" >
+        expenditure_id = #{record.expenditureId,jdbcType=INTEGER},
+      </if>
+      <if test="record.expenditureUserId != null" >
+        expenditure_user_id = #{record.expenditureUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.expenditureItemId != null" >
+        expenditure_item_id = #{record.expenditureItemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.expenditureMoney != null" >
+        expenditure_money = #{record.expenditureMoney,jdbcType=REAL},
+      </if>
+      <if test="record.expenditureDate != null" >
+        expenditure_date = #{record.expenditureDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expenditureRemark != null" >
+        expenditure_remark = #{record.expenditureRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update expenditure
+    set expenditure_id = #{record.expenditureId,jdbcType=INTEGER},
+      expenditure_user_id = #{record.expenditureUserId,jdbcType=INTEGER},
+      expenditure_item_id = #{record.expenditureItemId,jdbcType=INTEGER},
+      expenditure_money = #{record.expenditureMoney,jdbcType=REAL},
+      expenditure_date = #{record.expenditureDate,jdbcType=TIMESTAMP},
+      expenditure_remark = #{record.expenditureRemark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Expenditure" >
+    update expenditure
+    <set >
+      <if test="expenditureUserId != null" >
+        expenditure_user_id = #{expenditureUserId,jdbcType=INTEGER},
+      </if>
+      <if test="expenditureItemId != null" >
+        expenditure_item_id = #{expenditureItemId,jdbcType=INTEGER},
+      </if>
+      <if test="expenditureMoney != null" >
+        expenditure_money = #{expenditureMoney,jdbcType=REAL},
+      </if>
+      <if test="expenditureDate != null" >
+        expenditure_date = #{expenditureDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expenditureRemark != null" >
+        expenditure_remark = #{expenditureRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where expenditure_id = #{expenditureId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taoxiuxia.model.Expenditure" >
+    update expenditure
+    set expenditure_user_id = #{expenditureUserId,jdbcType=INTEGER},
+      expenditure_item_id = #{expenditureItemId,jdbcType=INTEGER},
+      expenditure_money = #{expenditureMoney,jdbcType=REAL},
+      expenditure_date = #{expenditureDate,jdbcType=TIMESTAMP},
+      expenditure_remark = #{expenditureRemark,jdbcType=VARCHAR}
+    where expenditure_id = #{expenditureId,jdbcType=INTEGER}
+  </update>
+</mapper>
