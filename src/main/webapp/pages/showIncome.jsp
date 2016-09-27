@@ -11,11 +11,11 @@
 	<table>
 		<tr>
 			<th>姓名</th>
-			<th>年龄</th>
-			<th>年龄</th>
-			<th>年龄</th>
-			<th>年龄</th>
-			<th>年龄</th>
+			<th>年龄3</th>
+			<th>年龄3</th>
+			<th>年龄3</th>
+			<th>年龄3</th>
+			<th>年龄3</th>
 		</tr>
 		<c:forEach items="${incomes}" var="income">
 			<tr>

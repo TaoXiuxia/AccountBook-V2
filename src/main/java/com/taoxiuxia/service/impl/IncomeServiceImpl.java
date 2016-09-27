@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.taoxiuxia.dao.IncomeMapper;
+import com.taoxiuxia.mapper.IncomeMapper;
 import com.taoxiuxia.model.Income;
 import com.taoxiuxia.service.IIncomeService;
 
@@ -25,6 +25,6 @@ public class IncomeServiceImpl implements IIncomeService {
 
 	@Override
 	public List<Income> loadIncomes() {
-		return incomeMapper.selectAll();
+		return incomeMapper.selectAllIncomes();
 	}
 }

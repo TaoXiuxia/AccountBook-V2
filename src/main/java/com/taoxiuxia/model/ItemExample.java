@@ -1,17 +1,16 @@
 package com.taoxiuxia.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class ExpenditureExample {
+public class ItemExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ExpenditureExample() {
+    public ItemExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -165,66 +164,6 @@ public class ExpenditureExample {
             return (Criteria) this;
         }
 
-        public Criteria andItemIdIsNull() {
-            addCriterion("item_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemIdIsNotNull() {
-            addCriterion("item_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemIdEqualTo(Integer value) {
-            addCriterion("item_id =", value, "itemId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemIdNotEqualTo(Integer value) {
-            addCriterion("item_id <>", value, "itemId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemIdGreaterThan(Integer value) {
-            addCriterion("item_id >", value, "itemId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("item_id >=", value, "itemId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemIdLessThan(Integer value) {
-            addCriterion("item_id <", value, "itemId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemIdLessThanOrEqualTo(Integer value) {
-            addCriterion("item_id <=", value, "itemId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemIdIn(List<Integer> values) {
-            addCriterion("item_id in", values, "itemId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemIdNotIn(List<Integer> values) {
-            addCriterion("item_id not in", values, "itemId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemIdBetween(Integer value1, Integer value2) {
-            addCriterion("item_id between", value1, value2, "itemId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("item_id not between", value1, value2, "itemId");
-            return (Criteria) this;
-        }
-
         public Criteria andUserIdIsNull() {
             addCriterion("user_id is null");
             return (Criteria) this;
@@ -285,123 +224,143 @@ public class ExpenditureExample {
             return (Criteria) this;
         }
 
-        public Criteria andMoneyIsNull() {
-            addCriterion("money is null");
+        public Criteria andNameIsNull() {
+            addCriterion("name is null");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyIsNotNull() {
-            addCriterion("money is not null");
+        public Criteria andNameIsNotNull() {
+            addCriterion("name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyEqualTo(Float value) {
-            addCriterion("money =", value, "money");
+        public Criteria andNameEqualTo(String value) {
+            addCriterion("name =", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyNotEqualTo(Float value) {
-            addCriterion("money <>", value, "money");
+        public Criteria andNameNotEqualTo(String value) {
+            addCriterion("name <>", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyGreaterThan(Float value) {
-            addCriterion("money >", value, "money");
+        public Criteria andNameGreaterThan(String value) {
+            addCriterion("name >", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyGreaterThanOrEqualTo(Float value) {
-            addCriterion("money >=", value, "money");
+        public Criteria andNameGreaterThanOrEqualTo(String value) {
+            addCriterion("name >=", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyLessThan(Float value) {
-            addCriterion("money <", value, "money");
+        public Criteria andNameLessThan(String value) {
+            addCriterion("name <", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyLessThanOrEqualTo(Float value) {
-            addCriterion("money <=", value, "money");
+        public Criteria andNameLessThanOrEqualTo(String value) {
+            addCriterion("name <=", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyIn(List<Float> values) {
-            addCriterion("money in", values, "money");
+        public Criteria andNameLike(String value) {
+            addCriterion("name like", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyNotIn(List<Float> values) {
-            addCriterion("money not in", values, "money");
+        public Criteria andNameNotLike(String value) {
+            addCriterion("name not like", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyBetween(Float value1, Float value2) {
-            addCriterion("money between", value1, value2, "money");
+        public Criteria andNameIn(List<String> values) {
+            addCriterion("name in", values, "name");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyNotBetween(Float value1, Float value2) {
-            addCriterion("money not between", value1, value2, "money");
+        public Criteria andNameNotIn(List<String> values) {
+            addCriterion("name not in", values, "name");
             return (Criteria) this;
         }
 
-        public Criteria andDateIsNull() {
-            addCriterion("date is null");
+        public Criteria andNameBetween(String value1, String value2) {
+            addCriterion("name between", value1, value2, "name");
             return (Criteria) this;
         }
 
-        public Criteria andDateIsNotNull() {
-            addCriterion("date is not null");
+        public Criteria andNameNotBetween(String value1, String value2) {
+            addCriterion("name not between", value1, value2, "name");
             return (Criteria) this;
         }
 
-        public Criteria andDateEqualTo(Date value) {
-            addCriterion("date =", value, "date");
+        public Criteria andInOrExIsNull() {
+            addCriterion("in_or_ex is null");
             return (Criteria) this;
         }
 
-        public Criteria andDateNotEqualTo(Date value) {
-            addCriterion("date <>", value, "date");
+        public Criteria andInOrExIsNotNull() {
+            addCriterion("in_or_ex is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDateGreaterThan(Date value) {
-            addCriterion("date >", value, "date");
+        public Criteria andInOrExEqualTo(String value) {
+            addCriterion("in_or_ex =", value, "inOrEx");
             return (Criteria) this;
         }
 
-        public Criteria andDateGreaterThanOrEqualTo(Date value) {
-            addCriterion("date >=", value, "date");
+        public Criteria andInOrExNotEqualTo(String value) {
+            addCriterion("in_or_ex <>", value, "inOrEx");
             return (Criteria) this;
         }
 
-        public Criteria andDateLessThan(Date value) {
-            addCriterion("date <", value, "date");
+        public Criteria andInOrExGreaterThan(String value) {
+            addCriterion("in_or_ex >", value, "inOrEx");
             return (Criteria) this;
         }
 
-        public Criteria andDateLessThanOrEqualTo(Date value) {
-            addCriterion("date <=", value, "date");
+        public Criteria andInOrExGreaterThanOrEqualTo(String value) {
+            addCriterion("in_or_ex >=", value, "inOrEx");
             return (Criteria) this;
         }
 
-        public Criteria andDateIn(List<Date> values) {
-            addCriterion("date in", values, "date");
+        public Criteria andInOrExLessThan(String value) {
+            addCriterion("in_or_ex <", value, "inOrEx");
             return (Criteria) this;
         }
 
-        public Criteria andDateNotIn(List<Date> values) {
-            addCriterion("date not in", values, "date");
+        public Criteria andInOrExLessThanOrEqualTo(String value) {
+            addCriterion("in_or_ex <=", value, "inOrEx");
             return (Criteria) this;
         }
 
-        public Criteria andDateBetween(Date value1, Date value2) {
-            addCriterion("date between", value1, value2, "date");
+        public Criteria andInOrExLike(String value) {
+            addCriterion("in_or_ex like", value, "inOrEx");
             return (Criteria) this;
         }
 
-        public Criteria andDateNotBetween(Date value1, Date value2) {
-            addCriterion("date not between", value1, value2, "date");
+        public Criteria andInOrExNotLike(String value) {
+            addCriterion("in_or_ex not like", value, "inOrEx");
+            return (Criteria) this;
+        }
+
+        public Criteria andInOrExIn(List<String> values) {
+            addCriterion("in_or_ex in", values, "inOrEx");
+            return (Criteria) this;
+        }
+
+        public Criteria andInOrExNotIn(List<String> values) {
+            addCriterion("in_or_ex not in", values, "inOrEx");
+            return (Criteria) this;
+        }
+
+        public Criteria andInOrExBetween(String value1, String value2) {
+            addCriterion("in_or_ex between", value1, value2, "inOrEx");
+            return (Criteria) this;
+        }
+
+        public Criteria andInOrExNotBetween(String value1, String value2) {
+            addCriterion("in_or_ex not between", value1, value2, "inOrEx");
             return (Criteria) this;
         }
 

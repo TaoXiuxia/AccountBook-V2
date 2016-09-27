@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.taoxiuxia.dao.ExpenditureMapper" >
+<mapper namespace="com.taoxiuxia.mapper.ExpenditureMapper" >
   <resultMap id="BaseResultMap" type="com.taoxiuxia.model.Expenditure" >
-    <id column="expenditure_id" property="expenditureId" jdbcType="INTEGER" />
-    <result column="expenditure_user_id" property="expenditureUserId" jdbcType="INTEGER" />
-    <result column="expenditure_item_id" property="expenditureItemId" jdbcType="INTEGER" />
-    <result column="expenditure_money" property="expenditureMoney" jdbcType="REAL" />
-    <result column="expenditure_date" property="expenditureDate" jdbcType="TIMESTAMP" />
-    <result column="expenditure_remark" property="expenditureRemark" jdbcType="VARCHAR" />
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="item_id" property="itemId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="REAL" />
+    <result column="date" property="date" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="dele" property="dele" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,8 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    expenditure_id, expenditure_user_id, expenditure_item_id, expenditure_money, expenditure_date, 
-    expenditure_remark
+    id, item_id, user_id, money, date, remark, dele
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taoxiuxia.model.ExpenditureExample" >
     select
@@ -89,11 +89,11 @@
     select 
     <include refid="Base_Column_List" />
     from expenditure
-    where expenditure_id = #{expenditureId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from expenditure
-    where expenditure_id = #{expenditureId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.taoxiuxia.model.ExpenditureExample" >
     delete from expenditure
@@ -102,53 +102,59 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.taoxiuxia.model.Expenditure" >
-    insert into expenditure (expenditure_id, expenditure_user_id, 
-      expenditure_item_id, expenditure_money, expenditure_date, 
-      expenditure_remark)
-    values (#{expenditureId,jdbcType=INTEGER}, #{expenditureUserId,jdbcType=INTEGER}, 
-      #{expenditureItemId,jdbcType=INTEGER}, #{expenditureMoney,jdbcType=REAL}, #{expenditureDate,jdbcType=TIMESTAMP}, 
-      #{expenditureRemark,jdbcType=VARCHAR})
+    insert into expenditure (id, item_id, user_id, 
+      money, date, remark, 
+      dele)
+    values (#{id,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{money,jdbcType=REAL}, #{date,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{dele,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.taoxiuxia.model.Expenditure" >
     insert into expenditure
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="expenditureId != null" >
-        expenditure_id,
+      <if test="id != null" >
+        id,
       </if>
-      <if test="expenditureUserId != null" >
-        expenditure_user_id,
+      <if test="itemId != null" >
+        item_id,
       </if>
-      <if test="expenditureItemId != null" >
-        expenditure_item_id,
+      <if test="userId != null" >
+        user_id,
       </if>
-      <if test="expenditureMoney != null" >
-        expenditure_money,
+      <if test="money != null" >
+        money,
       </if>
-      <if test="expenditureDate != null" >
-        expenditure_date,
+      <if test="date != null" >
+        date,
       </if>
-      <if test="expenditureRemark != null" >
-        expenditure_remark,
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="dele != null" >
+        dele,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="expenditureId != null" >
-        #{expenditureId,jdbcType=INTEGER},
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
       </if>
-      <if test="expenditureUserId != null" >
-        #{expenditureUserId,jdbcType=INTEGER},
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
       </if>
-      <if test="expenditureItemId != null" >
-        #{expenditureItemId,jdbcType=INTEGER},
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
       </if>
-      <if test="expenditureMoney != null" >
-        #{expenditureMoney,jdbcType=REAL},
+      <if test="money != null" >
+        #{money,jdbcType=REAL},
       </if>
-      <if test="expenditureDate != null" >
-        #{expenditureDate,jdbcType=TIMESTAMP},
+      <if test="date != null" >
+        #{date,jdbcType=TIMESTAMP},
       </if>
-      <if test="expenditureRemark != null" >
-        #{expenditureRemark,jdbcType=VARCHAR},
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="dele != null" >
+        #{dele,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -161,23 +167,26 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update expenditure
     <set >
-      <if test="record.expenditureId != null" >
-        expenditure_id = #{record.expenditureId,jdbcType=INTEGER},
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.expenditureUserId != null" >
-        expenditure_user_id = #{record.expenditureUserId,jdbcType=INTEGER},
+      <if test="record.itemId != null" >
+        item_id = #{record.itemId,jdbcType=INTEGER},
       </if>
-      <if test="record.expenditureItemId != null" >
-        expenditure_item_id = #{record.expenditureItemId,jdbcType=INTEGER},
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.expenditureMoney != null" >
-        expenditure_money = #{record.expenditureMoney,jdbcType=REAL},
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=REAL},
       </if>
-      <if test="record.expenditureDate != null" >
-        expenditure_date = #{record.expenditureDate,jdbcType=TIMESTAMP},
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.expenditureRemark != null" >
-        expenditure_remark = #{record.expenditureRemark,jdbcType=VARCHAR},
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dele != null" >
+        dele = #{record.dele,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -186,12 +195,13 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update expenditure
-    set expenditure_id = #{record.expenditureId,jdbcType=INTEGER},
-      expenditure_user_id = #{record.expenditureUserId,jdbcType=INTEGER},
-      expenditure_item_id = #{record.expenditureItemId,jdbcType=INTEGER},
-      expenditure_money = #{record.expenditureMoney,jdbcType=REAL},
-      expenditure_date = #{record.expenditureDate,jdbcType=TIMESTAMP},
-      expenditure_remark = #{record.expenditureRemark,jdbcType=VARCHAR}
+    set id = #{record.id,jdbcType=INTEGER},
+      item_id = #{record.itemId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      money = #{record.money,jdbcType=REAL},
+      date = #{record.date,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      dele = #{record.dele,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -199,31 +209,35 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Expenditure" >
     update expenditure
     <set >
-      <if test="expenditureUserId != null" >
-        expenditure_user_id = #{expenditureUserId,jdbcType=INTEGER},
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=INTEGER},
       </if>
-      <if test="expenditureItemId != null" >
-        expenditure_item_id = #{expenditureItemId,jdbcType=INTEGER},
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="expenditureMoney != null" >
-        expenditure_money = #{expenditureMoney,jdbcType=REAL},
+      <if test="money != null" >
+        money = #{money,jdbcType=REAL},
       </if>
-      <if test="expenditureDate != null" >
-        expenditure_date = #{expenditureDate,jdbcType=TIMESTAMP},
+      <if test="date != null" >
+        date = #{date,jdbcType=TIMESTAMP},
       </if>
-      <if test="expenditureRemark != null" >
-        expenditure_remark = #{expenditureRemark,jdbcType=VARCHAR},
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="dele != null" >
+        dele = #{dele,jdbcType=INTEGER},
       </if>
     </set>
-    where expenditure_id = #{expenditureId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.taoxiuxia.model.Expenditure" >
     update expenditure
-    set expenditure_user_id = #{expenditureUserId,jdbcType=INTEGER},
-      expenditure_item_id = #{expenditureItemId,jdbcType=INTEGER},
-      expenditure_money = #{expenditureMoney,jdbcType=REAL},
-      expenditure_date = #{expenditureDate,jdbcType=TIMESTAMP},
-      expenditure_remark = #{expenditureRemark,jdbcType=VARCHAR}
-    where expenditure_id = #{expenditureId,jdbcType=INTEGER}
+    set item_id = #{itemId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      money = #{money,jdbcType=REAL},
+      date = #{date,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      dele = #{dele,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

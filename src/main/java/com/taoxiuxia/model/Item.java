@@ -1,17 +1,13 @@
 package com.taoxiuxia.model;
 
-import java.util.Date;
-
-public class Expenditure {
+public class Item {
     private Integer id;
-
-    private Integer itemId;
 
     private Integer userId;
 
-    private Float money;
+    private String name;
 
-    private Date date;
+    private String inOrEx;
 
     private String remark;
 
@@ -25,14 +21,6 @@ public class Expenditure {
         this.id = id;
     }
 
-    public Integer getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(Integer itemId) {
-        this.itemId = itemId;
-    }
-
     public Integer getUserId() {
         return userId;
     }
@@ -41,20 +29,20 @@ public class Expenditure {
         this.userId = userId;
     }
 
-    public Float getMoney() {
-        return money;
+    public String getName() {
+        return name;
     }
 
-    public void setMoney(Float money) {
-        this.money = money;
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public Date getDate() {
-        return date;
+    public String getInOrEx() {
+        return inOrEx;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setInOrEx(String inOrEx) {
+        this.inOrEx = inOrEx == null ? null : inOrEx.trim();
     }
 
     public String getRemark() {

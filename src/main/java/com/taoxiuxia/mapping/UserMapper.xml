@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.taoxiuxia.dao.UserMapper" >
+<mapper namespace="com.taoxiuxia.mapper.UserMapper" >
   <resultMap id="BaseResultMap" type="com.taoxiuxia.model.User" >
-    <id column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
-    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
-    <result column="user_age" property="userAge" jdbcType="INTEGER" />
-    <result column="user_sex" property="userSex" jdbcType="CHAR" />
-    <result column="user_remark" property="userRemark" jdbcType="VARCHAR" />
-    <result column="user_register_time" property="userRegisterTime" jdbcType="TIMESTAMP" />
-    <result column="user_last_login_time" property="userLastLoginTime" jdbcType="TIMESTAMP" />
-    <result column="user_activation_code" property="userActivationCode" jdbcType="CHAR" />
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="activation_code" property="activationCode" jdbcType="CHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,8 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    user_id, user_name, user_email, user_password, user_age, user_sex, user_remark, user_register_time, 
-    user_last_login_time, user_activation_code
+    id, name, email, password, age, sex, remark, register_time, last_login_time, activation_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taoxiuxia.model.UserExample" >
     select
@@ -93,11 +92,11 @@
     select 
     <include refid="Base_Column_List" />
     from user
-    where user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user
-    where user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.taoxiuxia.model.UserExample" >
     delete from user
@@ -106,79 +105,79 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.taoxiuxia.model.User" >
-    insert into user (user_id, user_name, user_email, 
-      user_password, user_age, user_sex, 
-      user_remark, user_register_time, user_last_login_time, 
-      user_activation_code)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
-      #{userPassword,jdbcType=VARCHAR}, #{userAge,jdbcType=INTEGER}, #{userSex,jdbcType=CHAR}, 
-      #{userRemark,jdbcType=VARCHAR}, #{userRegisterTime,jdbcType=TIMESTAMP}, #{userLastLoginTime,jdbcType=TIMESTAMP}, 
-      #{userActivationCode,jdbcType=CHAR})
+    insert into user (id, name, email, 
+      password, age, sex, remark, 
+      register_time, last_login_time, activation_code
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{registerTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{activationCode,jdbcType=CHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.taoxiuxia.model.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        user_id,
+      <if test="id != null" >
+        id,
       </if>
-      <if test="userName != null" >
-        user_name,
+      <if test="name != null" >
+        name,
       </if>
-      <if test="userEmail != null" >
-        user_email,
+      <if test="email != null" >
+        email,
       </if>
-      <if test="userPassword != null" >
-        user_password,
+      <if test="password != null" >
+        password,
       </if>
-      <if test="userAge != null" >
-        user_age,
+      <if test="age != null" >
+        age,
       </if>
-      <if test="userSex != null" >
-        user_sex,
+      <if test="sex != null" >
+        sex,
       </if>
-      <if test="userRemark != null" >
-        user_remark,
+      <if test="remark != null" >
+        remark,
       </if>
-      <if test="userRegisterTime != null" >
-        user_register_time,
+      <if test="registerTime != null" >
+        register_time,
       </if>
-      <if test="userLastLoginTime != null" >
-        user_last_login_time,
+      <if test="lastLoginTime != null" >
+        last_login_time,
       </if>
-      <if test="userActivationCode != null" >
-        user_activation_code,
+      <if test="activationCode != null" >
+        activation_code,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
       </if>
-      <if test="userName != null" >
-        #{userName,jdbcType=VARCHAR},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
-      <if test="userEmail != null" >
-        #{userEmail,jdbcType=VARCHAR},
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
       </if>
-      <if test="userPassword != null" >
-        #{userPassword,jdbcType=VARCHAR},
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
       </if>
-      <if test="userAge != null" >
-        #{userAge,jdbcType=INTEGER},
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
       </if>
-      <if test="userSex != null" >
-        #{userSex,jdbcType=CHAR},
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
       </if>
-      <if test="userRemark != null" >
-        #{userRemark,jdbcType=VARCHAR},
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="userRegisterTime != null" >
-        #{userRegisterTime,jdbcType=TIMESTAMP},
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="userLastLoginTime != null" >
-        #{userLastLoginTime,jdbcType=TIMESTAMP},
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="userActivationCode != null" >
-        #{userActivationCode,jdbcType=CHAR},
+      <if test="activationCode != null" >
+        #{activationCode,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -191,35 +190,35 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update user
     <set >
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=INTEGER},
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.userName != null" >
-        user_name = #{record.userName,jdbcType=VARCHAR},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.userEmail != null" >
-        user_email = #{record.userEmail,jdbcType=VARCHAR},
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
       </if>
-      <if test="record.userPassword != null" >
-        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.userAge != null" >
-        user_age = #{record.userAge,jdbcType=INTEGER},
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=INTEGER},
       </if>
-      <if test="record.userSex != null" >
-        user_sex = #{record.userSex,jdbcType=CHAR},
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=CHAR},
       </if>
-      <if test="record.userRemark != null" >
-        user_remark = #{record.userRemark,jdbcType=VARCHAR},
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
       </if>
-      <if test="record.userRegisterTime != null" >
-        user_register_time = #{record.userRegisterTime,jdbcType=TIMESTAMP},
+      <if test="record.registerTime != null" >
+        register_time = #{record.registerTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.userLastLoginTime != null" >
-        user_last_login_time = #{record.userLastLoginTime,jdbcType=TIMESTAMP},
+      <if test="record.lastLoginTime != null" >
+        last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.userActivationCode != null" >
-        user_activation_code = #{record.userActivationCode,jdbcType=CHAR},
+      <if test="record.activationCode != null" >
+        activation_code = #{record.activationCode,jdbcType=CHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -228,16 +227,16 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update user
-    set user_id = #{record.userId,jdbcType=INTEGER},
-      user_name = #{record.userName,jdbcType=VARCHAR},
-      user_email = #{record.userEmail,jdbcType=VARCHAR},
-      user_password = #{record.userPassword,jdbcType=VARCHAR},
-      user_age = #{record.userAge,jdbcType=INTEGER},
-      user_sex = #{record.userSex,jdbcType=CHAR},
-      user_remark = #{record.userRemark,jdbcType=VARCHAR},
-      user_register_time = #{record.userRegisterTime,jdbcType=TIMESTAMP},
-      user_last_login_time = #{record.userLastLoginTime,jdbcType=TIMESTAMP},
-      user_activation_code = #{record.userActivationCode,jdbcType=CHAR}
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=CHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+      last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      activation_code = #{record.activationCode,jdbcType=CHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -245,47 +244,47 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.User" >
     update user
     <set >
-      <if test="userName != null" >
-        user_name = #{userName,jdbcType=VARCHAR},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="userEmail != null" >
-        user_email = #{userEmail,jdbcType=VARCHAR},
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="userPassword != null" >
-        user_password = #{userPassword,jdbcType=VARCHAR},
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="userAge != null" >
-        user_age = #{userAge,jdbcType=INTEGER},
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
       </if>
-      <if test="userSex != null" >
-        user_sex = #{userSex,jdbcType=CHAR},
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
       </if>
-      <if test="userRemark != null" >
-        user_remark = #{userRemark,jdbcType=VARCHAR},
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="userRegisterTime != null" >
-        user_register_time = #{userRegisterTime,jdbcType=TIMESTAMP},
+      <if test="registerTime != null" >
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="userLastLoginTime != null" >
-        user_last_login_time = #{userLastLoginTime,jdbcType=TIMESTAMP},
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="userActivationCode != null" >
-        user_activation_code = #{userActivationCode,jdbcType=CHAR},
+      <if test="activationCode != null" >
+        activation_code = #{activationCode,jdbcType=CHAR},
       </if>
     </set>
-    where user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.taoxiuxia.model.User" >
     update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      user_email = #{userEmail,jdbcType=VARCHAR},
-      user_password = #{userPassword,jdbcType=VARCHAR},
-      user_age = #{userAge,jdbcType=INTEGER},
-      user_sex = #{userSex,jdbcType=CHAR},
-      user_remark = #{userRemark,jdbcType=VARCHAR},
-      user_register_time = #{userRegisterTime,jdbcType=TIMESTAMP},
-      user_last_login_time = #{userLastLoginTime,jdbcType=TIMESTAMP},
-      user_activation_code = #{userActivationCode,jdbcType=CHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
+    set name = #{name,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      activation_code = #{activationCode,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

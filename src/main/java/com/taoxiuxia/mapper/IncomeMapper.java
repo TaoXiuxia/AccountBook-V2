@@ -1,4 +1,4 @@
-package com.taoxiuxia.dao;
+package com.taoxiuxia.mapper;
 
 import com.taoxiuxia.model.Income;
 import com.taoxiuxia.model.IncomeExample;
@@ -10,17 +10,17 @@ public interface IncomeMapper {
 
     int deleteByExample(IncomeExample example);
 
-    int deleteByPrimaryKey(Integer incomeId);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Income record);
 
     int insertSelective(Income record);
 
-    List<Income> selectByExample(IncomeExample example);
+    List<Income>selectAllIncomes();
     
-    List<Income> selectAll();
+    List<Income> selectByExample(IncomeExample example);
 
-    Income selectByPrimaryKey(Integer incomeId);
+    Income selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Income record, @Param("example") IncomeExample example);
 

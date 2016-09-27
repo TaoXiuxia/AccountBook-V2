@@ -1,65 +1,46 @@
 package com.taoxiuxia.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Income {
-    private Integer incomeId;
+    private Float money;
 
-    private Integer incomeUserId;
+    private Date date;
 
-    private Integer incomeItemId;
+    private String remark;
+    
+    private String name;
 
-    private Float incomeMoney;
+	public Float getMoney() {
+		return money;
+	}
 
-    private Date incomeDate;
+	public void setMoney(Float money) {
+		this.money = money;
+	}
 
-    private String incomeRemark;
+	public Date getDate() {
+		return date;
+	}
 
-    public Integer getIncomeId() {
-        return incomeId;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-    public void setIncomeId(Integer incomeId) {
-        this.incomeId = incomeId;
-    }
+	public String getRemark() {
+		return remark;
+	}
 
-    public Integer getIncomeUserId() {
-        return incomeUserId;
-    }
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
-    public void setIncomeUserId(Integer incomeUserId) {
-        this.incomeUserId = incomeUserId;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Integer getIncomeItemId() {
-        return incomeItemId;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setIncomeItemId(Integer incomeItemId) {
-        this.incomeItemId = incomeItemId;
-    }
-
-    public Float getIncomeMoney() {
-        return incomeMoney;
-    }
-
-    public void setIncomeMoney(Float incomeMoney) {
-        this.incomeMoney = incomeMoney;
-    }
-
-    public Date getIncomeDate() {
-        return incomeDate;
-    }
-
-    public void setIncomeDate(Date incomeDate) {
-        this.incomeDate = incomeDate;
-    }
-
-    public String getIncomeRemark() {
-        return incomeRemark;
-    }
-
-    public void setIncomeRemark(String incomeRemark) {
-        this.incomeRemark = incomeRemark == null ? null : incomeRemark.trim();
-    }
 }

@@ -1,0 +1,20 @@
+/* 增加收入支出 */
+.add-label{height: 25px;width: 100px;}
+.add-select{height: 25px;width: 150px;}
+.add-money{height: 25px;width: 100px;}
+.add-button{height: 25px;width: 100px;}
+.add-money-remark{height: 25px;width: 150px;}
+
+/* 增加收入支出项 */
+.addItem{margin-top:20px;}
+.addItem-label{height: 25px;width: 100px;}
+.addItem-name{height: 25px;width: 150px;}
+.addItem-button{height: 25px;width: 100px;}
+.addItem-remark{height: 25px;width: 150px;}
+
+/* 收入支出的总计栏 */
+.total{margin-top:20px;}
+.total-label1{height: 25px;width: 70px;}
+.total-money1{height: 25px;width: 100px;}
+.total-label2{height: 25px;width: 80px;}
+.total-money2{height: 25px;width: 100px;}

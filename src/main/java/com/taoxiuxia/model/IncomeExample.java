@@ -105,373 +105,433 @@ public class IncomeExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andIncomeIdIsNull() {
-            addCriterion("income_id is null");
+        public Criteria andIdIsNull() {
+            addCriterion("id is null");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeIdIsNotNull() {
-            addCriterion("income_id is not null");
+        public Criteria andIdIsNotNull() {
+            addCriterion("id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeIdEqualTo(Integer value) {
-            addCriterion("income_id =", value, "incomeId");
+        public Criteria andIdEqualTo(Integer value) {
+            addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeIdNotEqualTo(Integer value) {
-            addCriterion("income_id <>", value, "incomeId");
+        public Criteria andIdNotEqualTo(Integer value) {
+            addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeIdGreaterThan(Integer value) {
-            addCriterion("income_id >", value, "incomeId");
+        public Criteria andIdGreaterThan(Integer value) {
+            addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("income_id >=", value, "incomeId");
+        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeIdLessThan(Integer value) {
-            addCriterion("income_id <", value, "incomeId");
+        public Criteria andIdLessThan(Integer value) {
+            addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeIdLessThanOrEqualTo(Integer value) {
-            addCriterion("income_id <=", value, "incomeId");
+        public Criteria andIdLessThanOrEqualTo(Integer value) {
+            addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeIdIn(List<Integer> values) {
-            addCriterion("income_id in", values, "incomeId");
+        public Criteria andIdIn(List<Integer> values) {
+            addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeIdNotIn(List<Integer> values) {
-            addCriterion("income_id not in", values, "incomeId");
+        public Criteria andIdNotIn(List<Integer> values) {
+            addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeIdBetween(Integer value1, Integer value2) {
-            addCriterion("income_id between", value1, value2, "incomeId");
+        public Criteria andIdBetween(Integer value1, Integer value2) {
+            addCriterion("id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("income_id not between", value1, value2, "incomeId");
+        public Criteria andIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeUserIdIsNull() {
-            addCriterion("income_user_id is null");
+        public Criteria andItemIdIsNull() {
+            addCriterion("item_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeUserIdIsNotNull() {
-            addCriterion("income_user_id is not null");
+        public Criteria andItemIdIsNotNull() {
+            addCriterion("item_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeUserIdEqualTo(Integer value) {
-            addCriterion("income_user_id =", value, "incomeUserId");
+        public Criteria andItemIdEqualTo(Integer value) {
+            addCriterion("item_id =", value, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeUserIdNotEqualTo(Integer value) {
-            addCriterion("income_user_id <>", value, "incomeUserId");
+        public Criteria andItemIdNotEqualTo(Integer value) {
+            addCriterion("item_id <>", value, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeUserIdGreaterThan(Integer value) {
-            addCriterion("income_user_id >", value, "incomeUserId");
+        public Criteria andItemIdGreaterThan(Integer value) {
+            addCriterion("item_id >", value, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeUserIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("income_user_id >=", value, "incomeUserId");
+        public Criteria andItemIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("item_id >=", value, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeUserIdLessThan(Integer value) {
-            addCriterion("income_user_id <", value, "incomeUserId");
+        public Criteria andItemIdLessThan(Integer value) {
+            addCriterion("item_id <", value, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeUserIdLessThanOrEqualTo(Integer value) {
-            addCriterion("income_user_id <=", value, "incomeUserId");
+        public Criteria andItemIdLessThanOrEqualTo(Integer value) {
+            addCriterion("item_id <=", value, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeUserIdIn(List<Integer> values) {
-            addCriterion("income_user_id in", values, "incomeUserId");
+        public Criteria andItemIdIn(List<Integer> values) {
+            addCriterion("item_id in", values, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeUserIdNotIn(List<Integer> values) {
-            addCriterion("income_user_id not in", values, "incomeUserId");
+        public Criteria andItemIdNotIn(List<Integer> values) {
+            addCriterion("item_id not in", values, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeUserIdBetween(Integer value1, Integer value2) {
-            addCriterion("income_user_id between", value1, value2, "incomeUserId");
+        public Criteria andItemIdBetween(Integer value1, Integer value2) {
+            addCriterion("item_id between", value1, value2, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeUserIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("income_user_id not between", value1, value2, "incomeUserId");
+        public Criteria andItemIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("item_id not between", value1, value2, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeItemIdIsNull() {
-            addCriterion("income_item_id is null");
+        public Criteria andUserIdIsNull() {
+            addCriterion("user_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeItemIdIsNotNull() {
-            addCriterion("income_item_id is not null");
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("user_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeItemIdEqualTo(Integer value) {
-            addCriterion("income_item_id =", value, "incomeItemId");
+        public Criteria andUserIdEqualTo(Integer value) {
+            addCriterion("user_id =", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeItemIdNotEqualTo(Integer value) {
-            addCriterion("income_item_id <>", value, "incomeItemId");
+        public Criteria andUserIdNotEqualTo(Integer value) {
+            addCriterion("user_id <>", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeItemIdGreaterThan(Integer value) {
-            addCriterion("income_item_id >", value, "incomeItemId");
+        public Criteria andUserIdGreaterThan(Integer value) {
+            addCriterion("user_id >", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeItemIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("income_item_id >=", value, "incomeItemId");
+        public Criteria andUserIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("user_id >=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeItemIdLessThan(Integer value) {
-            addCriterion("income_item_id <", value, "incomeItemId");
+        public Criteria andUserIdLessThan(Integer value) {
+            addCriterion("user_id <", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeItemIdLessThanOrEqualTo(Integer value) {
-            addCriterion("income_item_id <=", value, "incomeItemId");
+        public Criteria andUserIdLessThanOrEqualTo(Integer value) {
+            addCriterion("user_id <=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeItemIdIn(List<Integer> values) {
-            addCriterion("income_item_id in", values, "incomeItemId");
+        public Criteria andUserIdIn(List<Integer> values) {
+            addCriterion("user_id in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeItemIdNotIn(List<Integer> values) {
-            addCriterion("income_item_id not in", values, "incomeItemId");
+        public Criteria andUserIdNotIn(List<Integer> values) {
+            addCriterion("user_id not in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeItemIdBetween(Integer value1, Integer value2) {
-            addCriterion("income_item_id between", value1, value2, "incomeItemId");
+        public Criteria andUserIdBetween(Integer value1, Integer value2) {
+            addCriterion("user_id between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeItemIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("income_item_id not between", value1, value2, "incomeItemId");
+        public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeMoneyIsNull() {
-            addCriterion("income_money is null");
+        public Criteria andMoneyIsNull() {
+            addCriterion("money is null");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeMoneyIsNotNull() {
-            addCriterion("income_money is not null");
+        public Criteria andMoneyIsNotNull() {
+            addCriterion("money is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeMoneyEqualTo(Float value) {
-            addCriterion("income_money =", value, "incomeMoney");
+        public Criteria andMoneyEqualTo(Float value) {
+            addCriterion("money =", value, "money");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeMoneyNotEqualTo(Float value) {
-            addCriterion("income_money <>", value, "incomeMoney");
+        public Criteria andMoneyNotEqualTo(Float value) {
+            addCriterion("money <>", value, "money");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeMoneyGreaterThan(Float value) {
-            addCriterion("income_money >", value, "incomeMoney");
+        public Criteria andMoneyGreaterThan(Float value) {
+            addCriterion("money >", value, "money");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeMoneyGreaterThanOrEqualTo(Float value) {
-            addCriterion("income_money >=", value, "incomeMoney");
+        public Criteria andMoneyGreaterThanOrEqualTo(Float value) {
+            addCriterion("money >=", value, "money");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeMoneyLessThan(Float value) {
-            addCriterion("income_money <", value, "incomeMoney");
+        public Criteria andMoneyLessThan(Float value) {
+            addCriterion("money <", value, "money");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeMoneyLessThanOrEqualTo(Float value) {
-            addCriterion("income_money <=", value, "incomeMoney");
+        public Criteria andMoneyLessThanOrEqualTo(Float value) {
+            addCriterion("money <=", value, "money");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeMoneyIn(List<Float> values) {
-            addCriterion("income_money in", values, "incomeMoney");
+        public Criteria andMoneyIn(List<Float> values) {
+            addCriterion("money in", values, "money");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeMoneyNotIn(List<Float> values) {
-            addCriterion("income_money not in", values, "incomeMoney");
+        public Criteria andMoneyNotIn(List<Float> values) {
+            addCriterion("money not in", values, "money");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeMoneyBetween(Float value1, Float value2) {
-            addCriterion("income_money between", value1, value2, "incomeMoney");
+        public Criteria andMoneyBetween(Float value1, Float value2) {
+            addCriterion("money between", value1, value2, "money");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeMoneyNotBetween(Float value1, Float value2) {
-            addCriterion("income_money not between", value1, value2, "incomeMoney");
+        public Criteria andMoneyNotBetween(Float value1, Float value2) {
+            addCriterion("money not between", value1, value2, "money");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeDateIsNull() {
-            addCriterion("income_date is null");
+        public Criteria andDateIsNull() {
+            addCriterion("date is null");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeDateIsNotNull() {
-            addCriterion("income_date is not null");
+        public Criteria andDateIsNotNull() {
+            addCriterion("date is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeDateEqualTo(Date value) {
-            addCriterion("income_date =", value, "incomeDate");
+        public Criteria andDateEqualTo(Date value) {
+            addCriterion("date =", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeDateNotEqualTo(Date value) {
-            addCriterion("income_date <>", value, "incomeDate");
+        public Criteria andDateNotEqualTo(Date value) {
+            addCriterion("date <>", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeDateGreaterThan(Date value) {
-            addCriterion("income_date >", value, "incomeDate");
+        public Criteria andDateGreaterThan(Date value) {
+            addCriterion("date >", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeDateGreaterThanOrEqualTo(Date value) {
-            addCriterion("income_date >=", value, "incomeDate");
+        public Criteria andDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("date >=", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeDateLessThan(Date value) {
-            addCriterion("income_date <", value, "incomeDate");
+        public Criteria andDateLessThan(Date value) {
+            addCriterion("date <", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeDateLessThanOrEqualTo(Date value) {
-            addCriterion("income_date <=", value, "incomeDate");
+        public Criteria andDateLessThanOrEqualTo(Date value) {
+            addCriterion("date <=", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeDateIn(List<Date> values) {
-            addCriterion("income_date in", values, "incomeDate");
+        public Criteria andDateIn(List<Date> values) {
+            addCriterion("date in", values, "date");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeDateNotIn(List<Date> values) {
-            addCriterion("income_date not in", values, "incomeDate");
+        public Criteria andDateNotIn(List<Date> values) {
+            addCriterion("date not in", values, "date");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeDateBetween(Date value1, Date value2) {
-            addCriterion("income_date between", value1, value2, "incomeDate");
+        public Criteria andDateBetween(Date value1, Date value2) {
+            addCriterion("date between", value1, value2, "date");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeDateNotBetween(Date value1, Date value2) {
-            addCriterion("income_date not between", value1, value2, "incomeDate");
+        public Criteria andDateNotBetween(Date value1, Date value2) {
+            addCriterion("date not between", value1, value2, "date");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeRemarkIsNull() {
-            addCriterion("income_remark is null");
+        public Criteria andRemarkIsNull() {
+            addCriterion("remark is null");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeRemarkIsNotNull() {
-            addCriterion("income_remark is not null");
+        public Criteria andRemarkIsNotNull() {
+            addCriterion("remark is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeRemarkEqualTo(String value) {
-            addCriterion("income_remark =", value, "incomeRemark");
+        public Criteria andRemarkEqualTo(String value) {
+            addCriterion("remark =", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeRemarkNotEqualTo(String value) {
-            addCriterion("income_remark <>", value, "incomeRemark");
+        public Criteria andRemarkNotEqualTo(String value) {
+            addCriterion("remark <>", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeRemarkGreaterThan(String value) {
-            addCriterion("income_remark >", value, "incomeRemark");
+        public Criteria andRemarkGreaterThan(String value) {
+            addCriterion("remark >", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeRemarkGreaterThanOrEqualTo(String value) {
-            addCriterion("income_remark >=", value, "incomeRemark");
+        public Criteria andRemarkGreaterThanOrEqualTo(String value) {
+            addCriterion("remark >=", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeRemarkLessThan(String value) {
-            addCriterion("income_remark <", value, "incomeRemark");
+        public Criteria andRemarkLessThan(String value) {
+            addCriterion("remark <", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeRemarkLessThanOrEqualTo(String value) {
-            addCriterion("income_remark <=", value, "incomeRemark");
+        public Criteria andRemarkLessThanOrEqualTo(String value) {
+            addCriterion("remark <=", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeRemarkLike(String value) {
-            addCriterion("income_remark like", value, "incomeRemark");
+        public Criteria andRemarkLike(String value) {
+            addCriterion("remark like", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeRemarkNotLike(String value) {
-            addCriterion("income_remark not like", value, "incomeRemark");
+        public Criteria andRemarkNotLike(String value) {
+            addCriterion("remark not like", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeRemarkIn(List<String> values) {
-            addCriterion("income_remark in", values, "incomeRemark");
+        public Criteria andRemarkIn(List<String> values) {
+            addCriterion("remark in", values, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeRemarkNotIn(List<String> values) {
-            addCriterion("income_remark not in", values, "incomeRemark");
+        public Criteria andRemarkNotIn(List<String> values) {
+            addCriterion("remark not in", values, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeRemarkBetween(String value1, String value2) {
-            addCriterion("income_remark between", value1, value2, "incomeRemark");
+        public Criteria andRemarkBetween(String value1, String value2) {
+            addCriterion("remark between", value1, value2, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andIncomeRemarkNotBetween(String value1, String value2) {
-            addCriterion("income_remark not between", value1, value2, "incomeRemark");
+        public Criteria andRemarkNotBetween(String value1, String value2) {
+            addCriterion("remark not between", value1, value2, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleIsNull() {
+            addCriterion("dele is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleIsNotNull() {
+            addCriterion("dele is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleEqualTo(Integer value) {
+            addCriterion("dele =", value, "dele");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleNotEqualTo(Integer value) {
+            addCriterion("dele <>", value, "dele");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleGreaterThan(Integer value) {
+            addCriterion("dele >", value, "dele");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleGreaterThanOrEqualTo(Integer value) {
+            addCriterion("dele >=", value, "dele");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleLessThan(Integer value) {
+            addCriterion("dele <", value, "dele");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleLessThanOrEqualTo(Integer value) {
+            addCriterion("dele <=", value, "dele");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleIn(List<Integer> values) {
+            addCriterion("dele in", values, "dele");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleNotIn(List<Integer> values) {
+            addCriterion("dele not in", values, "dele");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleBetween(Integer value1, Integer value2) {
+            addCriterion("dele between", value1, value2, "dele");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleNotBetween(Integer value1, Integer value2) {
+            addCriterion("dele not between", value1, value2, "dele");
             return (Criteria) this;
         }
     }

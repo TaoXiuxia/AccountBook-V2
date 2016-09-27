@@ -1,0 +1,20 @@
+/* 增加借款 */
+.add{margin-top:20px;}
+.add-label{height: 25px;width: 50px;}
+.add-money{height: 25px;width: 100px;}
+.add-button{height: 25px;width: 100px;}
+
+/* 借款的总计栏 */
+.total{margin-top:20px;}
+.total-label1{height: 25px;width: 70px;}
+.total-money1{height: 25px;width: 100px;}
+.total-label2{height: 25px;width: 80px;}
+.total-money2{height: 25px;width: 100px;}
+
+/* 选择和搜索 */
+.selectAndSearch{margin-top:5px;}
+.select{height: 25px;width: 70px;}
+.searchInput{height: 25px;width: 150px; margin-left:50px;}
+
+/* 借款的汇总表格 */
+.borrowTable{margin-top:5px;}

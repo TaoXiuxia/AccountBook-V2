@@ -1,4 +1,4 @@
-package com.taoxiuxia.dao;
+package com.taoxiuxia.mapper;
 
 import com.taoxiuxia.model.Expenditure;
 import com.taoxiuxia.model.ExpenditureExample;
@@ -10,7 +10,7 @@ public interface ExpenditureMapper {
 
     int deleteByExample(ExpenditureExample example);
 
-    int deleteByPrimaryKey(Integer expenditureId);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Expenditure record);
 
@@ -18,7 +18,7 @@ public interface ExpenditureMapper {
 
     List<Expenditure> selectByExample(ExpenditureExample example);
 
-    Expenditure selectByPrimaryKey(Integer expenditureId);
+    Expenditure selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Expenditure record, @Param("example") ExpenditureExample example);
 

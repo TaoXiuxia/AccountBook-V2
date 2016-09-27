@@ -3,103 +3,103 @@ package com.taoxiuxia.model;
 import java.util.Date;
 
 public class User {
-    private Integer userId;
+    private Integer id;
 
-    private String userName;
+    private String name;
 
-    private String userEmail;
+    private String email;
 
-    private String userPassword;
+    private String password;
 
-    private Integer userAge;
+    private Integer age;
 
-    private String userSex;
+    private String sex;
 
-    private String userRemark;
+    private String remark;
 
-    private Date userRegisterTime;
+    private Date registerTime;
 
-    private Date userLastLoginTime;
+    private Date lastLoginTime;
 
-    private String userActivationCode;
+    private String activationCode;
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail == null ? null : userEmail.trim();
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword == null ? null : userPassword.trim();
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
-    public Integer getUserAge() {
-        return userAge;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setUserAge(Integer userAge) {
-        this.userAge = userAge;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
-    public String getUserSex() {
-        return userSex;
+    public String getSex() {
+        return sex;
     }
 
-    public void setUserSex(String userSex) {
-        this.userSex = userSex == null ? null : userSex.trim();
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
     }
 
-    public String getUserRemark() {
-        return userRemark;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setUserRemark(String userRemark) {
-        this.userRemark = userRemark == null ? null : userRemark.trim();
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
-    public Date getUserRegisterTime() {
-        return userRegisterTime;
+    public Date getRegisterTime() {
+        return registerTime;
     }
 
-    public void setUserRegisterTime(Date userRegisterTime) {
-        this.userRegisterTime = userRegisterTime;
+    public void setRegisterTime(Date registerTime) {
+        this.registerTime = registerTime;
     }
 
-    public Date getUserLastLoginTime() {
-        return userLastLoginTime;
+    public Date getLastLoginTime() {
+        return lastLoginTime;
     }
 
-    public void setUserLastLoginTime(Date userLastLoginTime) {
-        this.userLastLoginTime = userLastLoginTime;
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 
-    public String getUserActivationCode() {
-        return userActivationCode;
+    public String getActivationCode() {
+        return activationCode;
     }
 
-    public void setUserActivationCode(String userActivationCode) {
-        this.userActivationCode = userActivationCode == null ? null : userActivationCode.trim();
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode == null ? null : activationCode.trim();
     }
 }
