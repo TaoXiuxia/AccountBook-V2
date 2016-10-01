@@ -6,27 +6,30 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface IncomeMapper {
-    int countByExample(IncomeExample example);
 
-    int deleteByExample(IncomeExample example);
+	List<Income> selectAllIncomes();
 
-    int deleteByPrimaryKey(Integer id);
+	int updateByPrimaryKeySelective(Income record);
 
-    int insert(Income record);
+	int insert(Income record);
 
-    int insertSelective(Income record);
+	/////////////////////////////////////////////////////////
+	
+	int countByExample(IncomeExample example);
 
-    List<Income>selectAllIncomes();
-    
-    List<Income> selectByExample(IncomeExample example);
+	int deleteByExample(IncomeExample example);
 
-    Income selectByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") Income record, @Param("example") IncomeExample example);
+	int insertSelective(Income record);
 
-    int updateByExample(@Param("record") Income record, @Param("example") IncomeExample example);
+	List<Income> selectByExample(IncomeExample example);
 
-    int updateByPrimaryKeySelective(Income record);
+	Income selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKey(Income record);
+	int updateByExampleSelective(@Param("record") Income record, @Param("example") IncomeExample example);
+
+	int updateByExample(@Param("record") Income record, @Param("example") IncomeExample example);
+
+	int updateByPrimaryKey(Income record);
 }

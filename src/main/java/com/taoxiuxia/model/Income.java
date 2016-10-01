@@ -1,15 +1,56 @@
 package com.taoxiuxia.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Income {
-    private Float money;
 
-    private Date date;
+	private int id;
 
-    private String remark;
-    
-    private String name;
+	private int itemId;
+
+	private int userId;
+
+	private Float money;
+
+	private Date date;
+
+	private String remark;
+
+	private String itemName;
+
+	private int dele;
+
+	public int getItemId() {
+		return itemId;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getDele() {
+		return dele;
+	}
+
+	public void setDele(int dele) {
+		this.dele = dele;
+	}
 
 	public Float getMoney() {
 		return money;
@@ -35,12 +76,11 @@ public class Income {
 		this.remark = remark;
 	}
 
-	public String getName() {
-		return name;
+	public String getItemName() {
+		return itemName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
-
 }

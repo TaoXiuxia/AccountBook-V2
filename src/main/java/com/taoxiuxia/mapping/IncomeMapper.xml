@@ -75,10 +75,13 @@
   
   <select id="selectAllIncomes" resultMap="BaseResultMap">
 	SELECT
+		income.id,
+		income.item_id,
+		income.user_id,
 		income.date,
 		income.money,
 		income.remark,
-		item.name
+		item.name as itemName
 	FROM
 		income,
 		item
@@ -91,6 +94,12 @@
 		income.date DESC
   </select>
   
+  <insert id="insert" parameterType="com.taoxiuxia.model.Income" >
+    insert into income (item_id, user_id, money, date, remark, dele)
+    values (#{itemId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{money,jdbcType=REAL}, #{date,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{dele,jdbcType=INTEGER})
+  </insert>
   
   
   <!-- 以下是自动生成的,以下的内容可能用不到，但是可以模仿这种代码方式，尽量减少代码冗余 -->
@@ -117,14 +126,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-  <insert id="insert" parameterType="com.taoxiuxia.model.Income" >
-    insert into income (id, item_id, user_id, 
-      money, date, remark, 
-      dele)
-    values (#{id,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{money,jdbcType=REAL}, #{date,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
-      #{dele,jdbcType=INTEGER})
-  </insert>
+  
   
   <select id="countByExample" parameterType="com.taoxiuxia.model.IncomeExample" resultType="java.lang.Integer" >
     select count(*) from income

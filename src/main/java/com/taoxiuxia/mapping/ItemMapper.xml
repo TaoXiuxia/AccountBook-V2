@@ -70,6 +70,53 @@
   <sql id="Base_Column_List" >
     id, user_id, name, in_or_ex, remark, dele
   </sql>
+  
+  
+  
+  
+  <!-- 查询income项 -->
+  <select id="selectIncomeItemByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    SELECT
+		id,name,remark
+	FROM
+		item
+	WHERE
+		(user_id = 1 OR user_id = #{id,jdbcType=INTEGER})
+	AND in_or_ex = 'in'
+	AND dele = 0
+  </select>
+  
+  <!-- 查询expenditure项 -->  
+  <select id="selectExpenditureItemByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    SELECT
+		name
+	FROM
+		item
+	WHERE
+		(user_id = 1 OR user_id = #{id,jdbcType=INTEGER})
+	AND in_or_ex = 'ex'
+	AND dele = 0
+  </select>
+  
+  <insert id="insert" parameterType="com.taoxiuxia.model.Item" >
+    insert into item (user_id, name, in_or_ex, remark, dele)
+    values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, 
+      #{inOrEx,jdbcType=VARCHAR}, #{remark,jdbcType=CHAR}, #{dele,jdbcType=INTEGER})
+  </insert>
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- //////////////////////////////////////////////////////////////////////////////// -->
+  
+  
+  
+  
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taoxiuxia.model.ItemExample" >
     select
     <if test="distinct" >
@@ -100,12 +147,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.taoxiuxia.model.Item" >
-    insert into item (id, user_id, name, 
-      in_or_ex, remark, dele)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, 
-      #{inOrEx,jdbcType=VARCHAR}, #{remark,jdbcType=CHAR}, #{dele,jdbcType=INTEGER})
-  </insert>
+  
   <insert id="insertSelective" parameterType="com.taoxiuxia.model.Item" >
     insert into item
     <trim prefix="(" suffix=")" suffixOverrides="," >

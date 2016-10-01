@@ -3,30 +3,46 @@ package com.taoxiuxia.model;
 public class Item {
     private Integer id;
 
-    private Integer userId;
-
+    private int userId;
+    
     private String name;
-
+    
     private String inOrEx;
 
     private String remark;
 
-    private Integer dele;
+    private int dele;
+    
+    public int getUserId() {
+		return userId;
+	}
 
-    public Integer getId() {
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public String getInOrEx() {
+		return inOrEx;
+	}
+
+	public void setInOrEx(String inOrEx) {
+		this.inOrEx = inOrEx;
+	}
+
+	public int getDele() {
+		return dele;
+	}
+
+	public void setDele(int dele) {
+		this.dele = dele;
+	}
+
+	public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getName() {
@@ -37,14 +53,6 @@ public class Item {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getInOrEx() {
-        return inOrEx;
-    }
-
-    public void setInOrEx(String inOrEx) {
-        this.inOrEx = inOrEx == null ? null : inOrEx.trim();
-    }
-
     public String getRemark() {
         return remark;
     }
@@ -53,11 +61,4 @@ public class Item {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public Integer getDele() {
-        return dele;
-    }
-
-    public void setDele(Integer dele) {
-        this.dele = dele;
-    }
 }

@@ -6,5 +6,8 @@
 <configuration>
 	<mappers>
 		<mapper resource="com/taoxiuxia/mapping/IncomeMapper.xml" />
+		<mapper resource="com/taoxiuxia/mapping/ItemMapper.xml" />
+		<mapper resource="com/taoxiuxia/mapping/ExpenditureMapper.xml" />
+		<mapper resource="com/taoxiuxia/mapping/UserMapper.xml" />
 	</mappers>
 </configuration> 
