@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.List"%>
-<%@ page import="java.util.HashMap"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,13 +28,6 @@
 		<input class="add-money-remark" placeholder="备注" id="remarkForIncome">
 		<button class="add-button" onclick="addMoney()">添加</button>
 	</div>
-	
-	<div class="addItem">
-		<label class="addItem-label">添加收入项目:</label>
-		<input class="addItem-name" placeholder="项目名称" id="itemName">
-		<input class="addItem-remark" placeholder="备注" id="remarkForItem">
-		<button class="addItem-button" onclick="addItem()">添加</button>
-	</div>	
 
 	<div class="total"> 
 		<label class="total-label1">月收入：</label>

@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.taoxiuxia.mapper.IncomeMapper;
-import com.taoxiuxia.mapper.ItemMapper;
 import com.taoxiuxia.model.Income;
-import com.taoxiuxia.model.Item;
 import com.taoxiuxia.service.IIncomeService;
 
 @Service("incomeService")

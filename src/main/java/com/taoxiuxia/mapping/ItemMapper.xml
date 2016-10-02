@@ -89,7 +89,7 @@
   <!-- 查询expenditure项 -->  
   <select id="selectExpenditureItemByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     SELECT
-		name
+		id,name,remark
 	FROM
 		item
 	WHERE

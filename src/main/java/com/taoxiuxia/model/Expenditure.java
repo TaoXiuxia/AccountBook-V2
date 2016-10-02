@@ -6,6 +6,8 @@ public class Expenditure {
     private Integer id;
 
     private Integer itemId;
+    
+    private String itemName;
 
     private Integer userId;
 
@@ -29,7 +31,15 @@ public class Expenditure {
         return itemId;
     }
 
-    public void setItemId(Integer itemId) {
+    public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	public void setItemId(Integer itemId) {
         this.itemId = itemId;
     }
 

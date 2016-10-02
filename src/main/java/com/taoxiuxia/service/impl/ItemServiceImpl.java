@@ -44,4 +44,24 @@ public class ItemServiceImpl implements IItemService {
 		itemMapper.insert(item);
 	}
 
+	@Override
+	public void changeItem(int itemId, String itemName, String remark, String inOrEx) {
+		Item item = new Item();
+		item.setId(itemId);
+		item.setUserId(2);
+		item.setName(itemName);
+		item.setInOrEx(inOrEx);
+		item.setRemark(remark);
+		item.setDele(0);
+		itemMapper.updateByPrimaryKeySelective(item);
+	}
+
+	@Override
+	public void deleItem(int itemId) {
+		Item item = new Item();
+		item.setId(itemId);
+		item.setUserId(2);
+		item.setDele(1);
+		itemMapper.updateByPrimaryKeySelective(item);
+	}
 }

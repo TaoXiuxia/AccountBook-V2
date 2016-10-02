@@ -5,6 +5,10 @@ function setLeftColumn(){
 	$("#expenditure").addClass("left-column-button-inactive-font");
 	$("#borrow").addClass("left-column-button-inactive");
 	$("#borrow").addClass("left-column-button-inactive-font");
+	$("#history").addClass("left-column-button-inactive");
+	$("#history").addClass("left-column-button-inactive-font");
+	$("#itemsManagement").addClass("left-column-button-inactive");
+	$("#itemsManagement").addClass("left-column-button-inactive-font");
 }
 
 function addMoney(){
@@ -14,16 +18,6 @@ function addMoney(){
 	$.post("addIncome",{
 		"item":item,
 		"money":money,
-		"remark":remark
-	});
-	setTimeout('location.reload()', 50);
-}
-
-function addItem(){
-	var itemName = $("#itemName").val();
-	var remark = $("#remarkForItem").val();
-	$.post("../itemController/addItem",{
-		"itemName":itemName,
 		"remark":remark
 	});
 	setTimeout('location.reload()', 50);

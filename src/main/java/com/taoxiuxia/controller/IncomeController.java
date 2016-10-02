@@ -91,7 +91,7 @@ public class IncomeController {
 	}
 	
 	/**
-	 * 修改收入
+	 * 删除收入
 	 * @param incomeId
 	 * @param itemId
 	 */

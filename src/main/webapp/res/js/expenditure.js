@@ -5,29 +5,47 @@ function setLeftColumn(){
 	$("#expenditure").addClass("left-column-button-active-font");
 	$("#borrow").addClass("left-column-button-inactive");
 	$("#borrow").addClass("left-column-button-inactive-font");
+	$("#history").addClass("left-column-button-inactive");
+	$("#history").addClass("left-column-button-inactive-font");
+	$("#itemsManagement").addClass("left-column-button-inactive");
+	$("#itemsManagement").addClass("left-column-button-inactive-font");
 }
 
 function addMoney(){
 	var item = $("#item option:selected") .val();
 	var money = $("#money").val();
-	var remark = $("#remarkForIncome").val();
-	$.post("expenditure",{
-		"type":1,    //1表示添加支出
+	var remark = $("#remarkForExpenditure").val();
+	$.post("addExpenditure",{
 		"item":item,
 		"money":money,
 		"remark":remark
 	});
-	location.reload();
+	setTimeout('location.reload()', 50);
 }
 
-function addItem(){
-	var itemName = $("#itemName").val();
-	var remark = $("#remarkForItem").val();
-	$.post("expenditure",{
-		"type":2,   //2表示添加支出项
-		"itemName":itemName,
-		"remark":remark
+function changeExpenditure(expenditureId){
+	layer.confirm(
+		$("#addContent").html(),{
+	    btn: ['修改','返回'] //按钮
+		}, function(){
+			var content = $(".layui-layer-content");
+       		var money = content.find("#changedMoney").val();
+       		var itemId = content.find("#changedItem option:selected").val();
+       		var remark = content.find("#changedRemark").val();
+			$.post("../expenditureController/changeExpenditure",{
+				"expenditureId":expenditureId,
+				"money":money,
+				"itemId":itemId,
+				"remark":remark
+			});
+			setTimeout('location.reload()', 50);
+		});
+}
+
+function delExpenditure(expenditureId, itemId){
+	$.post("../expenditureController/deleExpenditure",{
+		"expenditureId":expenditureId,
+		"itemId":itemId
 	});
-	location.reload();
+	setTimeout('location.reload()', 50);
 }
-

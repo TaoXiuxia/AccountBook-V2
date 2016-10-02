@@ -101,6 +101,31 @@
       #{dele,jdbcType=INTEGER})
   </insert>
   
+  <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Income" >
+    update income
+    <set >
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=REAL},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="dele != null" >
+        dele = #{dele,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
   
   <!-- 以下是自动生成的,以下的内容可能用不到，但是可以模仿这种代码方式，尽量减少代码冗余 -->
   
@@ -179,30 +204,7 @@
     </if>
   </update>
   
-  <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Income" >
-    update income
-    <set >
-      <if test="itemId != null" >
-        item_id = #{itemId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="money != null" >
-        money = #{money,jdbcType=REAL},
-      </if>
-      <if test="date != null" >
-        date = #{date,jdbcType=TIMESTAMP},
-      </if>
-      <if test="remark != null" >
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="dele != null" >
-        dele = #{dele,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+  
   
   <update id="updateByPrimaryKey" parameterType="com.taoxiuxia.model.Income" >
     update income

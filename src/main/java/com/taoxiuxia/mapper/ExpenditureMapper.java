@@ -1,30 +1,22 @@
 package com.taoxiuxia.mapper;
 
-import com.taoxiuxia.model.Expenditure;
-import com.taoxiuxia.model.ExpenditureExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+
+import com.taoxiuxia.model.Expenditure;
 
 public interface ExpenditureMapper {
-    int countByExample(ExpenditureExample example);
 
-    int deleteByExample(ExpenditureExample example);
+	List<Expenditure> selectAllExpenditures();
 
-    int deleteByPrimaryKey(Integer id);
+	int updateByPrimaryKeySelective(Expenditure record);
 
-    int insert(Expenditure record);
+	int insert(Expenditure record);
 
-    int insertSelective(Expenditure record);
+	////////////////////////////////////////////////////////////////
 
-    List<Expenditure> selectByExample(ExpenditureExample example);
+	int deleteByPrimaryKey(Integer id);
 
-    Expenditure selectByPrimaryKey(Integer id);
+	int insertSelective(Expenditure record);
 
-    int updateByExampleSelective(@Param("record") Expenditure record, @Param("example") ExpenditureExample example);
-
-    int updateByExample(@Param("record") Expenditure record, @Param("example") ExpenditureExample example);
-
-    int updateByPrimaryKeySelective(Expenditure record);
-
-    int updateByPrimaryKey(Expenditure record);
+	Expenditure selectByPrimaryKey(Integer id);
 }

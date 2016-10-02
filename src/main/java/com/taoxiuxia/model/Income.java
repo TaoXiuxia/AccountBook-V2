@@ -7,6 +7,8 @@ public class Income {
 	private int id;
 
 	private int itemId;
+	
+	private String itemName;
 
 	private int userId;
 
@@ -15,8 +17,6 @@ public class Income {
 	private Date date;
 
 	private String remark;
-
-	private String itemName;
 
 	private int dele;
 

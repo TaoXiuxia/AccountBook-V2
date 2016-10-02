@@ -10,6 +10,7 @@
 	<div class="row">
 		<div class="col-xs-2">
 			<div class="breadcrumb left-column">
+				<a href="../incomeController/showIncome">
 				<div id="income" class="breadcrumb">
 					<div>
 						收入
@@ -17,18 +18,32 @@
 				</div>
 				</a>
 				
-				<!-- /////////////////////////////////////////////////////// -->
-				<a href="../incomeController/showIncome">
+				<a href="../expenditureController/showExpenditure">
 				<div id="expenditure" class="breadcrumb">
 					<div>
 						支出
 					</div>
 				</div>
 				</a>
+				
 				<a href="">
 				<div id="borrow" class="breadcrumb">
 					<div>
 						借款
+					</div>
+				</div>
+				</a>
+				<a href="">
+				<div id="history" class="breadcrumb">
+					<div>
+						往月收支
+					</div>
+				</div>
+				</a>
+				<a href="../itemController/showManageItems">
+				<div id="itemsManagement" class="breadcrumb">
+					<div>
+						项目管理
 					</div>
 				</div>
 				</a>

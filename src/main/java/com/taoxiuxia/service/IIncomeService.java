@@ -3,7 +3,6 @@ package com.taoxiuxia.service;
 import java.util.List;
 
 import com.taoxiuxia.model.Income;
-import com.taoxiuxia.model.Item;
 
 public interface IIncomeService {
 	
@@ -33,6 +32,7 @@ public interface IIncomeService {
 	/**
 	 * 删除收入
 	 * @param incomeId
+	 * @param itemId
 	 */
 	void deleIncome(int incomeId,int itemId);
 }

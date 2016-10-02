@@ -71,6 +71,70 @@
   <sql id="Base_Column_List" >
     id, item_id, user_id, money, date, remark, dele
   </sql>
+  
+  <select id="selectAllExpenditures" resultMap="BaseResultMap">
+	SELECT
+		expenditure.id,
+		expenditure.item_id,
+		expenditure.user_id,
+		expenditure.date,
+		expenditure.money,
+		expenditure.remark,
+		item.name as itemName
+	FROM
+		expenditure,
+		item
+	WHERE
+		expenditure.item_id = item.id
+	AND expenditure.user_id = 2  <!-- 目前只有一个用户，如果需要指定用户的时候再进行修改 -->
+	AND expenditure.dele = 0
+	AND date_format(expenditure.date, '%Y-%m') = date_format(now(), '%Y-%m') <!-- 只查询本月数据 -->
+	ORDER BY
+		expenditure.date DESC
+  </select>
+  
+  <insert id="insert" parameterType="com.taoxiuxia.model.Expenditure" >
+    insert into expenditure (item_id, user_id, money, date, remark, dele)
+    values (#{itemId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{money,jdbcType=REAL}, #{date,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{dele,jdbcType=INTEGER})
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Expenditure" >
+    update expenditure
+    <set >
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=REAL},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="dele != null" >
+        dele = #{dele,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  <!-- //////////////////////////////////////////////////////////// -->
+  
+  
+  
+  
+  
+  
+  
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taoxiuxia.model.ExpenditureExample" >
     select
     <if test="distinct" >
@@ -101,14 +165,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.taoxiuxia.model.Expenditure" >
-    insert into expenditure (id, item_id, user_id, 
-      money, date, remark, 
-      dele)
-    values (#{id,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{money,jdbcType=REAL}, #{date,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
-      #{dele,jdbcType=INTEGER})
-  </insert>
+  
   <insert id="insertSelective" parameterType="com.taoxiuxia.model.Expenditure" >
     insert into expenditure
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -206,30 +263,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Expenditure" >
-    update expenditure
-    <set >
-      <if test="itemId != null" >
-        item_id = #{itemId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="money != null" >
-        money = #{money,jdbcType=REAL},
-      </if>
-      <if test="date != null" >
-        date = #{date,jdbcType=TIMESTAMP},
-      </if>
-      <if test="remark != null" >
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="dele != null" >
-        dele = #{dele,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.taoxiuxia.model.Expenditure" >
     update expenditure
     set item_id = #{itemId,jdbcType=INTEGER},

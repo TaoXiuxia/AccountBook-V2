@@ -23,4 +23,19 @@ public interface IItemService {
 	 * @param inOrEx
 	 */
 	void addItem(String itemName, String remark, String inOrEx);
+	
+	/**
+	 * 修改item
+	 * @param itemId
+	 * @param itemName
+	 * @param remark
+	 * @param inOrEx
+	 */
+	void changeItem(int itemId, String itemName, String remark, String inOrEx);
+	
+	/**
+	 * 删除item
+	 * @param itemId
+	 */
+	void deleItem(int itemId);
 }
