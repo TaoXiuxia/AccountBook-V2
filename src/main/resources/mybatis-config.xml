@@ -9,5 +9,6 @@
 		<mapper resource="com/taoxiuxia/mapping/ItemMapper.xml" />
 		<mapper resource="com/taoxiuxia/mapping/ExpenditureMapper.xml" />
 		<mapper resource="com/taoxiuxia/mapping/UserMapper.xml" />
+		<mapper resource="com/taoxiuxia/mapping/BalanceMapper.xml" />
 	</mappers>
 </configuration> 

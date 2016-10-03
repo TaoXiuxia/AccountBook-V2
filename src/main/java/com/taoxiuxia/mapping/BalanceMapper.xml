@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taoxiuxia.mapper.BalanceMapper" >
+  <resultMap id="BaseResultMap" type="com.taoxiuxia.model.Balance" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="DATE" />
+    <result column="actual_balance" property="actualBalance" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_id, month, actual_balance
+  </sql>
+  
+   <select id="selectMonthlyIncome" resultType="java.lang.Float" parameterType="java.lang.Integer" >
+    SELECT
+		SUM(income.money)
+	FROM
+		income
+	WHERE
+		user_id = #{user_id,jdbcType=INTEGER}
+	AND dele = 0
+	AND date_format(income.date, '%Y-%m') = date_format(now(), '%Y-%m')
+  </select>
+  
+  <select id="selectMonthlyExpenditure" resultType="java.lang.Float" parameterType="java.lang.Integer" >
+    SELECT
+		SUM(expenditure.money)
+	FROM
+		expenditure
+	WHERE
+		user_id = #{user_id,jdbcType=INTEGER}
+	AND dele = 0
+	AND date_format(expenditure.date, '%Y-%m') = date_format(now(), '%Y-%m')
+  </select>
+  
+  <select id="selectBalanceInBeginOfMonth" resultType="java.lang.Float" parameterType="java.lang.Integer" >
+	SELECT
+		actual_balance
+	FROM
+		balance
+	WHERE
+		user_id = #{user_id,jdbcType=INTEGER}
+	AND PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( balance.month, '%Y%m' ) ) =1
+  </select>
+  
+  <select id="selectBalanceOfThisMonth" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+	SELECT
+		id, actual_balance
+	FROM
+		balance
+	WHERE
+		user_id = #{user_id,jdbcType=INTEGER}
+	AND PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( balance.month, '%Y%m' ) ) =0
+  </select>
+ 
+  <insert id="insertBalance" parameterType="com.taoxiuxia.model.Balance" >
+    insert into balance (user_id, month, actual_balance)
+    values (#{userId,jdbcType=INTEGER}, #{month,jdbcType=DATE}, #{actualBalance,jdbcType=REAL})
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Balance" >
+    update balance
+    <set >
+      <if test="actualBalance != null" >
+        actual_balance = #{actualBalance,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- //////////////////////////////////////////////////////////////////////////// -->
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taoxiuxia.model.BalanceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from balance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from balance
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from balance
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.taoxiuxia.model.BalanceExample" >
+    delete from balance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  
+  <insert id="insertSelective" parameterType="com.taoxiuxia.model.Balance" >
+    insert into balance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="actualBalance != null" >
+        actual_balance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=DATE},
+      </if>
+      <if test="actualBalance != null" >
+        #{actualBalance,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.taoxiuxia.model.BalanceExample" resultType="java.lang.Integer" >
+    select count(*) from balance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update balance
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=DATE},
+      </if>
+      <if test="record.actualBalance != null" >
+        actual_balance = #{record.actualBalance,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update balance
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      month = #{record.month,jdbcType=DATE},
+      actual_balance = #{record.actualBalance,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.taoxiuxia.model.Balance" >
+    update balance
+    set user_id = #{userId,jdbcType=INTEGER},
+      month = #{month,jdbcType=DATE},
+      actual_balance = #{actualBalance,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

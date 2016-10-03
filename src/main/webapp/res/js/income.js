@@ -9,6 +9,8 @@ function setLeftColumn(){
 	$("#history").addClass("left-column-button-inactive-font");
 	$("#itemsManagement").addClass("left-column-button-inactive");
 	$("#itemsManagement").addClass("left-column-button-inactive-font");
+	$("#monthlyStatistics").addClass("left-column-button-inactive");
+	$("#monthlyStatistics").addClass("left-column-button-inactive-font");
 }
 
 function addMoney(){
@@ -20,7 +22,7 @@ function addMoney(){
 		"money":money,
 		"remark":remark
 	});
-	setTimeout('location.reload()', 50);
+	setTimeout('location.reload()', 1000);
 }
 
 function changeIncome(incomeId){
@@ -38,7 +40,7 @@ function changeIncome(incomeId){
 				"itemId":itemId,
 				"remark":remark
 			});
-			setTimeout('location.reload()', 50);
+			setTimeout('location.reload()', 1000);
 		});
 }
 
@@ -47,6 +49,6 @@ function delIncome(incomeId, itemId){
 		"incomeId":incomeId,
 		"itemId":itemId
 	});
-	setTimeout('location.reload()', 50);
+	setTimeout('location.reload()', 1000);
 }
 

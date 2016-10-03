@@ -9,6 +9,8 @@ function setLeftColumn(){
 	$("#history").addClass("left-column-button-inactive-font");
 	$("#itemsManagement").addClass("left-column-button-active");
 	$("#itemsManagement").addClass("left-column-button-active-font");
+	$("#monthlyStatistics").addClass("left-column-button-inactive");
+	$("#monthlyStatistics").addClass("left-column-button-inactive-font");
 }
 
 function addItem(inOrEx){
@@ -24,7 +26,7 @@ function addItem(inOrEx){
 				"remark":remark,
 				"inOrEx":inOrEx
 			});
-			setTimeout('location.reload()', 50);
+			setTimeout('location.reload()', 1000);
 		});
 }
 
@@ -47,7 +49,7 @@ function changeItem(itemId, itemName,remark,inOrEx){
 			"remark":remark,
 			"inOrEx":inOrEx
 		});
-		setTimeout('location.reload()', 50);
+		setTimeout('location.reload()', 1000);
 	});
 }
 
@@ -55,5 +57,5 @@ function delItem(itemId){
 	$.post("../itemController/deleItem",{
 		"itemId":itemId,
 	});
-	setTimeout('location.reload()', 50);
+	setTimeout('location.reload()', 1000);
 }

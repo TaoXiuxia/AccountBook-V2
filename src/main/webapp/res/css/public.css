@@ -4,7 +4,7 @@
 .title-text{font-size:30px; color:#ffffff;}
 
 /* 左侧选择栏 */
-.left-column{background-color:#ECEEEE; margin-top:-20px; height:300px;}
+.left-column{background-color:#ECEEEE; margin-top:-20px; height:400px;}
 .left-column-button-active{background-color:#0664C1; height:50px;width:171px;margin-left:-15px; text-align: center;}
 .left-column-button-active-font{font-size:20px; color:#ffffff;margin-top:3px; }
 .left-column-button-inactive{background-color:#ECEEEE; height:50px;width:171px;margin-left:-15px; text-align: center;border: 2px solid #dfdfe8}

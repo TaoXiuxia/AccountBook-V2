@@ -47,6 +47,13 @@
 					</div>
 				</div>
 				</a>
+				<a href="../monthlyStatisticsController/showMonthlyStatistics">
+				<div id="monthlyStatistics" class="breadcrumb">
+					<div>
+						月度统计
+					</div>
+				</div>
+				</a>
 			</div>
 		</div>
 		
