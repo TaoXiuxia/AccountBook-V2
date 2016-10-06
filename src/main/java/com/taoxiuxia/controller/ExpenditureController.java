@@ -1,6 +1,7 @@
 package com.taoxiuxia.controller;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.taoxiuxia.model.Expenditure;
 import com.taoxiuxia.model.Item;
 import com.taoxiuxia.service.IExpenditureService;
 import com.taoxiuxia.service.IItemService;
+import com.taoxiuxia.util.MyDateFormat;
 import com.taoxiuxia.util.NumberFormat;
 
 @Controller
@@ -90,8 +92,8 @@ public class ExpenditureController {
 	 * @param remark
 	 */
 	@RequestMapping("/changeExpenditure")
-	public void changeExpenditures(int expenditureId, float money, int itemId, String remark) {
-		expenditureService.changeExpenditure(expenditureId, money, itemId, remark);
+	public void changeExpenditures(int expenditureId, float money, int itemId, String remark,String date) {
+		expenditureService.changeExpenditure(expenditureId, money, itemId, remark,MyDateFormat.dateFormat(date));
 	}
 
 	/**

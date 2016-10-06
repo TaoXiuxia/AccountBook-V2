@@ -42,7 +42,7 @@ public class IncomeServiceImpl implements IIncomeService {
 	}
 
 	@Override
-	public void changeIncome(int incomeId, float money, int itemId, String remark) {
+	public void changeIncome(int incomeId, float money, int itemId, String remark, Date date) {
 		Income income = new Income();
 		income.setDate(null);
 		income.setDele(0);
@@ -51,6 +51,7 @@ public class IncomeServiceImpl implements IIncomeService {
 		income.setItemId(itemId);
 		income.setMoney(money);
 		income.setRemark(remark);
+		income.setDate(date);
 		incomeMapper.updateByPrimaryKeySelective(income);
 	}
 

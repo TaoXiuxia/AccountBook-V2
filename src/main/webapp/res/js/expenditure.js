@@ -25,12 +25,21 @@ function addMoney(){
 	setTimeout('location.reload()', 1000);
 }
 
-function changeExpenditure(expenditureId){
+function changeExpenditure(expenditureId,date,money,itemId,remark){
+	
 	layer.confirm(
 		$("#addContent").html(),{
-	    btn: ['修改','返回'] //按钮
+	    btn: ['修改','返回'],
+	    success: function(layero, index){
+	    	var content = $(".layui-layer-content");
+			content.find("#changedDate").val(date);
+       		content.find("#changedMoney").val(money);
+       		content.find("#changedItem").val(itemId);
+       		content.find("#changedRemark").val(remark);
+        }//按钮
 		}, function(){
 			var content = $(".layui-layer-content");
+			var date = content.find("#changedDate").val();
        		var money = content.find("#changedMoney").val();
        		var itemId = content.find("#changedItem option:selected").val();
        		var remark = content.find("#changedRemark").val();
@@ -38,7 +47,8 @@ function changeExpenditure(expenditureId){
 				"expenditureId":expenditureId,
 				"money":money,
 				"itemId":itemId,
-				"remark":remark
+				"remark":remark,
+				"date":date
 			});
 			setTimeout('location.reload()', 1000);
 		});

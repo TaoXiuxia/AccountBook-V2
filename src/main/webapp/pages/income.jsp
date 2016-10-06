@@ -55,7 +55,7 @@
                     <td>${income.money }</td>
                     <td>${income.itemName }</td>
                     <td>${income.remark }</td>
-                    <td><a href="#" onClick="changeIncome('${income.id}')">修改</a> 
+                    <td><a href="#" onClick="changeIncome('${income.id}','<fmt:formatDate value="${income.date}" pattern="yyyy-MM-dd"/>','${income.money }','${income.itemId }','${income.remark }')">修改</a> 
                     	<a href="#" onClick="delIncome('${income.id}','${income.itemId}')">删除</a></td>
                 </tr>
           		</c:forEach>
@@ -67,6 +67,10 @@
 
 
 <div id="addContent" class="hidden">
+	<div class="change">
+        <label class="changeLabel">日期</label>
+        <input type="text" id="changedDate" placeholder="日期" >
+    </div>
     <div class="change">
         <label class="changeLabel">Money</label>
         <input type="text" id="changedMoney" placeholder="Money" >

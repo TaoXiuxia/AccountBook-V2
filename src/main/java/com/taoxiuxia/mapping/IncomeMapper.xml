@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.taoxiuxia.mapper.IncomeMapper" >
+  
   <resultMap id="BaseResultMap" type="com.taoxiuxia.model.Income" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="item_id" property="itemId" jdbcType="INTEGER" />
@@ -92,6 +93,76 @@
 	AND date_format(income.date, '%Y-%m') = date_format(now(), '%Y-%m') <!-- 只查询本月数据 -->
 	ORDER BY
 		income.date DESC
+  </select>
+  
+  <!-- 查询收入和支出，根据传进来的日期和关键字，用于history页面 -->
+  <select id="selectIncomesAndExpenditure" resultType="java.util.HashMap" parameterType="java.util.HashMap" >
+	SELECT
+		income.id,
+		income.item_id,
+		income.user_id,
+		income.date as date,
+		income.money,
+		income.remark,
+		item.id AS itemId,
+		item.name AS itemName,
+		item.in_or_ex AS itemType
+	FROM
+		income,
+		item
+	<where>
+		income.item_id = item.id
+	AND income.user_id = #{userId,jdbcType=INTEGER}
+	AND income.dele = 0
+		<if test="beginDate!=null">
+			AND date_format(income.date, '%Y-%m') &gt;= date_format(#{beginDate}, '%Y-%m')
+		</if>
+		<if test="endDate!=null">
+			AND date_format(income.date, '%Y-%m') &lt;= date_format(#{endDate}, '%Y-%m')
+		</if>
+		<if test="keyword!=null">
+			AND (item.name like concat('%', #{keyword}, '%')
+			OR income.remark like concat('%', #{keyword}, '%'))
+		</if>
+		<if test="inOrEx!=null">
+			AND item.in_or_ex = #{inOrEx}
+		</if>
+	</where>
+	
+	UNION
+	
+	SELECT
+		expenditure.id,
+		expenditure.item_id,
+		expenditure.user_id,
+		expenditure.date as date,
+		expenditure.money,
+		expenditure.remark,
+		item.id AS itemId,
+		item.name AS itemName,
+		item.in_or_ex AS itemType
+	FROM
+		expenditure,
+		item
+	<where>
+		expenditure.item_id = item.id
+	AND expenditure.user_id = #{userId,jdbcType=INTEGER}
+	AND expenditure.dele = 0
+		<if test="beginDate!=null">
+			AND date_format(expenditure.date, '%Y-%m') &gt;= date_format(#{beginDate}, '%Y-%m')
+		</if>
+		<if test="endDate!=null">
+			AND date_format(expenditure.date, '%Y-%m') &lt;= date_format(#{endDate}, '%Y-%m')
+		</if>
+		<if test="keyword!=null">
+			AND (item.name like concat('%', #{keyword}, '%')
+			OR expenditure.remark like concat('%', #{keyword}, '%'))
+		</if>
+		<if test="inOrEx!=null">
+			AND item.in_or_ex = #{inOrEx}
+		</if>
+	</where>
+	ORDER BY date
   </select>
   
   <insert id="insert" parameterType="com.taoxiuxia.model.Income" >
@@ -203,8 +274,6 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  
-  
   
   <update id="updateByPrimaryKey" parameterType="com.taoxiuxia.model.Income" >
     update income

@@ -1,5 +1,6 @@
 package com.taoxiuxia.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.taoxiuxia.model.Expenditure;
@@ -26,8 +27,9 @@ public interface IExpenditureService {
 	 * @param money
 	 * @param itemId
 	 * @param remark
+	 * @param date 
 	 */
-	void changeExpenditure(int ExpenditureId,float money,int itemId ,String remark);
+	void changeExpenditure(int ExpenditureId,float money,int itemId ,String remark, Date date);
 	
 	/**
 	 * 删除Expenditure

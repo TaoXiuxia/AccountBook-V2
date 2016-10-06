@@ -42,7 +42,7 @@ public class ExpenditureServiceImpl implements IExpenditureService {
 	}
 
 	@Override
-	public void changeExpenditure(int expenditureId, float money, int itemId, String remark) {
+	public void changeExpenditure(int expenditureId, float money, int itemId, String remark,Date date) {
 		Expenditure expenditure = new Expenditure();
 		expenditure.setDate(null);
 		expenditure.setDele(0);
@@ -51,6 +51,7 @@ public class ExpenditureServiceImpl implements IExpenditureService {
 		expenditure.setItemId(itemId);
 		expenditure.setMoney(money);
 		expenditure.setRemark(remark);
+		expenditure.setDate(date);
 		expenditureMapper.updateByPrimaryKeySelective(expenditure);
 	}
 

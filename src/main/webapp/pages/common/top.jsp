@@ -26,14 +26,14 @@
 				</div>
 				</a>
 				
-				<a href="">
+				<a href="../borrowController/showBorrows">
 				<div id="borrow" class="breadcrumb">
 					<div>
 						借款
 					</div>
 				</div>
 				</a>
-				<a href="">
+				<a href="../historyController/showhistory">
 				<div id="history" class="breadcrumb">
 					<div>
 						往月收支

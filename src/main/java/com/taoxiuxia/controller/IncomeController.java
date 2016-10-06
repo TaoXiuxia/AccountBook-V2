@@ -1,6 +1,7 @@
 package com.taoxiuxia.controller;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.taoxiuxia.model.Income;
 import com.taoxiuxia.model.Item;
 import com.taoxiuxia.service.IIncomeService;
 import com.taoxiuxia.service.IItemService;
+import com.taoxiuxia.util.MyDateFormat;
 import com.taoxiuxia.util.NumberFormat;
 
 @Controller
@@ -86,8 +88,8 @@ public class IncomeController {
 	 * @param remark
 	 */
 	@RequestMapping("/changeIncome")
-	public void changeIncome(int incomeId,float money,int itemId ,String remark) {
-		incomeService.changeIncome(incomeId, money, itemId, remark);
+	public void changeIncome(int incomeId,float money,int itemId ,String remark, String date) {
+		incomeService.changeIncome(incomeId, money, itemId, remark,MyDateFormat.dateFormat(date));
 	}
 	
 	/**
