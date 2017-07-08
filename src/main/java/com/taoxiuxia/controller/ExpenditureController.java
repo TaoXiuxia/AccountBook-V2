@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.taoxiuxia.model.Expenditure;
 import com.taoxiuxia.model.Item;
+import com.taoxiuxia.model.SessionUser;
 import com.taoxiuxia.service.IExpenditureService;
 import com.taoxiuxia.service.IItemService;
+import com.taoxiuxia.util.Constants;
 import com.taoxiuxia.util.MyDateFormat;
 import com.taoxiuxia.util.NumberFormat;
 
@@ -48,7 +52,7 @@ public class ExpenditureController {
 	 * @return
 	 */
 	@RequestMapping("/showExpenditure")
-	public String showExpenditures(Model model) {
+	public String showExpenditures(Model model,HttpSession session) {
 
 		// Expenditure
 		List<Expenditure> expenditures = expenditureService.loadExpenditures();
@@ -67,6 +71,9 @@ public class ExpenditureController {
 		// Expenditure列表项
 		List<Item> items = itemService.loadExpenditureItems(2); // 目前只有用户2
 		model.addAttribute("items", items);
+		
+		SessionUser sessionUser= (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
+		model.addAttribute("sessionUser", sessionUser);
 
 		return "pages/expenditure";
 	}

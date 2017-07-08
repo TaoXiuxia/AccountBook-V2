@@ -2,7 +2,11 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<ol class="breadcrumb title">
-				<li class="title-li"><span class="title-text">Account Book</span></li>
+				<li class="title-li">
+					<span class="title-text">Account Book</span>
+					<span class="userInfo">${sessionUser.userName}</span>
+					<a class="logoutLink" href="#" onClick="logout()">注销</a>
+				</li>
 			</ol>
 		</div>
 	</div>

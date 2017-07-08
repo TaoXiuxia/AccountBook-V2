@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Account Book V2</title>
+<title>ABV2 收入</title>
 <%@ include file="common/common.jsp" %> 
 <link href="../res/css/inOrOut.css" rel="stylesheet">
 <script src="../res/js/income.js"></script>

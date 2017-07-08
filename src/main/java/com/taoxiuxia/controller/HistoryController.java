@@ -1,12 +1,13 @@
 package com.taoxiuxia.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.taoxiuxia.model.Item;
+import com.taoxiuxia.model.SessionUser;
 import com.taoxiuxia.service.IExpenditureService;
 import com.taoxiuxia.service.IHistoryService;
 import com.taoxiuxia.service.IIncomeService;
 import com.taoxiuxia.service.IItemService;
+import com.taoxiuxia.util.Constants;
 import com.taoxiuxia.util.MyDateFormat;
 
 @Controller
@@ -73,7 +76,7 @@ public class HistoryController {
 	 * @return
 	 */
 	@RequestMapping("/showhistory")
-	public String showHistory(Model model) {
+	public String showHistory(Model model,HttpSession session) {
 		// 初始页面，显示当前用户的全部数据
 		List<Map> historys = historyService.loadIncomesAndExpenditure(2, null, -1, -1, null);
 		List<Item> incomesItems = itemService.loadIncomeItems(2); // 目前只有用户2
@@ -81,6 +84,9 @@ public class HistoryController {
 		model.addAttribute("incomesItems", incomesItems);
 		model.addAttribute("expenditureItems", expenditureItems);
 		model.addAttribute("historys", historys);
+		
+		SessionUser sessionUser= (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
+		model.addAttribute("sessionUser", sessionUser);
 		return "pages/history";
 	}
 
@@ -155,8 +161,19 @@ public class HistoryController {
 				incomeService.deleIncome(detailsId, changedItem);
 			}
 		}
-
 	}
 
-	
+	/**
+	 * 删除history，可能是income或者expenditure
+	 * @param itemType
+	 * @param itemId
+	 */
+	@RequestMapping("/deleHistory")
+	public void deleteHistory(String itemType, int historyId, int itemId) {
+		if (itemType.equals("in")) { // 删除income
+			incomeService.deleIncome(historyId, itemId);
+		} else { // 删除expenditure
+			expenditureService.deleExpenditure(historyId, itemId);
+		}
+	}
 }

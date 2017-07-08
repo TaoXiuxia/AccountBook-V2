@@ -3,28 +3,39 @@ package com.taoxiuxia.mapper;
 import com.taoxiuxia.model.User;
 import com.taoxiuxia.model.UserExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserMapper {
-    int countByExample(UserExample example);
 
-    int deleteByExample(UserExample example);
+	int insert(User record);
+	
+	List<User> findUserByUserName(Map map);
+	
+	List<User> findUserByEmail(Map map);
 
-    int deleteByPrimaryKey(Integer id);
+	////////////////////////////////////////////////////////////////////////////////////
 
-    int insert(User record);
+	int countByExample(UserExample example);
 
-    int insertSelective(User record);
+	int deleteByExample(UserExample example);
 
-    List<User> selectByExample(UserExample example);
+	int deleteByPrimaryKey(Integer id);
 
-    User selectByPrimaryKey(Integer id);
+	int insertSelective(User record);
 
-    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+	List<User> selectByExample(UserExample example);
 
-    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+	User selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(User record);
+	int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
-    int updateByPrimaryKey(User record);
+	int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+
+	int updateByPrimaryKeySelective(User record);
+
+	int updateByPrimaryKey(User record);
 }

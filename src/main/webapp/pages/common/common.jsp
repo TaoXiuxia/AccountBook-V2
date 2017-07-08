@@ -3,3 +3,4 @@
 <script src="../res/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <script src="../res/layer/layer.js"></script>
 <link href="../res/css/public.css" rel="stylesheet">
+<script src="../res/js/user.logout.js"></script>

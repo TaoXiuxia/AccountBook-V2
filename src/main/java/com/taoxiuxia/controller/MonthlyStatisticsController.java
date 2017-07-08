@@ -3,6 +3,8 @@ package com.taoxiuxia.controller;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.taoxiuxia.model.Balance;
 import com.taoxiuxia.model.Item;
+import com.taoxiuxia.model.SessionUser;
 import com.taoxiuxia.service.IItemService;
 import com.taoxiuxia.service.IMonthlyStatisticsService;
+import com.taoxiuxia.util.Constants;
 import com.taoxiuxia.util.NumberFormat;
 
 @Controller
@@ -35,7 +39,7 @@ public class MonthlyStatisticsController {
 	 * @return
 	 */
 	@RequestMapping("/showMonthlyStatistics")
-	public String showMonthlyStatistics(Model model) {
+	public String showMonthlyStatistics(Model model,HttpSession session) {
 
 		Calendar ca = Calendar.getInstance();
 		
@@ -59,6 +63,9 @@ public class MonthlyStatisticsController {
 		model.addAttribute("balanceInBeginOfMonth", balanceInBeginOfMonth);
 		model.addAttribute("balanceOfThisMonth", balanceOfThisMonth);
 		model.addAttribute("balanceShould", balanceShould);
+		
+		SessionUser sessionUser= (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
+		model.addAttribute("sessionUser", sessionUser);
 		
 		return "pages/monthlyStatistics";
 	}

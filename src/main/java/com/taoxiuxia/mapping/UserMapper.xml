@@ -74,6 +74,40 @@
   <sql id="Base_Column_List" >
     id, name, email, password, age, sex, remark, register_time, last_login_time, activation_code
   </sql>
+  
+  <insert id="insert" parameterType="com.taoxiuxia.model.User" useGeneratedKeys="true" keyProperty="id">
+    insert into user (id, name, email, 
+      password, age, sex, remark, 
+      register_time, last_login_time, activation_code
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{registerTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{activationCode,jdbcType=CHAR}
+      )
+  </insert>
+  
+  <select id="findUserByUserName" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    SELECT
+		*
+	FROM
+		user
+	WHERE
+		user.name = #{name}
+  </select>
+  
+  <select id="findUserByEmail" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    SELECT
+		*
+	FROM
+		user
+	WHERE
+		user.email = #{email}
+  </select>
+  
+  <!-- ///////////////////////////////////////////////////////////////////////////////// -->
+  
+  
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taoxiuxia.model.UserExample" >
     select
     <if test="distinct" >
@@ -104,16 +138,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.taoxiuxia.model.User" >
-    insert into user (id, name, email, 
-      password, age, sex, remark, 
-      register_time, last_login_time, activation_code
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{registerTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{activationCode,jdbcType=CHAR}
-      )
-  </insert>
+  
   <insert id="insertSelective" parameterType="com.taoxiuxia.model.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >

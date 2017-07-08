@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Account Book V2</title>
+<title>ABV2 项目管理</title>
 <%@ include file="common/common.jsp" %> 
 <link href="../res/css/manageItems.css" rel="stylesheet">
 <script src="../res/js/manageItems.js"></script>

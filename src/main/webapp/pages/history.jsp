@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Account Book V2</title>
+<title>ABV2 往月收支</title>
 <%@ include file="common/common.jsp" %> 
 <link href="../res/css/history.css" rel="stylesheet">
 <script src="../res/js/history.js"></script>
@@ -86,7 +86,8 @@
                     								)">修改</a> 
                     	<a href="#" onClick="delDetailsItem(
 						                    		'${history.itemType}',
-													'${history.id }'
+													'${history.id }',
+													'${history.itemId}'
 						                    		)">删除</a></td>
                 </tr>
           		</c:forEach>

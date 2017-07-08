@@ -52,4 +52,19 @@
 		<servlet-name>springDispatcherServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<!-- 自动登录过滤 -->
+	<filter>
+		<filter-name>autoLogin</filter-name>
+		<filter-class>com.taoxiuxia.filter.AuthorityFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>autoLogin</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<welcome-file-list>
+		<welcome-file>
+			userController/showUserLogin.action
+		</welcome-file>
+	</welcome-file-list>
 </web-app>

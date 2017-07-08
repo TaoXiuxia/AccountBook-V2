@@ -2,13 +2,17 @@ package com.taoxiuxia.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.taoxiuxia.model.Item;
+import com.taoxiuxia.model.SessionUser;
 import com.taoxiuxia.service.IItemService;
+import com.taoxiuxia.util.Constants;
 
 @Controller
 @RequestMapping("/itemController")
@@ -31,11 +35,15 @@ public class ItemController {
 	 * @return
 	 */
 	@RequestMapping("/showManageItems")
-	public String showManageItems(Model model) {
+	public String showManageItems(Model model,HttpSession session) {
 		List<Item> expenditureItems = itemService.loadExpenditureItems(2); // 目前只有用户2
 		List<Item> incomeItems = itemService.loadIncomeItems(2);
 		model.addAttribute("expenditureItems", expenditureItems);
 		model.addAttribute("incomeItems", incomeItems);
+		
+		SessionUser sessionUser= (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
+		model.addAttribute("sessionUser", sessionUser);
+		
 		return "pages/manageItems";
 	}
 

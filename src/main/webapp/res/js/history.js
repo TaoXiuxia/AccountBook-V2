@@ -108,9 +108,11 @@ function changeDetailsItem(itemType, detailsId, date, money, itemId, remark){
 	});
 }
 
-function delDetailsItem(itemType,itemId){
-//	$.post("../itemController/deleItem",{
-//		"itemId":itemId,
-//	});
-//	setTimeout('location.reload()', 1000);
+function delDetailsItem(itemType,historyId,itemId){
+	$.post("../historyController/deleHistory",{
+		"itemType":itemType,
+		"historyId":historyId,
+		"itemId":itemId,
+	});
+	setTimeout('location.reload()', 1000);
 }

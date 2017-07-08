@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.taoxiuxia.model.Income;
 import com.taoxiuxia.model.Item;
+import com.taoxiuxia.model.SessionUser;
 import com.taoxiuxia.service.IIncomeService;
 import com.taoxiuxia.service.IItemService;
+import com.taoxiuxia.util.Constants;
 import com.taoxiuxia.util.MyDateFormat;
 import com.taoxiuxia.util.NumberFormat;
 
@@ -46,7 +50,7 @@ public class IncomeController {
 	 * @return
 	 */
 	@RequestMapping("/showIncome")
-	public String showIncomes(Model model) {
+	public String showIncomes(Model model,HttpSession session) {
 		
 		// 收入income
 		List<Income> incomes = incomeService.loadIncomes();
@@ -65,6 +69,9 @@ public class IncomeController {
 		// 收入列表项
 		List<Item>items = itemService.loadIncomeItems(2);  // 目前只有用户2
 		model.addAttribute("items", items);	
+
+		SessionUser sessionUser= (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
+		model.addAttribute("sessionUser", sessionUser);
 		
 		return "pages/income";
 	}
