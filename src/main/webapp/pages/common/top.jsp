@@ -30,13 +30,15 @@
 				</div>
 				</a>
 				
-				<a href="../borrowController/showBorrows">
+				<!-- 借款这一项可以不要了 -->
+				<!-- <a href="../borrowController/showBorrows">
 				<div id="borrow" class="breadcrumb">
 					<div>
 						借款
 					</div>
 				</div>
-				</a>
+				</a> -->
+				
 				<a href="../historyController/showhistory">
 				<div id="history" class="breadcrumb">
 					<div>
@@ -51,13 +53,25 @@
 					</div>
 				</div>
 				</a>
-				<a href="../monthlyStatisticsController/showMonthlyStatistics">
+				
+				<!-- 月度统计这一项也可以不要了 -->				
+				<!-- <a href="../monthlyStatisticsController/showMonthlyStatistics">
 				<div id="monthlyStatistics" class="breadcrumb">
 					<div>
 						月度统计
 					</div>
 				</div>
+				</a> -->
+				
+				<!-- 说明一些注意事项，不好理解的地方 -->
+				<a href="../monthlyStatisticsController/showMonthlyStatistics">
+				<div id="monthlyStatistics" class="breadcrumb">
+					<div>
+						关于
+					</div>
+				</div>
 				</a>
+				
 			</div>
 		</div>
 		

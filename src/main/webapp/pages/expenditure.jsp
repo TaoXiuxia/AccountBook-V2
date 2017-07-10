@@ -42,7 +42,8 @@
 		    <thead> 
 		        <tr> 
 					<th>日期</th>
-					<th>Money</th>
+					<th>金额</th>
+					<th>支出方式</th>
 					<th>项目</th>
 					<th>备注</th>
 					<th>操作</th>
@@ -53,6 +54,7 @@
                 <tr>
                     <td><fmt:formatDate value="${expenditure.date}" pattern="yyyy-MM-dd"/></td> 
                     <td>${expenditure.money }</td>
+                    <td>${expenditure.type_of_money }</td>
                     <td>${expenditure.itemName }</td>
                     <td>${expenditure.remark }</td>
                     <td><a href="#" onClick="changeExpenditure('${expenditure.id}','<fmt:formatDate value="${expenditure.date}" pattern="yyyy-MM-dd"/>','${expenditure.money }',${expenditure.itemId },'${expenditure.remark }')">修改</a> 

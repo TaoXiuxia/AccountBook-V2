@@ -51,7 +51,7 @@
 		</select>
 		
 		<label class="label3">关键词&nbsp;</label>
-		<input class="input1" placeholder="关键词" id="keyword">
+		<input class="input1" placeholder="金额/项目/备注" id="keyword">
 		
 		<button onclick="search()">筛选</button>
 	</div>
@@ -61,7 +61,7 @@
 		    <thead> 
 		        <tr> 
 					<th>日期</th>
-					<th>Money</th>
+					<th>金额</th>
 					<th>类型</th>
 					<th>项目</th>
 					<th>备注</th>
@@ -83,7 +83,7 @@
                     								'${history.money}',
                     								'${history.itemId}',
                     								'${history.remark}'
-                    								)">修改</a> 
+                    								)">修改&nbsp;&nbsp;&nbsp;&nbsp;</a> 
                     	<a href="#" onClick="delDetailsItem(
 						                    		'${history.itemType}',
 													'${history.id }',
@@ -99,26 +99,26 @@
 <%@ include file="common/bottom.jsp"%>
 
 
-
+<!-- 修改命令的弹出框 -->
 <div id="changeDetailsItemLayer" class="hidden">
-    <div>
+    <div class="layout_div_Style">
         <label class="change-label">日期</label>
-        <input type="text" id="changedDate" placeholder="日期" >
+        <input class="change-text" type="text" id="changedDate" placeholder="日期" >
     </div>
-	<div>
-        <label class="change-label">Money</label>
-        <input type="text" id="changedMoney" placeholder="Money" >
+	<div class="layout_div_Style">
+        <label class="change-label">金额</label>
+        <input class="change-text" type="text" id="changedMoney" placeholder="Money" >
 	</div>
-	<div>
+	<div class="layout_div_Style">
         <label class="change-label">类型</label>
-        <select id="changedType" onchange="changeType1()">
+        <select class="change-text" id="changedType" onchange="changeType1()">
         	<option value="in">收入</option>
         	<option value="ex">支出</option>
 		</select>
 	</div>
-	<div id="changedItemDiv">
+	<div class="layout_div_Style" id="changedItemDiv">
         <label class="change-label">项目</label>
-        <select id="changedItem">
+        <select class="change-text" id="changedItem">
 		    <c:forEach items="${incomesItems}" var="item">
                  <option class="in" value=${item.id }>${item.name}</option>
       		</c:forEach>
@@ -127,8 +127,9 @@
       		</c:forEach>
 		</select>
 	</div>
-	<div>
+	<div class="layout_div_Style">
         <label class="change-label">备注</label>
-        <input type="text" id="changedRemark" placeholder="备注" >
+        <input class="change-text" type="text" id="changedRemark" placeholder="备注" >
 	</div>
 </div>
+<!-- / -->

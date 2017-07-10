@@ -27,9 +27,10 @@
 		<table class="table table-bordered"> 
 		    <thead> 
 		        <tr> 
-					<th>项目</th>
-					<th>备注</th>
-					<th>操作</th>
+					<th class="col1">项目</th>
+					<th class="col2">备注</th>
+					<th class="col3">操作</th>
+					<th class="col4">排序</th>
 		        </tr>
 		    </thead>
 		    <tbody> 
@@ -37,8 +38,9 @@
                 <tr>
                     <td>${incomeItem.name }</td>
                     <td>${incomeItem.remark }</td>
-                    <td><a href="#" onClick="changeItem('${incomeItem.id}','${incomeItem.name }','${incomeItem.remark }','in')">修改</a> 
+                    <td><a href="#" onClick="changeItem('${incomeItem.id}','${incomeItem.name }','${incomeItem.remark }','in')">修改&nbsp;&nbsp;</a> 
                     	<a href="#" onClick="delItem('${incomeItem.id}')">删除</a></td>
+                    <td>上移&nbsp;&nbsp;下移</td>
                 </tr>
           		</c:forEach>
 		    </tbody> 
@@ -54,9 +56,10 @@
 		<table class="table table-bordered"> 
 		    <thead> 
 		        <tr> 
-					<th>项目</th>
-					<th>备注</th>
-					<th>操作</th>
+					<th class="col1">项目</th>
+					<th class="col2">备注</th>
+					<th class="col3">操作</th>
+					<th class="col4">排序</th>
 		        </tr>
 		    </thead>
 		    <tbody> 
@@ -64,8 +67,9 @@
                 <tr>
                     <td>${expenditureItem.name }</td>
                     <td>${expenditureItem.remark }</td>
-                    <td><a href="#" onClick="changeItem('${expenditureItem.id}','${expenditureItem.name }','${expenditureItem.remark }','ex')">修改</a> 
+                    <td><a href="#" onClick="changeItem('${expenditureItem.id}','${expenditureItem.name }','${expenditureItem.remark }','ex')">修改&nbsp;&nbsp;</a> 
                     	<a href="#" onClick="delItem('${expenditureItem.id}')">删除</a></td>
+                    <td>上移&nbsp;&nbsp;下移</td>
                 </tr>
           		</c:forEach>
 		    </tbody> 

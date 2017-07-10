@@ -20,7 +20,7 @@ function login() {
 			"rememberMe":rememberMe
 		},
 		success: function(msg){
-			alert(msg.info);
+//			alert(msg.info);
 			if(msg.info=="登录成功"){
 				window.location.href="../incomeController/showIncome";
 			}

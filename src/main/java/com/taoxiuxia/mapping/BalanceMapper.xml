@@ -98,7 +98,7 @@
 		balance
 	WHERE
 		user_id = #{user_id,jdbcType=INTEGER}
-	AND PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( balance.month, '%Y%m' ) ) =1
+	AND date_format(balance.MONTH, '%Y-%m') = date_format(now(), '%Y-%m')
   </select>
   
   <select id="selectBalanceOfThisMonth" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

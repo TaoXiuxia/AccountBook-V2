@@ -84,6 +84,7 @@
 		(user_id = 1 OR user_id = #{id,jdbcType=INTEGER})
 	AND in_or_ex = 'in'
 	AND dele = 0
+	Order By sort
   </select>
   
   <!-- 查询expenditure项 -->  
@@ -96,6 +97,7 @@
 		(user_id = 1 OR user_id = #{id,jdbcType=INTEGER})
 	AND in_or_ex = 'ex'
 	AND dele = 0
+	Order By sort
   </select>
   
   <insert id="insert" parameterType="com.taoxiuxia.model.Item" >

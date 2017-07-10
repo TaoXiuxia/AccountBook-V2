@@ -79,6 +79,7 @@
 		expenditure.user_id,
 		expenditure.date,
 		expenditure.money,
+		expenditure.type_of_money,
 		expenditure.remark,
 		item.name as itemName
 	FROM
@@ -93,6 +94,7 @@
 		expenditure.date DESC
   </select>
   
+  <!-- 目前这里还没有加入expenditure.type_of_money;的内容 -->
   <insert id="insert" parameterType="com.taoxiuxia.model.Expenditure" >
     insert into expenditure (item_id, user_id, money, date, remark, dele)
     values (#{itemId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
@@ -100,6 +102,7 @@
       #{dele,jdbcType=INTEGER})
   </insert>
   
+  <!-- 目前这里还没有加入expenditure.type_of_money;的内容 -->
   <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Expenditure" >
     update expenditure
     <set >

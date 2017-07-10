@@ -42,7 +42,8 @@
 		    <thead> 
 		        <tr> 
 					<th>日期</th>
-					<th>Money</th>
+					<th>金额</th>
+					<th>收入方式</th>
 					<th>项目</th>
 					<th>备注</th>
 					<th>操作</th>
@@ -53,6 +54,7 @@
                 <tr>
                     <td><fmt:formatDate value="${income.date}" pattern="yyyy-MM-dd"/></td> 
                     <td>${income.money }</td>
+                    <td>${income.type_of_money }</td>
                     <td>${income.itemName }</td>
                     <td>${income.remark }</td>
                     <td><a href="#" onClick="changeIncome('${income.id}','<fmt:formatDate value="${income.date}" pattern="yyyy-MM-dd"/>','${income.money }','${income.itemId }','${income.remark }')">修改</a> 

@@ -13,6 +13,8 @@ public class Expenditure {
 
     private Float money;
 
+    private String type_of_money;
+    
     private Date date;
 
     private String remark;
@@ -59,7 +61,15 @@ public class Expenditure {
         this.money = money;
     }
 
-    public Date getDate() {
+    public String getType_of_money() {
+		return type_of_money;
+	}
+
+	public void setType_of_money(String type_of_money) {
+		this.type_of_money = type_of_money;
+	}
+
+	public Date getDate() {
         return date;
     }
 
