@@ -1,17 +1,24 @@
 /* 增加收入支出 */
 .add-label{height: 25px;width: 100px;}
-.add-select{height: 25px;width: 150px;}
-.add-money{height: 25px;width: 100px;}
-.add-button{height: 25px;width: 100px;}
-.add-money-remark{height: 25px;width: 150px;}
+.label2{width: 90px; text-align: right; font-weight: normal;}
+.label3{font-weight: normal;}
+.label4{width: 150px; text-align: right; font-weight: normal;}
+.label5{width: 50px; text-align: right; font-weight: normal;}
 
-/* 收入支出的总计栏 */
-.total{margin-top:20px;}
-.total-label1{height: 25px;width: 70px;}
-.total-money1{height: 25px;width: 100px;}
-.total-label2{height: 25px;width: 80px;}
-.total-money2{height: 25px;width: 100px;}
+.addIncome_div1{height: 30px;}
+.addIncome_div2{height: 55px;}
+.add-data{height: 25px;width: 200px;}
+.add-select{height: 25px;width: 200px; margin-left: -4px;}
+.add-money{height: 25px;width: 200px;}
+.add-money-type{height: 25px;width: 200px;}
+.add-money-remark{height: 50px;width: 200px; vertical-align: top; margin-left: -4px;}
+.add-button{height: 25px;width: 100px; margin-left: 90px;}
 
 /* 修改增加收入支出项 */
 .changeLabel{height: 25px;width: 60px;}
 .changeInput{height: 25px;width: 150px;}
+
+.input2{height: 25px;width: 150px;}
+
+.div3{height: 35px;}
+

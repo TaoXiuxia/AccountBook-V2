@@ -19,7 +19,7 @@ public interface IIncomeService {
 	 * @param money
 	 * @param remark
 	 */
-	void addIncome(int item,float money,String remark);
+	void addIncome(String date, int item, float money, String moneyType, String remark);
 	
 	/**
 	 * 修改收入
@@ -28,7 +28,7 @@ public interface IIncomeService {
 	 * @param itemId
 	 * @param remark
 	 */
-	void changeIncome(int incomeId,float money,int itemId ,String remark, Date date);
+	void changeIncome(int incomeId,float money, String moneyType, int itemId ,String remark, Date date);
 	
 	/**
 	 * 删除收入

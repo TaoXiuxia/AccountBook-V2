@@ -93,7 +93,7 @@
 	AND income.dele = 0
 	AND date_format(income.date, '%Y-%m') = date_format(now(), '%Y-%m') <!-- 只查询本月数据 -->
 	ORDER BY
-		income.date DESC
+		income.id DESC
   </select>
   
   <!-- 查询收入和支出，根据传进来的日期和关键字，用于history页面 -->
@@ -168,11 +168,10 @@
 	ORDER BY date
   </select>
   
-  <!-- 这里还没有加入 income.type_of_money 的内容 -->
   <insert id="insert" parameterType="com.taoxiuxia.model.Income" >
-    insert into income (item_id, user_id, money, date, remark, dele)
+    insert into income (item_id, user_id, money, type_of_money, date, remark, dele)
     values (#{itemId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{money,jdbcType=REAL}, #{date,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{money,jdbcType=REAL}, #{type_of_money, jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
       #{dele,jdbcType=INTEGER})
   </insert>
   
@@ -188,6 +187,9 @@
       </if>
       <if test="money != null" >
         money = #{money,jdbcType=REAL},
+      </if>
+      <if test="type_of_money != null" >
+        type_of_money = #{type_of_money,jdbcType=VARCHAR},
       </if>
       <if test="date != null" >
         date = #{date,jdbcType=TIMESTAMP},

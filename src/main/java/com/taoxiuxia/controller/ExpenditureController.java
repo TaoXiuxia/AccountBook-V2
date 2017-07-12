@@ -1,6 +1,5 @@
 package com.taoxiuxia.controller;
 
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,7 +16,6 @@ import com.taoxiuxia.service.IExpenditureService;
 import com.taoxiuxia.service.IItemService;
 import com.taoxiuxia.util.Constants;
 import com.taoxiuxia.util.MyDateFormat;
-import com.taoxiuxia.util.NumberFormat;
 
 @Controller
 @RequestMapping("/expenditureController")
@@ -57,15 +55,11 @@ public class ExpenditureController {
 		List<Expenditure> expenditures = expenditureService.loadExpenditures();
 
 		float totalExpenditure = 0;
-		float averageExpenditure = 0;
 		for (Expenditure expenditure : expenditures) {
 			totalExpenditure += expenditure.getMoney();
 		}
-		Calendar ca = Calendar.getInstance();
-		averageExpenditure = NumberFormat.to2Decimals(totalExpenditure / ca.get(Calendar.DAY_OF_MONTH) * 100);
 		model.addAttribute("expenditures", expenditures);
 		model.addAttribute("totalExpenditure", totalExpenditure);
-		model.addAttribute("averageExpenditure", averageExpenditure);
 
 		// Expenditure列表项
 		List<Item> items = itemService.loadExpenditureItems(2); // 目前只有用户2

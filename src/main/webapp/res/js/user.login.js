@@ -20,9 +20,8 @@ function login() {
 			"rememberMe":rememberMe
 		},
 		success: function(msg){
-//			alert(msg.info);
 			if(msg.info=="登录成功"){
-				window.location.href="../incomeController/showIncome";
+				window.location.href="../expenditureController/showExpenditure";
 			}
 		},
 		error: function () {
@@ -35,6 +34,6 @@ function login() {
 $(document).keyup(function(event) {
 	var code = event.keyCode;
 	if (code == 13) {
-		register();
+		login();
 	}
 })

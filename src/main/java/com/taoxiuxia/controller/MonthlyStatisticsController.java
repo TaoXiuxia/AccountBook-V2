@@ -1,22 +1,16 @@
 package com.taoxiuxia.controller;
 
-import java.util.Calendar;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.taoxiuxia.model.Balance;
-import com.taoxiuxia.model.Item;
-import com.taoxiuxia.model.SessionUser;
-import com.taoxiuxia.service.IItemService;
 import com.taoxiuxia.service.IMonthlyStatisticsService;
-import com.taoxiuxia.util.Constants;
-import com.taoxiuxia.util.NumberFormat;
 
 @Controller
 @RequestMapping("/monthlyStatisticsController")
@@ -32,42 +26,36 @@ public class MonthlyStatisticsController {
 		this.monthlyStatisticsService = monthlyStatisticsService;
 	}
 
-	/**
-	 * MonthlyStatistics页面
-	 * 
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/showMonthlyStatistics")
-	public String showMonthlyStatistics(Model model,HttpSession session) {
-
-		Calendar ca = Calendar.getInstance();
+	public Map<String,Float> monthlyStatistics(HttpSession session) {
+		Map<String,Float>map = new HashMap<String, Float>();
 		
-		int now = ca.get(Calendar.DAY_OF_MONTH);
-		int lastDay = ca.getActualMaximum(Calendar.DAY_OF_MONTH);
-		String isLastDay = (now==lastDay)+"";
+		// 月收入
+		float monthlyIncome = monthlyStatisticsService.monthlyIncome(2); 
+		map.put("monthlyIncome", monthlyIncome);
 		
-		float monthlyIncome = monthlyStatisticsService.monthlyIncome(2);
-		float averageIncome = NumberFormat.to2Decimals(monthlyIncome/now*100);
-		float monthlyExpenditure = monthlyStatisticsService.monthlyExpenditure(2);
-		float averageExpenditure = NumberFormat.to2Decimals(monthlyExpenditure/now*100);
+		// 月支出
+		float monthlyExpenditure = monthlyStatisticsService.monthlyExpenditure(2);  
+		map.put("monthlyExpenditure", monthlyExpenditure);
+		
+		// 本月初（上月末）结余
 		float balanceInBeginOfMonth = monthlyStatisticsService.balanceInBeginOfMonth(2);
-		Balance balanceOfThisMonth = monthlyStatisticsService.balanceOfThisMonth(2);
+		map.put("balanceInBeginOfMonth", balanceInBeginOfMonth);
+		
+		// 本月应结余 ==> 月初结余+月收入-月支出
 		float balanceShould = balanceInBeginOfMonth + monthlyIncome - monthlyExpenditure;
+		map.put("balanceShould", balanceShould);
 		
-		model.addAttribute("isLastDay", isLastDay);
-		model.addAttribute("monthlyIncome", monthlyIncome);
-		model.addAttribute("averageIncome", averageIncome);
-		model.addAttribute("monthlyExpenditure", monthlyExpenditure);
-		model.addAttribute("averageExpenditure", averageExpenditure);
-		model.addAttribute("balanceInBeginOfMonth", balanceInBeginOfMonth);
-		model.addAttribute("balanceOfThisMonth", balanceOfThisMonth);
-		model.addAttribute("balanceShould", balanceShould);
+		// 本月实际结余
+		Balance balanceOfThisMonth = monthlyStatisticsService.balanceOfThisMonth(2);
+		float actualBalance; // 本月实际结余
+		if(balanceOfThisMonth == null){
+			actualBalance = -1;
+		}else{
+			actualBalance = balanceOfThisMonth.getActualBalance();
+		}
+		map.put("actualBalance", actualBalance);
 		
-		SessionUser sessionUser= (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
-		model.addAttribute("sessionUser", sessionUser);
-		
-		return "pages/monthlyStatistics";
+		return map;
 	}
 
 	/**
@@ -82,15 +70,14 @@ public class MonthlyStatisticsController {
 	}
 
 	/**
-	 * 修改item
 	 * 
-	 * @param itemId
-	 * @param itemName
-	 * @param remark
-	 * @param inOrEx
+	 * @param balanceId
+	 * @param actualBalance
 	 */
 	@RequestMapping("/changeBalance")
-	public void changeBalance(int balanceId,float actualBalance) {
-		monthlyStatisticsService.changeBalance(balanceId,actualBalance, 2);
+	public void changeBalance(String month, float changed_balance) {
+//		monthlyStatisticsService.changeBalance(balanceId,actualBalance, 2);
+
+		
 	}
 }

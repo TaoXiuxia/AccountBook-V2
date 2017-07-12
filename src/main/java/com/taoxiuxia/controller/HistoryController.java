@@ -145,16 +145,16 @@ public class HistoryController {
 	 */
 	@RequestMapping("/changeHistory")
 	public void changeHistory(String itemType, String changedType, int detailsId, String changedDate,
-			float changedMoney, int changedItem, String changedRemark) {
+			float changedMoney, String changedMoneyType, int changedItem, String changedRemark) {
 		if (itemType.equals(changedType)) { // 同一个类目下修改
 			if (itemType.equals("in")) {
-				incomeService.changeIncome(detailsId, changedMoney, changedItem, changedRemark, MyDateFormat.dateFormat(changedDate));
+				incomeService.changeIncome(detailsId, changedMoney, changedMoneyType, changedItem, changedRemark, MyDateFormat.dateFormat(changedDate));
 			} else {
 				expenditureService.changeExpenditure(detailsId, changedMoney, changedItem, changedRemark, MyDateFormat.dateFormat(changedDate));
 			}
 		} else { // 不同的类目下，先删除原来的，在添加上新的
 			if (changedType.equals("in")) { // 原来是ex，现在是in
-				incomeService.addIncome(changedItem, changedMoney, changedRemark);
+				incomeService.addIncome(changedDate, changedItem, changedMoney,changedMoneyType, changedRemark);
 				expenditureService.deleExpenditure(detailsId, changedItem);
 			}else{ // 原来是in，现在是ex
 				expenditureService.addExpenditure(changedItem, changedMoney, changedRemark);
