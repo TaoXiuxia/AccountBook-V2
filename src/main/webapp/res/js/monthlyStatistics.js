@@ -1,38 +1,39 @@
-function setLeftColumn(){
-	$("#income").addClass("left-column-button-inactive");
-	$("#income").addClass("left-column-button-inactive-font");
-	$("#expenditure").addClass("left-column-button-inactive");
-	$("#expenditure").addClass("left-column-button-inactive-font");
-	$("#borrow").addClass("left-column-button-inactive");
-	$("#borrow").addClass("left-column-button-inactive-font");
-	$("#history").addClass("left-column-button-inactive");
-	$("#history").addClass("left-column-button-inactive-font");
-	$("#itemsManagement").addClass("left-column-button-inactive");
-	$("#itemsManagement").addClass("left-column-button-inactive-font");
-	$("#monthlyStatistics").addClass("left-column-button-active");
-	$("#monthlyStatistics").addClass("left-column-button-active-font");
-}
-
-function addMoney(){
-	var actualBalance = $("#actualBalance").val();
+function submitBalance(){
+	var actualBalance = $("#actual_balance").val();
 	$.post("../monthlyStatisticsController/addBalance",{
 		"actualBalance":actualBalance
 	});
 	setTimeout('location.reload()', 1000);
 }
 
-function changeMoney(){
-	balanceId
-	var balanceId = $("#balanceId").val();
-	var actualBalance = $("#actualBalance").val();
-	alert(actualBalance);
-	$.post("../monthlyStatisticsController/changeBalance",{
-		"balanceId":balanceId,
-		"actualBalance":actualBalance
-	});
-	setTimeout('location.reload()', 1000);
+/**
+ * 修改balance 
+ * @param month
+ */
+function changeBalance(month){ // 如果参数month为last，表示修改上月balance；如果参数为this，表示修改本月balance
+	layer.confirm(
+		$("#changeBalance").html(),{
+	    btn: ['修改','返回'], //按钮
+	    success: function(layero, index){
+	    	var content = $(".layui-layer-content");
+	    	if(month=="last"){
+	    		content.find("#month_label").text("修改本月初/上月末结余：");
+	    	}else{
+	    		content.find("#month_label").text("修改本月末结余：");
+	    	}
+        }
+		}, function(){
+			var content = $(".layui-layer-content");
+			var changed_balance = content.find("#changed_balance").val();
+       		$.post("../monthlyStatisticsController/changeBalance",{
+				"changed_balance":changed_balance,
+				"month":month
+			});
+			setTimeout('location.reload()', 1000);
+		});
 }
 
+// 导出到excel
 function toExcel(){
 	alert("本部分还没有做");
 }

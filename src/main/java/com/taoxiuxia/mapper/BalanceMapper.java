@@ -22,6 +22,14 @@ public interface BalanceMapper {
 	float selectMonthlyExpenditure(int userId);
 	
 	/**
+	 * 本月支出中花呗与信用卡的数额
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	float selectHuaBeiAndCreditCard(int userId);
+	
+	/**
 	 * 查询月初结余，即上月末结余
 	 * @param userId
 	 * @return

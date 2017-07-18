@@ -3,53 +3,38 @@ function setLeftColumn(){
 	$("#income").addClass("left-column-button-active-font");
 	$("#expenditure").addClass("left-column-button-inactive");
 	$("#expenditure").addClass("left-column-button-inactive-font");
-	$("#borrow").addClass("left-column-button-inactive");
-	$("#borrow").addClass("left-column-button-inactive-font");
 	$("#history").addClass("left-column-button-inactive");
 	$("#history").addClass("left-column-button-inactive-font");
 	$("#itemsManagement").addClass("left-column-button-inactive");
 	$("#itemsManagement").addClass("left-column-button-inactive-font");
-	$("#monthlyStatistics").addClass("left-column-button-inactive");
-	$("#monthlyStatistics").addClass("left-column-button-inactive-font");
+	$("#about").addClass("left-column-button-inactive");
+	$("#about").addClass("left-column-button-inactive-font");
 }
 
-function fillUpDate(){ //在日期框中填入今天的日期，（默认当前日期）；
+/**
+ * 在日期框中填入今天的日期，（默认当前日期）；
+ */
+function fillUpDate(){ 
 	var myDate = new Date();
 	var myDate=myDate.toLocaleDateString();
 	$("#date").val(myDate);
 }
 
-function unenableInput(actualSurplus){ //在“本月实际结余”输入框中填入数值（如果有的话）,并且将其变为不可用
+/**
+ * 在“本月实际结余”输入框中填入数值（如果有的话）,并且将其变为不可用
+ * @param actualSurplus
+ */
+function unenableInput(actualSurplus){ 
 	if(actualSurplus!=-1){ //-1表示没有内容
-		$("#actualSurplus").val(actualSurplus);
-		$("#actualSurplus").attr("disabled","disabled");
+		$("#actual_balance").val(actualSurplus);
+		$("#actual_balance").attr("disabled","disabled");
+		$("#submitBalanceButton").attr("disabled","disabled");
 	}
 }
 
-function changeBalance(month){ // 如果参数month为last，表示修改上月balance；如果参数为this，表示修改本月balance
-	layer.confirm(
-		$("#changeBalance").html(),{
-	    btn: ['修改','返回'], //按钮
-	    success: function(layero, index){
-	    	var content = $(".layui-layer-content");
-	    	if(month=="last"){
-	    		content.find("#month_label").text("修改本月初/上月末结余：");
-	    	}else{
-	    		content.find("#month_label").text("修改本月末结余：");
-	    	}
-        }
-		}, function(){
-			var content = $(".layui-layer-content");
-			var changed_balance = content.find("#changed_balance").val();
-			
-       		$.post("../monthlyStatisticsController/changeBalance",{
-				"changed_balance":changed_balance,
-				"month":month
-			});
-			setTimeout('location.reload()', 1000);
-		});
-}
-
+/**
+ * 增加收入
+ */
 function addMoney(){
 	var date = $("#date").val();
 	var item = $("#item option:selected").val();
@@ -66,6 +51,15 @@ function addMoney(){
 	setTimeout('location.reload()', 1000);
 }
 
+/**
+ * 修改收入
+ * @param incomeId
+ * @param date
+ * @param money
+ * @param itemId
+ * @param remark
+ * @param money_type
+ */
 function changeIncome(incomeId,date,money,itemId,remark,money_type){
 	layer.confirm(
 		$("#addContent").html(),{
@@ -97,6 +91,11 @@ function changeIncome(incomeId,date,money,itemId,remark,money_type){
 		});
 }
 
+/**
+ * 删除收入
+ * @param incomeId
+ * @param itemId
+ */
 function delIncome(incomeId, itemId){
 	$.post("../incomeController/deleIncome",{
 		"incomeId":incomeId,

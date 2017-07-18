@@ -46,7 +46,6 @@ public class IncomeServiceImpl implements IIncomeService {
 	@Override
 	public void changeIncome(int incomeId, float money, String moneyType, int itemId, String remark, Date date) {
 		Income income = new Income();
-		income.setDate(null);
 		income.setDele(0);
 		income.setUserId(2); // 如果不设置会自动设置成0，为什么？？
 		income.setId(incomeId);

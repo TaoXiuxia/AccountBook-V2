@@ -91,18 +91,30 @@
 	AND expenditure.dele = 0
 	AND date_format(expenditure.date, '%Y-%m') = date_format(now(), '%Y-%m') <!-- 只查询本月数据 -->
 	ORDER BY
-		expenditure.date DESC
+		expenditure.id DESC
   </select>
   
-  <!-- 目前这里还没有加入expenditure.type_of_money;的内容 -->
   <insert id="insert" parameterType="com.taoxiuxia.model.Expenditure" >
-    insert into expenditure (item_id, user_id, money, date, remark, dele)
-    values (#{itemId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{money,jdbcType=REAL}, #{date,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
-      #{dele,jdbcType=INTEGER})
+    INSERT INTO expenditure (
+		item_id,
+		user_id,
+		money,
+		type_of_money,
+		date,
+		remark,
+		dele
+	)
+	VALUES(
+		#{itemId,jdbcType=INTEGER}, 
+		#{userId,jdbcType=INTEGER}, 
+		#{money,jdbcType=REAL}, 
+		#{type_of_money, jdbcType=VARCHAR}, 
+		#{date,jdbcType=TIMESTAMP}, 
+		#{remark,jdbcType=VARCHAR}, 
+		#{dele,jdbcType=INTEGER}
+	)
   </insert>
   
-  <!-- 目前这里还没有加入expenditure.type_of_money;的内容 -->
   <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Expenditure" >
     update expenditure
     <set >
@@ -114,6 +126,9 @@
       </if>
       <if test="money != null" >
         money = #{money,jdbcType=REAL},
+      </if>
+      <if test="type_of_money != null" >
+        type_of_money = #{type_of_money,jdbcType=VARCHAR},
       </if>
       <if test="date != null" >
         date = #{date,jdbcType=TIMESTAMP},

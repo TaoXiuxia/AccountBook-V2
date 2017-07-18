@@ -139,7 +139,7 @@
 		expenditure.user_id,
 		expenditure.date as date,
 		expenditure.money,
-		income.type_of_money,
+		expenditure.type_of_money,
 		expenditure.remark,
 		item.id AS itemId,
 		item.name AS itemName,
@@ -169,13 +169,26 @@
   </select>
   
   <insert id="insert" parameterType="com.taoxiuxia.model.Income" >
-    insert into income (item_id, user_id, money, type_of_money, date, remark, dele)
-    values (#{itemId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{money,jdbcType=REAL}, #{type_of_money, jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
-      #{dele,jdbcType=INTEGER})
+    INSERT INTO income (
+		item_id,
+		user_id,
+		money,
+		type_of_money,
+		date,
+		remark,
+		dele
+	)
+	VALUES(
+		#{itemId,jdbcType=INTEGER}, 
+		#{userId,jdbcType=INTEGER}, 
+		#{money,jdbcType=REAL}, 
+		#{type_of_money, jdbcType=VARCHAR}, 
+		#{date,jdbcType=TIMESTAMP}, 
+		#{remark,jdbcType=VARCHAR}, 
+		#{dele,jdbcType=INTEGER}
+	)
   </insert>
   
-   <!-- 这里还没有加入 income.type_of_money 的内容 -->
   <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Income" >
     update income
     <set >

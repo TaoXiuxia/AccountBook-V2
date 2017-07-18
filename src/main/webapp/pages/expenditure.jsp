@@ -5,59 +5,132 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ABV2 支出</title>
+<title>Account Book v2 支出</title>
 <%@ include file="common/common.jsp" %> 
 <link href="../res/css/inOrOut.css" rel="stylesheet">
 <script src="../res/js/expenditure.js"></script>
-
+<script src="../res/js/monthlyStatistics.js"></script>
 </head>
 <body>
 <%@ include file="common/top.jsp"%>
 <script language="JavaScript" type="text/JavaScript"> 
 	document.onload = setLeftColumn();
 </script>
+
 <div class="col-xs-10">
-	<div class="add">
-		<label class="add-label">添加支出:</label>
-		<select class="add-select" id="item">
-		    <c:forEach items="${items}" var="item">
-                 <option value=${item.id }>${item.name}</option>
-      		</c:forEach>
-		</select>
-		<input class="add-money" placeholder="金额" id="money">
-		<input class="add-money-remark" placeholder="备注" id="remarkForExpenditure">
-		<button class="add-button" onclick="addMoney()">添加</button>
-	</div>
-	
-	<div class="total"> 
-		<label class="total-label1">月支出：</label>
-		<label class="total-money1">${totalExpenditure}</label>
+	<div class="col-xs-5">
+		<div class="add">
+			<label class="add-label">添加支出:</label><br>
+			
+			<div class="addIncome_div1">
+				<label class="label2">日期：</label>
+				<input class="Wdate add-data" type="text" onClick="WdatePicker()" id="date">
+			</div><br>
+			
+			<div class="addIncome_div1"><label class="label2">项目：</label>
+				<select class="add-select" id="item">
+				    <c:forEach items="${items}" var="item">
+		                 <option value=${item.id }>${item.name}</option>
+		      		</c:forEach>
+				</select>
+			</div><br>
+
+			<div class="addIncome_div1"><label class="label2">支出方式：</label>
+				<select class="add-select" id="money-type">
+					 <option value=""></option>
+		             <option value="支付宝">支付宝</option>
+		             <option value="花呗">花呗</option>
+		             <option value="信用卡">信用卡</option>
+		             <option value="微信">微信</option>
+		             <option value="现金">现金</option>
+		             <option value="银行卡">银行卡</option>
+		             <option value="其他">其他</option>
+				</select>
+			</div><br>
+			
+			<div class="addIncome_div1">
+				<label class="label2">金额：</label>
+				<input class="add-money" placeholder="金额" id="money">
+			</div><br>
+			
+			<div class="addIncome_div2">
+				<label class="label2">备注：</label>
+				<textarea class="add-money-remark" placeholder="备注" id="remarkForExpenditure"></textarea>
+			</div><br>
+			
+			<div class="addIncome_div1">
+				<button class="add-button" onclick="addMoney()">添加</button>
+			</div><br>
+		</div>
+		</div>
+		<div class="col-xs-6">
+		<br>
+		<div class="div3"> 
+			<label class="label4">月收入：</label>
+			<label>${totalIncome}</label>
+		</div>
 		
-		<label class="total-label2">日均支出：</label>
-		<label class="total-money2">${averageExpenditure}元</label>
-	</div>
+		<div class="div3"> 
+			<label class="label4">月支出：</label>
+			<label>${totalExpenditure}</label>
+		</div>
 		
+		<div class="div3">
+			<label class="label4">其中花呗与信用卡：</label>
+			<label>${huaBeiAndCreditCard}</label>
+			<label class="label3">&nbsp;&nbsp;&nbsp;（次月还）</label>
+		</div>
+		
+		<div class="div3">
+			<label class="label4">本月实际支出：</label>
+			<label>${actualExpenditure}</label>
+		</div><br>
+		
+		<div class="div3">
+			<label class="label4">本月初/上月末结余：</label>
+			<label>${balanceInBeginOfMonth}</label>
+			<label class="label3">&nbsp;&nbsp;&nbsp;（未计入花呗与信用卡）</label>
+			<button onclick="changeBalance('last')">修改</button>
+		</div>
+		
+		<div class="div3">
+			<label class="label4">本月应结余：</label>
+			<label>${balanceShould}</label>
+			<label class="label3">&nbsp;&nbsp;&nbsp;（花呗/信用卡不计入本月支出）</label>
+		</div>
+		
+		<div class="div3">
+			<label class="label4">本月实际结余：</label>
+			<input class="input2" placeholder="月末输入" id="actual_balance">&nbsp;&nbsp;
+			<button onclick="submitBalance()" id="submitBalanceButton">提交</button>
+			<button onclick="changeBalance('this')">修改</button>
+		</div>
+	</div>
+</div>
+
+<div class="col-xs-10">
 	<div>
 		<table class="table table-bordered"> 
 		    <thead> 
 		        <tr> 
-					<th>日期</th>
-					<th>金额</th>
-					<th>支出方式</th>
-					<th>项目</th>
-					<th>备注</th>
-					<th>操作</th>
+					<th class="col1">日期</th>
+					<th class="col2">项目</th>
+					<th class="col3">金额</th>
+					<th class="col4">收入方式</th>
+					<th class="col5">备注</th>
+					<th class="col6">操作</th>
 		        </tr> 
 		    </thead> 
 		    <tbody> 
 		        <c:forEach items="${expenditures}" var="expenditure">
                 <tr>
                     <td><fmt:formatDate value="${expenditure.date}" pattern="yyyy-MM-dd"/></td> 
+                    <td>${expenditure.itemName }</td>
                     <td>${expenditure.money }</td>
                     <td>${expenditure.type_of_money }</td>
-                    <td>${expenditure.itemName }</td>
                     <td>${expenditure.remark }</td>
-                    <td><a href="#" onClick="changeExpenditure('${expenditure.id}','<fmt:formatDate value="${expenditure.date}" pattern="yyyy-MM-dd"/>','${expenditure.money }',${expenditure.itemId },'${expenditure.remark }')">修改</a> 
+                    <td><a href="#" onClick="changeExpenditure('${expenditure.id}','<fmt:formatDate value="${expenditure.date}" pattern="yyyy-MM-dd"/>','${expenditure.money }',${expenditure.itemId },'${expenditure.remark }','${expenditure.type_of_money }')">修改</a> 
+                    	&nbsp;
                     	<a href="#" onClick="delExpenditure('${expenditure.id}','${expenditure.itemId}')">删除</a></td>
                 </tr>
           		</c:forEach>
@@ -67,28 +140,57 @@
 </div>
 <%@ include file="common/bottom.jsp"%>
 
-
+<!-- 修改支出弹出框 -->
 <div id="addContent" class="hidden">
-    
-    <div class="change">
-        <label class="changeLabel">日期</label>
-        <input type="text" id="changedDate" placeholder="日期" >
-    </div>
-    <div class="change">
-        <label class="changeLabel">Money</label>
-        <input type="text" id="changedMoney" placeholder="Money" >
-    </div>
-    <div>
-        <label class="changeLabel">项目</label>
-        <select class="add-select" id="changedItem">
-  		<c:forEach items="${items}" var="item">
-             <option value=${item.id }>${item.name}</option>
-  		</c:forEach>
+	<div class="addIncome_div1">
+		<label class="label2">日期：</label>
+		<input class="Wdate add-data" type="text" onClick="WdatePicker()" id="changedDate">
+	</div><br>
+	
+	<div class="addIncome_div1">
+		<label class="label2">项目：</label>
+		<select class="add-select" id="changedItem">
+		    <c:forEach items="${items}" var="item">
+                 <option value=${item.id }>${item.name}</option>
+      		</c:forEach>
 		</select>
-	</div>
-	<div>
-        <label class="changeLabel">备注</label>
-        <input type="text" id="changedRemark" placeholder="备注" >
-	</div>
+	</div><br>
+
+	<div class="addIncome_div1">
+		<label class="label2">支出方式：</label>
+		<select class="add-select" id="changed-money-type">
+			 <option value=""></option>
+             <option value="支付宝">支付宝</option>
+             <option value="花呗">花呗</option>
+             <option value="信用卡">信用卡</option>
+             <option value="微信">微信</option>
+             <option value="现金">现金</option>
+             <option value="银行卡">银行卡</option>
+             <option value="其他">其他</option>
+		</select>
+	</div><br>
+	
+	<div class="addIncome_div1">
+		<label class="label2">金额：</label>
+		<input class="add-money" id="changedMoney">
+	</div><br>
+	
+	<div class="addIncome_div2">
+		<label class="label2">备注：</label>
+		<textarea class="add-money-remark" id="changedRemark"></textarea>
+	</div><br>
 </div>
 
+<!--  修改结余金额 弹出框  -->
+<div id="changeBalance" class="hidden">
+	<div><label id="month_label"></label></div><br>
+	<div class="addIncome_div1">
+		<label class="label5">金额：</label>
+		<input class="input2" id="changed_balance">
+	</div><br>
+</div>
+
+<script language="JavaScript" type="text/JavaScript"> 
+	document.onload = fillUpDate();
+	document.onload = unenableInput('${actualBalance}');
+</script>

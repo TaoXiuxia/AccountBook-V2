@@ -19,6 +19,14 @@ public interface IMonthlyStatisticsService {
 	 * @return
 	 */
 	float monthlyExpenditure(int userId);
+	
+	/**
+	 * 本月支出中花呗与信用卡的数额
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	float huaBeiAndCreditCard(int userId);
 
 	/**
 	 * 查询月初结余，即上月末结余
@@ -46,9 +54,9 @@ public interface IMonthlyStatisticsService {
 
 	/**
 	 * 修改本月结余
-	 * 
-	 * @param balance
+	 * @param month
+	 * @param changed_balance
 	 * @param userId
 	 */
-	void changeBalance(int balanceId,float balance, int userId);
+	void changeBalance(String month, float changed_balance, int userId);
 }

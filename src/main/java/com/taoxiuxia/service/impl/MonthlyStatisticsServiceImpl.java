@@ -1,5 +1,6 @@
 package com.taoxiuxia.service.impl;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class MonthlyStatisticsServiceImpl implements IMonthlyStatisticsService {
 	}
 
 	@Override
+	public float huaBeiAndCreditCard(int userId) {
+		return balanceMapper.selectHuaBeiAndCreditCard(userId);
+	}
+	
+	@Override
 	public float balanceInBeginOfMonth(int userId) {
 		return balanceMapper.selectBalanceInBeginOfMonth(userId);
 	}
@@ -53,11 +59,17 @@ public class MonthlyStatisticsServiceImpl implements IMonthlyStatisticsService {
 	}
 
 	@Override
-	public void changeBalance(int balanceId,float balanceMoney, int userId) {
+	public void changeBalance(String month, float changed_balance, int userId) {
 		Balance balance = new Balance();
-		balance.setId(balanceId);
-		balance.setActualBalance(balanceMoney);
+		Calendar c = Calendar.getInstance();
+		if(month.equals("last")){
+			c.add(Calendar.MONTH, -1);
+		}
+		Date date=c.getTime();
+		balance.setMonth(date);
+		balance.setActualBalance(changed_balance);
 		balanceMapper.updateByPrimaryKeySelective(balance);
 	}
 
+	
 }

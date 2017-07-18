@@ -150,14 +150,14 @@ public class HistoryController {
 			if (itemType.equals("in")) {
 				incomeService.changeIncome(detailsId, changedMoney, changedMoneyType, changedItem, changedRemark, MyDateFormat.dateFormat(changedDate));
 			} else {
-				expenditureService.changeExpenditure(detailsId, changedMoney, changedItem, changedRemark, MyDateFormat.dateFormat(changedDate));
+				expenditureService.changeExpenditure(detailsId, changedMoney, changedMoneyType, changedItem, changedRemark, MyDateFormat.dateFormat(changedDate));
 			}
 		} else { // 不同的类目下，先删除原来的，在添加上新的
 			if (changedType.equals("in")) { // 原来是ex，现在是in
 				incomeService.addIncome(changedDate, changedItem, changedMoney,changedMoneyType, changedRemark);
 				expenditureService.deleExpenditure(detailsId, changedItem);
 			}else{ // 原来是in，现在是ex
-				expenditureService.addExpenditure(changedItem, changedMoney, changedRemark);
+				expenditureService.addExpenditure(changedDate, changedItem, changedMoney,changedMoneyType, changedRemark);
 				incomeService.deleIncome(detailsId, changedItem);
 			}
 		}

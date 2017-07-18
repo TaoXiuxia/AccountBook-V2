@@ -3,14 +3,12 @@ function setLeftColumn(){
 	$("#income").addClass("left-column-button-inactive-font");
 	$("#expenditure").addClass("left-column-button-inactive");
 	$("#expenditure").addClass("left-column-button-inactive-font");
-	$("#borrow").addClass("left-column-button-inactive");
-	$("#borrow").addClass("left-column-button-inactive-font");
 	$("#history").addClass("left-column-button-active");
 	$("#history").addClass("left-column-button-active-font");
 	$("#itemsManagement").addClass("left-column-button-inactive");
 	$("#itemsManagement").addClass("left-column-button-inactive-font");
-	$("#monthlyStatistics").addClass("left-column-button-inactive");
-	$("#monthlyStatistics").addClass("left-column-button-inactive-font");
+	$("#about").addClass("left-column-button-inactive");
+	$("#about").addClass("left-column-button-inactive-font");
 }
 
 function search(){

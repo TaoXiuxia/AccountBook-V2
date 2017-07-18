@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.taoxiuxia.mapper.ExpenditureMapper;
 import com.taoxiuxia.model.Expenditure;
+import com.taoxiuxia.model.Income;
 import com.taoxiuxia.service.IExpenditureService;
+import com.taoxiuxia.util.MyDateFormat;
 
 @Service("expenditureService")
 public class ExpenditureServiceImpl implements IExpenditureService {
@@ -30,26 +32,27 @@ public class ExpenditureServiceImpl implements IExpenditureService {
 	}
 
 	@Override
-	public void addExpenditure(int item, float money, String remark) {
+	public void addExpenditure(String date, int item, float money, String moneyType, String remark) {
 		Expenditure expenditure = new Expenditure();
 		expenditure.setItemId(item);
 		expenditure.setUserId(2); 
 		expenditure.setDele(0);
 		expenditure.setMoney(money);
-		expenditure.setDate(new Date());
+		expenditure.setType_of_money(moneyType);
+		expenditure.setDate(MyDateFormat.dateFormat(date));
 		expenditure.setRemark(remark);
 		expenditureMapper.insert(expenditure);
 	}
 
 	@Override
-	public void changeExpenditure(int expenditureId, float money, int itemId, String remark,Date date) {
+	public void changeExpenditure(int expenditureId, float money, String moneyType, int itemId, String remark,Date date) {
 		Expenditure expenditure = new Expenditure();
-		expenditure.setDate(null);
 		expenditure.setDele(0);
 		expenditure.setUserId(2); // 如果不设置会自动设置成0，为什么？？
 		expenditure.setId(expenditureId);
 		expenditure.setItemId(itemId);
 		expenditure.setMoney(money);
+		expenditure.setType_of_money(moneyType);
 		expenditure.setRemark(remark);
 		expenditure.setDate(date);
 		expenditureMapper.updateByPrimaryKeySelective(expenditure);

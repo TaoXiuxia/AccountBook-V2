@@ -91,6 +91,21 @@
 	AND date_format(expenditure.date, '%Y-%m') = date_format(now(), '%Y-%m')
   </select>
   
+  <select id="selectHuaBeiAndCreditCard" resultType="java.lang.Float" parameterType="java.lang.Integer" >
+    SELECT
+		SUM(expenditure.money)
+	FROM
+		expenditure
+	WHERE
+		user_id = #{user_id,jdbcType=INTEGER}
+	AND dele = 0
+	AND date_format(expenditure.date, '%Y-%m') = date_format(now(), '%Y-%m')
+	AND (type_of_money = '花呗' OR type_of_money = '信用卡')
+  </select>
+  
+  
+  
+  
   <select id="selectBalanceInBeginOfMonth" resultType="java.lang.Float" parameterType="java.lang.Integer" >
 	SELECT
 		actual_balance
@@ -108,7 +123,7 @@
 		balance
 	WHERE
 		user_id = #{user_id,jdbcType=INTEGER}
-	AND PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( balance.month, '%Y%m' ) ) =0
+	AND PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( balance.month, '%Y%m' ) ) = 0
   </select>
  
   <insert id="insertBalance" parameterType="com.taoxiuxia.model.Balance" >
@@ -123,7 +138,7 @@
         actual_balance = #{actualBalance,jdbcType=REAL},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where date_format(balance.month, '%Y-%m') = date_format(#{month,jdbcType=DATE}, '%Y-%m')
   </update>
   
   

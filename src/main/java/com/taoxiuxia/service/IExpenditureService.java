@@ -19,7 +19,7 @@ public interface IExpenditureService {
 	 * @param money
 	 * @param remark
 	 */
-	void addExpenditure(int item,float money,String remark);
+	void addExpenditure(String date, int item, float money, String moneyType, String remark);
 	
 	/**
 	 * 修改Expenditure
@@ -29,7 +29,7 @@ public interface IExpenditureService {
 	 * @param remark
 	 * @param date 
 	 */
-	void changeExpenditure(int ExpenditureId,float money,int itemId ,String remark, Date date);
+	void changeExpenditure(int ExpenditureId,float money, String moneyType, int itemId ,String remark, Date date);
 	
 	/**
 	 * 删除Expenditure

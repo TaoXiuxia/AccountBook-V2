@@ -12,11 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.taoxiuxia.model.Balance;
-import com.taoxiuxia.model.Expenditure;
 import com.taoxiuxia.model.Income;
 import com.taoxiuxia.model.Item;
 import com.taoxiuxia.model.SessionUser;
-import com.taoxiuxia.service.IExpenditureService;
 import com.taoxiuxia.service.IIncomeService;
 import com.taoxiuxia.service.IItemService;
 import com.taoxiuxia.service.IMonthlyStatisticsService;
@@ -74,9 +72,11 @@ public class IncomeController {
 		//页面上的统计信息
 		model.addAttribute("totalIncome", NumberFormat.save2Decimals(map.get("monthlyIncome")));
 		model.addAttribute("totalExpenditure", NumberFormat.save2Decimals(map.get("monthlyExpenditure")));
+		model.addAttribute("huaBeiAndCreditCard", NumberFormat.save2Decimals(map.get("huaBeiAndCreditCard")));
 		model.addAttribute("balanceInBeginOfMonth", NumberFormat.save2Decimals(map.get("balanceInBeginOfMonth")));
 		model.addAttribute("balanceShould", NumberFormat.save2Decimals(map.get("balanceShould")));
 		model.addAttribute("actualBalance", NumberFormat.save2Decimals(map.get("actualBalance")));
+		model.addAttribute("actualExpenditure", NumberFormat.save2Decimals(map.get("actualExpenditure")));
 		
 		// income list
 		List<Income> incomes = incomeService.loadIncomes();
@@ -101,6 +101,13 @@ public class IncomeController {
 	 */
 	@RequestMapping("/addIncome")
 	public void addIncomes(String date, int item, float money, String moneyType, String remark) {
+		
+		System.out.println(date);
+		System.out.println(item);
+		System.out.println(money);
+		System.out.println(moneyType);
+		System.out.println(remark);
+		
 		incomeService.addIncome(date, item, money, moneyType, remark);
 	}
 
@@ -128,6 +135,11 @@ public class IncomeController {
 		incomeService.deleIncome(incomeId, itemId);
 	}
 	
+	/**
+	 * 在收入和支出页面上 统计部分的内容
+	 * @param session
+	 * @return
+	 */
 	public Map<String,Float> monthlyStatistics(HttpSession session) {
 		Map<String,Float>map = new HashMap<String, Float>();
 		
@@ -139,12 +151,20 @@ public class IncomeController {
 		float monthlyExpenditure = monthlyStatisticsService.monthlyExpenditure(2);  
 		map.put("monthlyExpenditure", monthlyExpenditure);
 		
+		// 月支出中花呗与信用卡的数额
+		float huaBeiAndCreditCard = monthlyStatisticsService.huaBeiAndCreditCard(2);
+		map.put("huaBeiAndCreditCard", huaBeiAndCreditCard);
+		
+		// 本月实际支出 
+		float actualExpenditure = monthlyExpenditure - huaBeiAndCreditCard;
+		map.put("actualExpenditure", actualExpenditure);
+		
 		// 本月初（上月末）结余
 		float balanceInBeginOfMonth = monthlyStatisticsService.balanceInBeginOfMonth(2);
 		map.put("balanceInBeginOfMonth", balanceInBeginOfMonth);
 		
-		// 本月应结余 ==> 月初结余+月收入-月支出
-		float balanceShould = balanceInBeginOfMonth + monthlyIncome - monthlyExpenditure;
+		// 本月应结余 ==> 月初结余+月收入- (月支出-花呗/信用卡)
+		float balanceShould = balanceInBeginOfMonth + monthlyIncome - (monthlyExpenditure - huaBeiAndCreditCard);
 		map.put("balanceShould", balanceShould);
 		
 		// 本月实际结余

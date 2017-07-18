@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ABV2 往月收支</title>
+<title>Account Book v2 往月收支</title>
 <%@ include file="common/common.jsp" %> 
 <link href="../res/css/history.css" rel="stylesheet">
 <script src="../res/js/history.js"></script>
@@ -19,21 +19,21 @@
 <div class="col-xs-10">
 
 	<div> 
-		<label class="label1">类目</label>
+		<label class="label2">类目</label>
 		<select class="select1" id="type">
         	<option value="all">全部</option>
         	<option value="in">收入</option>
         	<option value="ex">支出</option>
 		</select>
 	
-		<label class="label2">年&nbsp;</label>
+		<label class="label2">&nbsp;&nbsp;&nbsp;年&nbsp;</label>
 		<select class="select1" id="year">
 			<option value="-1">全部</option>
         	<option value="2015">2015</option>
         	<option value="2016">2016</option>
 		</select>
 		
-		<label class="label2">月&nbsp;</label>
+		<label class="label2">&nbsp;&nbsp;&nbsp;月&nbsp;</label>
 		<select class="select1" id="month">
 			<option value="-1">全部</option>	
         	<option value="01">01</option>
@@ -50,9 +50,18 @@
         	<option value="12">12</option>
 		</select>
 		
-		<label class="label3">关键词&nbsp;</label>
+		<label class="label2">&nbsp;&nbsp;&nbsp;关键词&nbsp;</label>
 		<input class="input1" placeholder="金额/项目/备注" id="keyword">
 		
+		<label class="label2">&nbsp;&nbsp;&nbsp;排序方式&nbsp;</label>
+		<select class="select1" id="sortBy">
+			<option value="dateDESC">日期降序</option>	
+        	<option value="dateASC">日期升序</option>
+        	<option value="moneyDESC">金额降序</option>
+        	<option value="moneyASC">金额升序</option>
+		</select>
+		
+		&nbsp;&nbsp;&nbsp;
 		<button onclick="search()">筛选</button>
 	</div>
 	<br>
@@ -83,7 +92,8 @@
                     								'${history.money}',
                     								'${history.itemId}',
                     								'${history.remark}'
-                    								)">修改&nbsp;&nbsp;&nbsp;&nbsp;</a> 
+                    								)">修改</a> 
+                    	&nbsp;
                     	<a href="#" onClick="delDetailsItem(
 						                    		'${history.itemType}',
 													'${history.id }',
