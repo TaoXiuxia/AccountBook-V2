@@ -78,12 +78,19 @@ public class HistoryController {
 	@RequestMapping("/showhistory")
 	public String showHistory(Model model,HttpSession session) {
 		// 初始页面，显示当前用户的全部数据
-		List<Map> historys = historyService.loadIncomesAndExpenditure(2, null, -1, -1, null);
+		int limit = Constants.LIMIT;
+		int totalRecords = historyService.countIncomesAndExpenditure(2, null, -1, -1, null); // 初始条件下 根据条件查到的记录的总条数
+		int totalPages = (int) Math.ceil(totalRecords*1.0/limit);  // 初始条件下 总页数
+		List<Map> historys = historyService.loadIncomesAndExpenditure(2, null, -1, -1, null, "date DESC", 1, totalPages );
 		List<Item> incomesItems = itemService.loadIncomeItems(2); // 目前只有用户2
 		List<Item> expenditureItems = itemService.loadExpenditureItems(2); // 目前只有用户2
+		
 		model.addAttribute("incomesItems", incomesItems);
 		model.addAttribute("expenditureItems", expenditureItems);
 		model.addAttribute("historys", historys);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("totalRecords", totalRecords);
+		model.addAttribute("curPage", 1);  // 当前页码
 		
 		SessionUser sessionUser= (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
 		model.addAttribute("sessionUser", sessionUser);
@@ -91,22 +98,39 @@ public class HistoryController {
 	}
 
 	/**
+	 * 
 	 * 搜索，返回json数据
 	 * 
 	 * @param model
-	 * @param type
-	 * @param year
-	 * @param month
-	 * @param keyword
+	 * @param type 支出/收入 ex/in
+	 * @param year 年份
+	 * @param month 月份
+	 * @param keyword 关键词
+	 * @param sortBy 排序方式
+	 * @param Curpage 当前页
 	 * @return
 	 */
 	@RequestMapping(value = "/searchHistory", produces = "application/json;charset=UTF-8")
-	public @ResponseBody Map<String, Object> searchHistory(Model model, String type, int year, int month,
-			String keyword) {
-		List<Map> historys = historyService.loadIncomesAndExpenditure(2, type.equals("all") ? null : type, year, month,
-				keyword);
+	public @ResponseBody Map<String, Object> searchHistory(Model model, String type, int year, int month, String keyword, String sortBy, int curPage) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		// 后台处理时间
+		
+		int limit = Constants.LIMIT;
+		int totalRecords = historyService.countIncomesAndExpenditure(2, type.equals("all") ? null : type, year, month, keyword); // 根据条件查到的记录的总条数
+		int totalPages = (int) Math.ceil(totalRecords*1.0/limit);  // 总页数
+		
+		if(totalRecords==0){ //如果查到0条数据，就不需要后序的操作了
+			map.put("list", null);   // 查询到的全部历史记录的list
+			map.put("dateList", null);  // 相应历史记录的日期的list
+			map.put("typeList", null);  // 相应历史纪录的类型的list
+			map.put("totalPages", 0); // 全部页数
+			map.put("totalRecords", 0); // 全部条数
+			map.put("curPage", 0);  // 当前页码
+			return map; // 返回的是已经转化过的json数据
+		}
+		
+		List<Map> historys = historyService.loadIncomesAndExpenditure(2, type.equals("all") ? null : type, year, month, keyword, "date DESC", curPage, totalPages);
+		
+		// 后台处理日期
 		List<String> dateList = new ArrayList<String>();
 		for (Map history : historys) {
 			Date date = (Date) history.get("date");
@@ -115,19 +139,21 @@ public class HistoryController {
 			int year1 = cal.get(Calendar.YEAR);
 			int month1 = cal.get(Calendar.MONTH) + 1;
 			int day1 = cal.get(Calendar.DATE);
-			dateList.add(
-					year1 + "-" + (month1 < 10 ? ("0" + month1) : month1) + "-" + (day1 < 10 ? ("0" + day1) : day1));
+			dateList.add(year1 + "-" + (month1 < 10 ? ("0" + month1) : month1) + "-" + (day1 < 10 ? ("0" + day1) : day1));
 		}
 
-		// 后台处理类型
+		// 后台处理 类型type
 		List<String> typeList = new ArrayList<String>();
 		for (Map history : historys) {
 			String type1 = (String) history.get("itemType");
 			typeList.add(type1.equals("ex") ? "支出" : "收入");
 		}
-		map.put("list", historys);
-		map.put("dateList", dateList);
-		map.put("typeList", typeList);
+		map.put("list", historys);   // 查询到的全部历史记录的list
+		map.put("dateList", dateList);  // 相应历史记录的日期的list
+		map.put("typeList", typeList);  // 相应历史纪录的类型的list
+		map.put("totalPages", totalPages); // 全部页数
+		map.put("totalRecords", totalRecords); // 全部条数
+		map.put("curPage", curPage);  // 当前页码
 		return map; // 返回的是已经转化过的json数据
 	}
 

@@ -69,10 +69,58 @@
       </foreach>
     </where>
   </sql>
+  
   <sql id="Base_Column_List" >
     id, item_id, user_id, money, date, remark, dele
   </sql>
   
+  <!-- income搜索的where语句 -->
+  <sql id="where_statement_for_income_search" >
+    <where>
+		income.item_id = item.id
+	AND income.user_id = #{userId,jdbcType=INTEGER}
+	AND income.dele = 0
+		<if test="beginDate!=null">
+			AND date_format(income.date, '%Y-%m') &gt;= date_format(#{beginDate}, '%Y-%m')
+		</if>
+		<if test="endDate!=null">
+			AND date_format(income.date, '%Y-%m') &lt;= date_format(#{endDate}, '%Y-%m')
+		</if>
+		<if test="keyword!=null">
+			AND (
+				item.name like concat('%', #{keyword}, '%')
+				OR income.type_of_money like concat('%', #{keyword}, '%')
+				OR income.remark like concat('%', #{keyword}, '%')
+				)
+		</if>
+		<if test="inOrEx!=null">
+			AND item.in_or_ex = #{inOrEx}
+		</if>
+	</where>
+  </sql>
+  
+  <!-- expenditure搜索的where语句 -->
+  <sql id="where_statement_for_expenditure_search" >
+    <where>
+		expenditure.item_id = item.id
+	AND expenditure.user_id = #{userId,jdbcType=INTEGER}
+	AND expenditure.dele = 0
+		<if test="beginDate!=null">
+			AND date_format(expenditure.date, '%Y-%m') &gt;= date_format(#{beginDate}, '%Y-%m')
+		</if>
+		<if test="endDate!=null">
+			AND date_format(expenditure.date, '%Y-%m') &lt;= date_format(#{endDate}, '%Y-%m')
+		</if>
+		<if test="keyword!=null">
+			AND (item.name like concat('%', #{keyword}, '%')
+			OR expenditure.type_of_money like concat('%', #{keyword}, '%')
+			OR expenditure.remark like concat('%', #{keyword}, '%'))
+		</if>
+		<if test="inOrEx!=null">
+			AND item.in_or_ex = #{inOrEx}
+		</if>
+	</where>
+  </sql>
   
   <select id="selectAllIncomes" resultMap="BaseResultMap">
 	SELECT
@@ -96,6 +144,28 @@
 		income.id DESC
   </select>
   
+   <!-- 查询收入和支出的总条数，根据传进来的日期和关键字，用于history页面 -->
+   <select id="countIncomesAndExpenditure" resultType="java.lang.Integer" parameterType="java.util.HashMap" >
+	SELECT
+	(	
+		SELECT
+			count(*)
+		FROM
+			income,
+			item
+		<include refid="where_statement_for_income_search" />
+	)
+	+
+	(
+		SELECT
+			count(*)
+		FROM
+			expenditure,
+			item
+		<include refid="where_statement_for_expenditure_search" />
+	) AS count
+  </select>
+  
   <!-- 查询收入和支出，根据传进来的日期和关键字，用于history页面 -->
   <select id="selectIncomesAndExpenditure" resultType="java.util.HashMap" parameterType="java.util.HashMap" >
 	SELECT
@@ -103,7 +173,7 @@
 		income.item_id,
 		income.user_id,
 		income.date as date,
-		income.money,
+		income.money as money,
 		income.type_of_money,
 		income.remark,
 		item.id AS itemId,
@@ -112,24 +182,7 @@
 	FROM
 		income,
 		item
-	<where>
-		income.item_id = item.id
-	AND income.user_id = #{userId,jdbcType=INTEGER}
-	AND income.dele = 0
-		<if test="beginDate!=null">
-			AND date_format(income.date, '%Y-%m') &gt;= date_format(#{beginDate}, '%Y-%m')
-		</if>
-		<if test="endDate!=null">
-			AND date_format(income.date, '%Y-%m') &lt;= date_format(#{endDate}, '%Y-%m')
-		</if>
-		<if test="keyword!=null">
-			AND (item.name like concat('%', #{keyword}, '%')
-			OR income.remark like concat('%', #{keyword}, '%'))
-		</if>
-		<if test="inOrEx!=null">
-			AND item.in_or_ex = #{inOrEx}
-		</if>
-	</where>
+	<include refid="where_statement_for_income_search" />
 	
 	UNION
 	
@@ -138,7 +191,7 @@
 		expenditure.item_id,
 		expenditure.user_id,
 		expenditure.date as date,
-		expenditure.money,
+		expenditure.money as money,
 		expenditure.type_of_money,
 		expenditure.remark,
 		item.id AS itemId,
@@ -147,25 +200,9 @@
 	FROM
 		expenditure,
 		item
-	<where>
-		expenditure.item_id = item.id
-	AND expenditure.user_id = #{userId,jdbcType=INTEGER}
-	AND expenditure.dele = 0
-		<if test="beginDate!=null">
-			AND date_format(expenditure.date, '%Y-%m') &gt;= date_format(#{beginDate}, '%Y-%m')
-		</if>
-		<if test="endDate!=null">
-			AND date_format(expenditure.date, '%Y-%m') &lt;= date_format(#{endDate}, '%Y-%m')
-		</if>
-		<if test="keyword!=null">
-			AND (item.name like concat('%', #{keyword}, '%')
-			OR expenditure.remark like concat('%', #{keyword}, '%'))
-		</if>
-		<if test="inOrEx!=null">
-			AND item.in_or_ex = #{inOrEx}
-		</if>
-	</where>
-	ORDER BY date
+	<include refid="where_statement_for_expenditure_search" />
+	ORDER BY ${sortBy}
+	LIMIT #{beginRecord, jdbcType=INTEGER}, #{limit, jdbcType=INTEGER}
   </select>
   
   <insert id="insert" parameterType="com.taoxiuxia.model.Income" >

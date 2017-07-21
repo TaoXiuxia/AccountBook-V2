@@ -16,6 +16,16 @@ public interface IHistoryService {
 	 * @param keyword
 	 * @return
 	 */
-	List<Map> loadIncomesAndExpenditure(int userId,String inOrEx,int year, int month, String keyword);
+	List<Map> loadIncomesAndExpenditure(int userId,String inOrEx,int year, int month, String keyword, String sortBy, int curPage, int totalPages);
 	
+	/**
+	 * 根据条件查询全部income和expenditure的条数
+	 * @param userId
+	 * @param inOrEx
+	 * @param year
+	 * @param month
+	 * @param keyword
+	 * @return
+	 */
+	int countIncomesAndExpenditure(int userId,String inOrEx,int year, int month, String keyword);
 }

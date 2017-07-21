@@ -12,27 +12,6 @@ function setLeftColumn(){
 }
 
 /**
- * 在日期框中填入今天的日期，（默认当前日期）；
- */
-function fillUpDate(){ 
-	var myDate = new Date();
-	var myDate=myDate.toLocaleDateString();
-	$("#date").val(myDate);
-}
-
-/**
- * 在“本月实际结余”输入框中填入数值（如果有的话）,并且将其变为不可用
- * @param actualSurplus
- */
-function unenableInput(actualSurplus){ 
-	if(actualSurplus!=-1){ //-1表示没有内容
-		$("#actual_balance").val(actualSurplus);
-		$("#actual_balance").attr("disabled","disabled");
-		$("#submitBalanceButton").attr("disabled","disabled");
-	}
-}
-
-/**
  * 增加收入
  */
 function addMoney(){

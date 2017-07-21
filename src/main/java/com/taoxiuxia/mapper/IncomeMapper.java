@@ -11,6 +11,8 @@ public interface IncomeMapper {
 	List<Income> selectAllIncomes();
 	
 	List<Map> selectIncomesAndExpenditure(HashMap map);
+	
+	int countIncomesAndExpenditure(HashMap map);
 
 	int updateByPrimaryKeySelective(Income record);
 

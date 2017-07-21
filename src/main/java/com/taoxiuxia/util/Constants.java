@@ -23,5 +23,5 @@ public class Constants {
 	
 	public static final String ABSOLUTEPATH = "absolutePath";
 	
-	
+	public static final int LIMIT = 15;
 }

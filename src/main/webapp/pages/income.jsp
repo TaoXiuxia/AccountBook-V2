@@ -10,7 +10,7 @@
 <link href="../res/css/inOrOut.css" rel="stylesheet">
 <script src="../res/js/income.js"></script>
 <script src="../res/js/monthlyStatistics.js"></script>
-
+<script src="../res/js/common/common.js"></script>
 </head>
 <body>
 <%@ include file="common/top.jsp"%>

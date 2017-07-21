@@ -1,7 +1,16 @@
 .label2{font-size:15px; text-align: right;}
 .label3{font-size:17px;width:80px; text-align: right;}
-.input1{width:150px;}
+.input1{width:200px;}
 .layout_div_Style{height: 50px; width: 400px;}
-.change-label{width:50px;}
-.change-text{width:250px}
+.change-label{width:90px; text-align: right; font-weight: normal;}
+.change-text{width:200px;height: 25px;}
 .select1{height: 25px;}
+
+.col1{width: 100px;}
+.col2{width: 50px;}
+.col3{width: 250px;}
+.col4{width: 110px;}
+.col5{width: 120px;}
+.col6{width: 250px;}
+.col7{width: 120px;}
+

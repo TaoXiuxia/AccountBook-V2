@@ -9,7 +9,7 @@
 <%@ include file="common/common.jsp" %> 
 <link href="../res/css/history.css" rel="stylesheet">
 <script src="../res/js/history.js"></script>
-
+<script src="../res/js/common/common.js"></script>
 </head>
 <body>
 <%@ include file="common/top.jsp"%>
@@ -27,14 +27,12 @@
 		</select>
 	
 		<label class="label2">&nbsp;&nbsp;&nbsp;年&nbsp;</label>
-		<select class="select1" id="year">
+		<select class="select1" id="year" onchange="setMonthEnable()">
 			<option value="-1">全部</option>
-        	<option value="2015">2015</option>
-        	<option value="2016">2016</option>
 		</select>
 		
 		<label class="label2">&nbsp;&nbsp;&nbsp;月&nbsp;</label>
-		<select class="select1" id="month">
+		<select class="select1" id="month" disabled="true">
 			<option value="-1">全部</option>	
         	<option value="01">01</option>
         	<option value="02">02</option>
@@ -51,7 +49,7 @@
 		</select>
 		
 		<label class="label2">&nbsp;&nbsp;&nbsp;关键词&nbsp;</label>
-		<input class="input1" placeholder="金额/项目/备注" id="keyword">
+		<input class="input1" placeholder="项目/收入支出方式/备注" id="keyword">
 		
 		<label class="label2">&nbsp;&nbsp;&nbsp;排序方式&nbsp;</label>
 		<select class="select1" id="sortBy">
@@ -62,28 +60,30 @@
 		</select>
 		
 		&nbsp;&nbsp;&nbsp;
-		<button onclick="search()">筛选</button>
+		<button onclick="search(1)">筛选</button>
 	</div>
 	<br>
 	<div>
 		<table class="table table-bordered" id="details"> 
 		    <thead> 
 		        <tr> 
-					<th>日期</th>
-					<th>金额</th>
-					<th>类型</th>
-					<th>项目</th>
-					<th>备注</th>
-					<th>操作</th>
+					<th class="col1">日期</th>
+					<th class="col2">类型</th>
+					<th class="col3">项目</th>
+					<th class="col4">收入/支出方式</th>
+					<th class="col5">金额</th>
+					<th class="col6">备注</th>
+					<th class="col7">操作</th>
 		        </tr>
 		    </thead>
 		    <tbody id="detailItems"> 
 		        <c:forEach items="${historys}" var="history">
                 <tr>
                     <td><fmt:formatDate value="${history.date}" pattern="yyyy-MM-dd"/></td>
-                    <td>${history.money }</td>
                     <td><c:if test="${history.itemType =='in'}">收入</c:if><c:if test="${history.itemType =='ex'}">支出</c:if></td>
                     <td>${history.itemName }</td>
+                    <td>${history.type_of_money }</td>
+                    <td>${history.money }</td>
                     <td>${history.remark }</td>
                     <td><a href="#" onClick="changeDetailsItem(
                     								'${history.itemType}',
@@ -91,7 +91,8 @@
                     								'${history.date}',
                     								'${history.money}',
                     								'${history.itemId}',
-                    								'${history.remark}'
+                    								'${history.remark}',
+                    								'${history.type_of_money}',
                     								)">修改</a> 
                     	&nbsp;
                     	<a href="#" onClick="delDetailsItem(
@@ -104,7 +105,22 @@
 		    </tbody> 
 		</table>
 	</div>
-
+	第<label id="curPage">${curPage}</label>页
+	&nbsp;
+	共<label id="totalPages">${totalPages}</label>页
+	&nbsp;
+	共<label id="totalRecords">${totalRecords}</label>条
+	&nbsp;
+	每页显示15条
+	&nbsp;
+	<a href="#" onClick="gotoPage(-${totalPages}, ${totalPages})">首页</a> <!-- 首页就往前跳全部页 -->
+	&nbsp;
+	<a href="#" onClick="gotoPage(-1, ${totalPages})">上一页</a>
+	&nbsp;
+	<a href="#" onClick="gotoPage(1, ${totalPages})">下一页</a>
+	&nbsp;
+	<a href="#" onClick="gotoPage(${totalPages}, ${totalPages})">最后一页</a> <!-- 最后一页就往后跳全部页 -->
+	<br><br><br>
 </div>
 <%@ include file="common/bottom.jsp"%>
 
@@ -113,12 +129,8 @@
 <div id="changeDetailsItemLayer" class="hidden">
     <div class="layout_div_Style">
         <label class="change-label">日期</label>
-        <input class="change-text" type="text" id="changedDate" placeholder="日期" >
+        <input class="change-text Wdate add-data"      type="text" onClick="WdatePicker()" id="changedDate" placeholder="日期" >
     </div>
-	<div class="layout_div_Style">
-        <label class="change-label">金额</label>
-        <input class="change-text" type="text" id="changedMoney" placeholder="Money" >
-	</div>
 	<div class="layout_div_Style">
         <label class="change-label">类型</label>
         <select class="change-text" id="changedType" onchange="changeType1()">
@@ -130,12 +142,38 @@
         <label class="change-label">项目</label>
         <select class="change-text" id="changedItem">
 		    <c:forEach items="${incomesItems}" var="item">
-                 <option class="in" value=${item.id }>${item.name}</option>
+                 <option class="in" value=${item.id}>${item.name}</option>
       		</c:forEach>
       		<c:forEach items="${expenditureItems}" var="item">
-                 <option class="ex" value=${item.id }>${item.name}</option>
+                 <option class="ex" value=${item.id}>${item.name}</option>
       		</c:forEach>
 		</select>
+	</div>
+	
+	<!-- 收入支出方式 -->
+	<div class="layout_div_Style">
+        <label class="change-label">收入/支出方式</label>
+        <select class="change-text" id="changedtype_of_money">
+		    <option class="in" value=""></option>
+		    <option class="in" value="支付宝">支付宝</option>
+		    <option class="in" value="微信">微信</option>
+		    <option class="in" value="现金">现金</option>
+		    <option class="in" value="银行卡">银行卡</option>
+		    <option class="in" value="信用卡">信用卡</option>
+		    <option class="in" value="其他">其他</option>
+		    <option class="ex" value=""></option>
+            <option class="ex" value="支付宝">支付宝</option>
+            <option class="ex" value="花呗">花呗</option>
+            <option class="ex" value="信用卡">信用卡</option>
+            <option class="ex" value="微信">微信</option>
+            <option class="ex" value="现金">现金</option>
+            <option class="ex" value="银行卡">银行卡</option>
+            <option class="ex" value="其他">其他</option>
+		</select>
+	</div>
+	<div class="layout_div_Style">
+        <label class="change-label">金额</label>
+        <input class="change-text" type="text" id="changedMoney" placeholder="Money" >
 	</div>
 	<div class="layout_div_Style">
         <label class="change-label">备注</label>
@@ -143,3 +181,6 @@
 	</div>
 </div>
 <!-- / -->
+<script language="JavaScript" type="text/JavaScript"> 
+	document.onload = setYear();
+</script>
