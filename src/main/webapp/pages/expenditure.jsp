@@ -40,8 +40,8 @@
 				<select class="add-select" id="money-type">
 					 <option value=""></option>
 		             <option value="支付宝">支付宝</option>
-		             <option value="花呗">花呗</option>
-		             <option value="信用卡">信用卡</option>
+		             <option value="花呗">花呗(不计入本月支出)</option>
+		             <option value="信用卡">信用卡(不计入本月支出)</option>
 		             <option value="微信">微信</option>
 		             <option value="现金">现金</option>
 		             <option value="银行卡">银行卡</option>
@@ -162,8 +162,8 @@
 		<select class="add-select" id="changed-money-type">
 			 <option value=""></option>
              <option value="支付宝">支付宝</option>
-             <option value="花呗">花呗</option>
-             <option value="信用卡">信用卡</option>
+             <option value="花呗">花呗(不计入本月支出)</option>
+             <option value="信用卡">信用卡(不计入本月支出)</option>
              <option value="微信">微信</option>
              <option value="现金">现金</option>
              <option value="银行卡">银行卡</option>

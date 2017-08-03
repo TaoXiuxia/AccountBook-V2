@@ -101,13 +101,6 @@ public class IncomeController {
 	 */
 	@RequestMapping("/addIncome")
 	public void addIncomes(String date, int item, float money, String moneyType, String remark) {
-		
-		System.out.println(date);
-		System.out.println(item);
-		System.out.println(money);
-		System.out.println(moneyType);
-		System.out.println(remark);
-		
 		incomeService.addIncome(date, item, money, moneyType, remark);
 	}
 

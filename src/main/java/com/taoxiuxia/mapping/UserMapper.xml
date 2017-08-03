@@ -92,7 +92,7 @@
 	FROM
 		user
 	WHERE
-		user.name = #{name}
+		user.name = #{name,jdbcType=VARCHAR}
   </select>
   
   <select id="findUserByEmail" resultMap="BaseResultMap" parameterType="java.util.HashMap" >

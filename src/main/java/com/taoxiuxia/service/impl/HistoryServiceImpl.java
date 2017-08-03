@@ -57,37 +57,6 @@ public class HistoryServiceImpl implements IHistoryService {
 	    }else if (curPage > totalPages){  
 	    	curPage = totalPages;  
 	    } 
-	    
-		
-		
-		
-		
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println("curPage"+curPage);
-		System.out.println("totalPages"+totalPages);
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		
-		
-		
-		
-		
 	    map.put("sortBy", sortBy);
 		map.put("beginRecord", (curPage-1)*limit);
 		map.put("limit", limit);

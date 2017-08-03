@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import com.taoxiuxia.util.StringTools;
 @Service("userService")
 public class UserServiceImpl implements IUserService {
 
+	@Resource
 	private UserMapper userMapper;
 
 	public UserMapper getUserMapper() {
@@ -43,7 +46,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User login(String account, String password,boolean hasMD5) {
 		if (StringTools.isEmpty(account) || StringTools.isEmpty(password)) {
-			System.out.println("输入参数不合法");
+			System.out.println("\n\n\n\n\n\n\n\n\n输入参数不合法\n\n\n\n\n\n\n\n\n");
 			return null;
 		}
 		User user = null;
@@ -53,26 +56,21 @@ public class UserServiceImpl implements IUserService {
 			user = this.findUserByUserName(account);
 		}
 		if (null == user) {
-			System.out.println("用户不存在");
+			System.out.println("\n\n\n\n\n\n\n\n\n用户不存在\n\n\n\n\n\n\n\n\n");
 			return null;
 		}
 		if(hasMD5){
-			if (password.equals(user.getPassword())) {
-				System.out.println("密码错误");
+			if (!password.equals(user.getPassword())) {
+				System.out.println("\n\n\n\n\n\n\n\n\n密码错误  MD5\n\n\n\n\n\n\n\n\n");
 				return null;
 			}
 		}else{
 			if (!PasswordUtil.verifyPassword(password, user.getPassword())) {
-				System.out.println("密码错误");
+				System.out.println("\n\n\n\n\n\n\n\n\n密码错误 not MD5\n\n\n\n\n\n\n\n\n");
 				return null;
 			}
 		}
 		return user;
-	}
-	
-	@Override
-	public void update(User user) {
-		// TODO Auto-generated method stub
 	}
 	
 	public User findUserByEmail(String email) {
@@ -92,7 +90,7 @@ public class UserServiceImpl implements IUserService {
 	public User findUserByUserName(String userName) {
 		Map<String,String> map = new HashMap<String,String>(); 
 		map.put("name", userName);
-		if(userMapper==null){
+		if(userMapper == null){
 			System.out.println("userMapper == null");
 			userMapper = getUserMapper();
 		}
@@ -103,5 +101,10 @@ public class UserServiceImpl implements IUserService {
 			return list.get(0);
 		}
 		return null;
+	}
+	
+	@Override
+	public void update(User user) {
+		// TODO Auto-generated method stub
 	}
 }

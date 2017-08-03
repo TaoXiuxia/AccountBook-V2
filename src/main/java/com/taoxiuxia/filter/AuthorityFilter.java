@@ -4,6 +4,7 @@ package com.taoxiuxia.filter;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,10 +20,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.core.ApplicationContext;
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.context.support.XmlWebApplicationContext;
 
+import com.taoxiuxia.mapper.UserMapper;
 import com.taoxiuxia.model.SessionUser;
 import com.taoxiuxia.model.User;
 import com.taoxiuxia.service.IUserService;
@@ -40,10 +45,10 @@ public class AuthorityFilter implements Filter {
 	private IUserService userService;
 	
 	private IUserService getUserService(){
-		if(userService==null){
+		/*if(userService==null){
 			userService = new UserServiceImpl();
 			return userService;
-		}
+		}*/
 		return userService;
 	}
 	
@@ -75,7 +80,7 @@ public class AuthorityFilter implements Filter {
 		
 		// 如果现在session中没有用户对象，自动登录
 		if(null == sessionUserObj){
-			autoLogin(request);
+			autoLogin(request, response);
 		}
 		
 		// 凡是有action后缀的都不过滤（注册，登录功能带action后缀），其他都过滤
@@ -90,7 +95,27 @@ public class AuthorityFilter implements Filter {
 		return;
 	}
 
-	private void autoLogin(HttpServletRequest req) {
+	/**
+	 * 自动登录功能
+	 * @param req
+	 */
+	private void autoLogin(HttpServletRequest req, HttpServletResponse resp) {
+		
+		//////////////////////////////////////////////////////////////////////////
+		
+		ServletContext sc = req.getSession().getServletContext();
+        XmlWebApplicationContext cxt = (XmlWebApplicationContext)WebApplicationContextUtils.getWebApplicationContext(sc);
+        
+        if(cxt != null && cxt.getBean("userService") != null && userService == null){
+            userService = (UserServiceImpl) cxt.getBean("userService");
+        }
+        
+        
+        //////////////////////////////////////////////////////////////////////////
+		    
+        
+        
+		
 		try {
 			Cookie cookieInfo = getCookieByName(req, Constants.COOKIE_USER_INFO);
 			if (cookieInfo != null) {
@@ -104,14 +129,14 @@ public class AuthorityFilter implements Filter {
 						loginUser.setUserId(user.getId());
 						loginUser.setUserName(user.getName());
 						req.getSession().setAttribute(Constants.SESSION_USER_KEY, loginUser);
-//						user.setLastLoginTime(new Date());
-//						userService.update(user); //这里主要是更新用户的登陆时间，这一部分先不做
+						user.setLastLoginTime(new Date());
+						userService.update(user); 
 					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("自动登录失败");
+			System.out.println("\n\n\n\n\n\n\n\n\n自动登录失败\n\n\n\n\n\n\n\n\n");
 		}
 	}
 	
@@ -144,6 +169,8 @@ public class AuthorityFilter implements Filter {
 	
 	public void destroy() {
 	}
-	public void init(FilterConfig arg0) throws ServletException {
+	
+	public void init(FilterConfig config) throws ServletException {
+		
 	}
 }

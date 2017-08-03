@@ -3,16 +3,16 @@ function refreshCheckCodeButton(){
 	$(refreshCheckCode).find("img").attr("src", "checkCode.action?" + new Date());
 }
 
-// 注册
+// 登录
 function login() {
 	var account = $("#account").val();
 	var password = $("#password").val();
 	var checkCode = $("#checkCode").val();
 	var rememberMe = $("#rememberMe").is(':checked');
-	
 	$.ajax({
 		type: "POST",
 		url: "login.action",
+		dataType:"json",  
 		data: {
 			"account":account,
 			"password":password,
@@ -22,6 +22,8 @@ function login() {
 		success: function(msg){
 			if(msg.info=="登录成功"){
 				window.location.href="../expenditureController/showExpenditure";
+			}else{
+				alert(msg.info);
 			}
 		},
 		error: function () {

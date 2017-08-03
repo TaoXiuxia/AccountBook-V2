@@ -99,7 +99,6 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/login.action", produces = "application/json;charset=UTF-8")
 	public @ResponseBody Map<String ,Object> login(HttpSession session, HttpServletResponse response, String account, String password,  String checkCode,String rememberMe) {
-		
 		final String REMEMBERME ="true";
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -109,7 +108,8 @@ public class UserController {
 				map.put("info", "验证码错误");
 				return map;
 			}
-			User user = userService.login(account, password,false); 
+			
+			User user = userService.login(account, password, false); 
 			SessionUser sessionUser = new SessionUser();
 			sessionUser.setUserId(user.getId());
 			sessionUser.setUserName(user.getName());
@@ -143,6 +143,11 @@ public class UserController {
 		return map;
 	}
 	
+	/**
+	 * 注销
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/logout.action", produces = "application/json;charset=UTF-8")
 	public @ResponseBody Map<String ,Object> logout(HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();

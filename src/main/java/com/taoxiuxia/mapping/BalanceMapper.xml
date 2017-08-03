@@ -71,7 +71,7 @@
   
    <select id="selectMonthlyIncome" resultType="java.lang.Float" parameterType="java.lang.Integer" >
     SELECT
-		SUM(income.money)
+		ifnull(SUM(income.money), 0)
 	FROM
 		income
 	WHERE
@@ -82,7 +82,7 @@
   
   <select id="selectMonthlyExpenditure" resultType="java.lang.Float" parameterType="java.lang.Integer" >
     SELECT
-		SUM(expenditure.money)
+		ifnull(SUM(expenditure.money), 0)
 	FROM
 		expenditure
 	WHERE
@@ -93,7 +93,7 @@
   
   <select id="selectHuaBeiAndCreditCard" resultType="java.lang.Float" parameterType="java.lang.Integer" >
     SELECT
-		SUM(expenditure.money)
+		ifnull(SUM(expenditure.money), 0)
 	FROM
 		expenditure
 	WHERE
