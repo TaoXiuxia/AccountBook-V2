@@ -1,3 +1,7 @@
+/**
+ * 用在收入和支出页面
+ */
+
 function submitBalance(){
 	var actualBalance = $("#actual_balance").val();
 	$.post("../monthlyStatisticsController/addBalance",{
@@ -31,9 +35,4 @@ function changeBalance(month){ // 如果参数month为last，表示修改上月b
 			});
 			setTimeout('location.reload()', 1000);
 		});
-}
-
-// 导出到excel
-function toExcel(){
-	alert("本部分还没有做");
 }

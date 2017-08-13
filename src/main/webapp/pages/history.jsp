@@ -53,10 +53,10 @@
 		
 		<label class="label2">&nbsp;&nbsp;&nbsp;排序方式&nbsp;</label>
 		<select class="select1" id="sortBy">
-			<option value="dateDESC">日期降序</option>	
-        	<option value="dateASC">日期升序</option>
-        	<option value="moneyDESC">金额降序</option>
-        	<option value="moneyASC">金额升序</option>
+			<option value="date DESC">日期降序</option>	
+        	<option value="date ASC">日期升序</option>
+        	<option value="money DESC">金额降序</option>
+        	<option value="money ASC">金额升序</option>
 		</select>
 		
 		&nbsp;&nbsp;&nbsp;
@@ -93,12 +93,14 @@
                     								'${history.itemId}',
                     								'${history.remark}',
                     								'${history.type_of_money}',
+                    								'${curPage}'
                     								)">修改</a> 
                     	&nbsp;
                     	<a href="#" onClick="delDetailsItem(
 						                    		'${history.itemType}',
 													'${history.id }',
-													'${history.itemId}'
+													'${history.itemId}',
+                    								'${curPage}'
 						                    		)">删除</a></td>
                 </tr>
           		</c:forEach>
@@ -111,7 +113,7 @@
 	&nbsp;
 	共<label id="totalRecords">${totalRecords}</label>条
 	&nbsp;
-	每页显示15条
+	每页显示20条
 	&nbsp;
 	<a href="#" onClick="gotoPage(-${totalPages}, ${totalPages})">首页</a> <!-- 首页就往前跳全部页 -->
 	&nbsp;

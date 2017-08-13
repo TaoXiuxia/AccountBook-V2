@@ -128,7 +128,7 @@ public class HistoryController {
 			return map; // 返回的是已经转化过的json数据
 		}
 		
-		List<Map> historys = historyService.loadIncomesAndExpenditure(2, type.equals("all") ? null : type, year, month, keyword, "date DESC", curPage, totalPages);
+		List<Map> historys = historyService.loadIncomesAndExpenditure(2, type.equals("all") ? null : type, year, month, keyword, sortBy, curPage, totalPages);
 		
 		// 后台处理日期
 		List<String> dateList = new ArrayList<String>();

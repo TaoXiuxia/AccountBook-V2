@@ -91,7 +91,7 @@
 	AND expenditure.dele = 0
 	AND date_format(expenditure.date, '%Y-%m') = date_format(now(), '%Y-%m') <!-- 只查询本月数据 -->
 	ORDER BY
-		expenditure.id DESC
+		expenditure.date DESC, expenditure.id DESC
   </select>
   
   <insert id="insert" parameterType="com.taoxiuxia.model.Expenditure" >

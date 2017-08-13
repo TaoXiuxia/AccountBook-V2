@@ -141,7 +141,7 @@
 	AND income.dele = 0
 	AND date_format(income.date, '%Y-%m') = date_format(now(), '%Y-%m') <!-- 只查询本月数据 -->
 	ORDER BY
-		income.id DESC
+		income.date DESC, income.id DESC
   </select>
   
    <!-- 查询收入和支出的总条数，根据传进来的日期和关键字，用于history页面 -->
@@ -170,6 +170,7 @@
   <select id="selectIncomesAndExpenditure" resultType="java.util.HashMap" parameterType="java.util.HashMap" >
 	SELECT
 		income.id,
+		income.id as sortId,
 		income.item_id,
 		income.user_id,
 		income.date as date,
@@ -188,6 +189,7 @@
 	
 	SELECT
 		expenditure.id,
+		expenditure.id as sortId,
 		expenditure.item_id,
 		expenditure.user_id,
 		expenditure.date as date,
@@ -201,7 +203,7 @@
 		expenditure,
 		item
 	<include refid="where_statement_for_expenditure_search" />
-	ORDER BY ${sortBy}
+	ORDER BY ${sortBy}, sortId ASC
 	LIMIT #{beginRecord, jdbcType=INTEGER}, #{limit, jdbcType=INTEGER}
   </select>
   

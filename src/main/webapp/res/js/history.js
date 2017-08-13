@@ -46,6 +46,7 @@ function search(page){
 	var year = $("#year option:selected").val();
 	var month = $("#month option:selected").val();
 	var keyword = $("#keyword").val();
+	var sortBy = $("#sortBy option:selected").val(); 
 	$.ajax({
 		type: "POST",
 		url: "searchHistory",
@@ -54,7 +55,7 @@ function search(page){
 			"year":year,
 			"month":month,
 			"keyword":keyword,
-			"sortBy":"date DECS",
+			"sortBy":sortBy,
 			"curPage":page
 		},
 		success: function(msg){
@@ -70,19 +71,30 @@ function search(page){
 								msg.list[i].money  +"','"+
 								msg.list[i].itemId +"','"+
 								msg.list[i].remark +"','"+
-								msg.list[i].type_of_money +"'"+
-							")>修改</a>&nbsp;&nbsp;"+ 
+								msg.list[i].type_of_money +"','"+
+								page +"'"+
+							")>修改</a>&nbsp;&nbsp;&nbsp;"+ 
 							"<a href='#' onClick=delDetailsItem('"+
 								msg.list[i].itemType +"','"+
-								msg.list[i].id +"'"+
+								msg.list[i].id +"','"+
+								page +"'"+
 							")>删除</a>";
+						
+						//处理金额money：如果金额为整数，如10元，则处理为10.0元
+						var money;
+						if(msg.list[i].money*100%100==0){
+							money = msg.list[i].money+".0";
+						}else{
+							money =msg.list[i].money
+						}
+						
 						$("#detailItems").append(
 							"<tr>"+
 				            "    <td>"+ msg.dateList[i] +"</td>"+
 				            "    <td>"+ msg.typeList[i] +"</td>"+
 				            "    <td>"+ msg.list[i].itemName +"</td>"+
 				            "    <td>"+ msg.list[i].type_of_money +"</td>"+
-				            "    <td>"+ msg.list[i].money +"</td>"+
+				            "    <td>"+ money +"</td>"+
 				            "    <td>"+ msg.list[i].remark +"</td>"+
 				            "    <td>"+ operation +"</td>"+
 				            "</tr>"
@@ -118,11 +130,11 @@ function changeType1(){
 	}
 }
 
-function changeDetailsItem(itemType, detailsId, date, money, itemId, remark, type_of_money){
+function changeDetailsItem(itemType, detailsId, date, money, itemId, remark, type_of_money, curPage){
 	layer.confirm(
 		$("#changeDetailsItemLayer").html(),{
 	    btn: ['修改','返回'], //按钮
-		success: function(layero, index){
+	    success: function(layero, index){
        		var content = $(".layui-layer-content");
  		   	content.find("#changedDate").val(date.substring(0,10));
  		   	content.find("#changedMoney").val(money);
@@ -132,33 +144,47 @@ function changeDetailsItem(itemType, detailsId, date, money, itemId, remark, typ
  		    content.find("#changedtype_of_money").val(type_of_money);
  		    changeType1();
         }
-	}, function(){
-		var content = $(".layui-layer-content");
-		var changedDate = content.find("#changedDate").val();
-		var changedMoney = content.find("#changedMoney").val();
-		var changedType = content.find("#changedType").val();
-		var changedItem = content.find("#changedItem").val();
-		var changedRemark = content.find("#changedRemark").val();
-		var changedtype_of_money = content.find("#changedtype_of_money").val();
-		$.post("../historyController/changeHistory",{
-			"itemType":itemType,  // 原项的类型（收入or支出）
-			"changedType":changedType,  // 现在的类型（收入or支出）
-			"detailsId":detailsId,
-			"changedDate":changedDate,
-			"changedMoney":changedMoney,
-			"changedItem":changedItem,
-			"changedRemark":changedRemark,
-			"changedMoneyType":changedtype_of_money
+		}, function(){
+			var content = $(".layui-layer-content");
+			var changedDate = content.find("#changedDate").val();
+			var changedMoney = content.find("#changedMoney").val();
+			var changedType = content.find("#changedType").val();
+			var changedItem = content.find("#changedItem").val();
+			var changedRemark = content.find("#changedRemark").val();
+			var changedtype_of_money = content.find("#changedtype_of_money").val();
+			$.post("../historyController/changeHistory",{
+				"itemType":itemType,  // 原项的类型（收入or支出）
+				"changedType":changedType,  // 现在的类型（收入or支出）
+				"detailsId":detailsId,
+				"changedDate":changedDate,
+				"changedMoney":changedMoney,
+				"changedItem":changedItem,
+				"changedRemark":changedRemark,
+				"changedMoneyType":changedtype_of_money
+			});
+			
+			setTimeout(function(){
+				gotoPage(0, curPage);
+				layer.closeAll();
+			},800);
+			
 		});
-		setTimeout('location.reload()', 1000);
-	});
 }
 
-function delDetailsItem(itemType,historyId,itemId){
-	$.post("../historyController/deleHistory",{
-		"itemType":itemType,
-		"historyId":historyId,
-		"itemId":itemId,
+function delDetailsItem(itemType,historyId,itemId, curPage){
+	layer.confirm('确认删除？', {
+		  btn: ['删除','返回'] //按钮
+	}, function(){
+		  $.post("../historyController/deleHistory",{
+				"itemType":itemType,
+				"historyId":historyId,
+				"itemId":itemId,
+			});
+			
+			setTimeout(function(){
+				gotoPage(0, curPage);
+				layer.closeAll();
+			},800);
+	}, function(){
 	});
-	setTimeout('location.reload()', 1000);
 }

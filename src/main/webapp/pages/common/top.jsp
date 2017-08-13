@@ -45,8 +45,8 @@
 					</div>
 				</a>
 				
-				<!-- 说明一些注意事项，不好理解的地方 -->
-				<a href="../monthlyStatisticsController/showMonthlyStatistics">
+				<!-- 关于页面 -->
+				<a href="../aboutController/showAbout">
 					<div id="about" class="breadcrumb">
 						<div>
 							关于
