@@ -17,11 +17,10 @@
 
 <div class="col-xs-10">
 	
-	<label>注销功能：</label>无法注销<br>
 	<label>项目管理：</label>上移与下移功能<br>
 	<label>分用户分账本：</label><br>
 	<label>收入，支出加分页：</label><br>
-	<label>限定输入规范</label>
+	<label>收入支出 方式：</label>应该有一个单独的页面，与项目管理类似的
 	
 </div>
 <%@ include file="common/bottom.jsp"%>

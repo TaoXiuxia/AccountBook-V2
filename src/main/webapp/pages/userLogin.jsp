@@ -48,7 +48,7 @@
 		
 		<div class="div1">
 			<button class="btn1" onclick="login()">登录</button>
-			<a href="showUserRegister.action" class="link1">注册</a>
+			<a href="showUserRegister" class="link1">注册</a>
 		</div>
 	</div>
 	

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +33,8 @@ import checkcode.patchca.utils.encoder.EncoderHelper;
 @Controller
 @RequestMapping("/userController")
 public class UserController {
-
+	private Logger logger=LoggerFactory.getLogger(UserController.class);
+	
 	private IUserService userService;
 
 	public IUserService getUserService() {
@@ -43,12 +46,22 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@RequestMapping("/showUserRegister.action")
+	/**
+	 * 注册页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/showUserRegister")
 	public String showUserRegister(Model model) {
 		return "pages/userRegister";
 	}
 	
-	@RequestMapping("/showUserLogin.action")
+	/**
+	 * 登陆界面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/showUserLogin")
 	public String showUserLogin(Model model) {
 		return "pages/userLogin";
 	}
@@ -106,10 +119,15 @@ public class UserController {
 			String sessionCheckCode = String.valueOf(session.getAttribute(Constants.check_code_key));
 			if (!StringTools.isEmpty(sessionCheckCode) && !sessionCheckCode.equalsIgnoreCase(checkCode)) {
 				map.put("info", "验证码错误");
+				logger.info("验证码错误");
 				return map;
 			}
 			
 			User user = userService.login(account, password, false); 
+			if(user==null){
+				map.put("info", "用户不存在或密码错误");
+				logger.info("用户不存在或密码错误. account==> "+account+"; password ==> "+password);
+			}
 			SessionUser sessionUser = new SessionUser();
 			sessionUser.setUserId(user.getId());
 			sessionUser.setUserName(user.getName());
@@ -129,14 +147,17 @@ public class UserController {
 				// 设置最大生命周期为1年
 				cookieInfo.setMaxAge(31536000);
 				response.addCookie(cookieInfo);
-			} else {
+			} else {  //清空cookie
 				Cookie cookie = new Cookie(Constants.COOKIE_USER_INFO, null);
 				cookie.setPath("/");
 				cookie.setMaxAge(0);
 				response.addCookie(cookie);
 			}
 		} catch (Exception e) {
-			map.put("info", "登录失败");
+			if(map.get("info")==null){
+				map.put("info", "登录失败");
+				logger.info("登录失败");
+			}
 			return map;
 		}
 		map.put("info", "登录成功");
@@ -149,9 +170,16 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/logout.action", produces = "application/json;charset=UTF-8")
-	public @ResponseBody Map<String ,Object> logout(HttpSession session) {
+	public @ResponseBody Map<String ,Object> logout(HttpSession session, HttpServletResponse response) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		//清空session
 		session.setAttribute(Constants.SESSION_USER_KEY, null);
+		//清空cookie
+		Cookie cookie = new Cookie(Constants.COOKIE_USER_INFO, null);
+		cookie.setPath("/");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+		
 		map.put("info", "注销成功");
 		return map;
 	}

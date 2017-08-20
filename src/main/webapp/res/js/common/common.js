@@ -40,3 +40,32 @@ Date.prototype.Format = function (fmt) { //author: meizz
     if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 }
+
+//列表项上移下移，用于项目管理和收支方式管理
+function upAndDown(type, inOrex, id, upAndDown){
+	var target;
+	if(type == "item"){
+		targetUrl = "../itemController/upAndDownItem";
+	}else if(type == "typeOfMoney"){
+		targetUrl = "...urlurlurlurlurl";   // 收入支出方式的url
+	}
+	
+	$.ajax({
+		type: "POST",
+		url: targetUrl,
+		data: {
+			"inOrEx":inOrex,
+			"itemId":id,
+			"upAndDown":upAndDown
+		},
+		success: function(msg){
+			layer.msg(msg.info);
+			setTimeout(function(){
+				location.reload();
+			},1000);
+		},
+		error: function (msg) {//XMLHttpRequest, textStatus, errorThrown
+			alert("请求失败");
+		} 
+	});
+}

@@ -9,7 +9,7 @@
 <%@ include file="common/common.jsp" %> 
 <link href="../res/css/manageItems.css" rel="stylesheet">
 <script src="../res/js/manageItems.js"></script>
-
+<script src="../res/js/common/common.js"></script>
 </head>
 <body>
 <%@ include file="common/top.jsp"%>
@@ -38,9 +38,15 @@
                 <tr>
                     <td>${incomeItem.name }</td>
                     <td>${incomeItem.remark }</td>
-                    <td><a href="#" onClick="changeItem('${incomeItem.id}','${incomeItem.name }','${incomeItem.remark }','in')">修改&nbsp;&nbsp;</a> 
+                    <td>
+                    	<a href="#" onClick="changeItem('${incomeItem.id}','${incomeItem.name }','${incomeItem.remark }','in')">修改</a> 
+                    	&nbsp;&nbsp;
                     	<a href="#" onClick="delItem('${incomeItem.id}')">删除</a></td>
-                    <td>上移&nbsp;&nbsp;下移</td>
+                    <td>
+                    	<a href="#" onClick="upAndDown('item','in','${incomeItem.id}','up')">上移</a>
+	                    &nbsp;&nbsp;
+	                    <a href="#" onClick="upAndDown('item','in','${incomeItem.id}','down')">下移</a>
+                    </td>
                 </tr>
           		</c:forEach>
 		    </tbody> 
@@ -64,13 +70,20 @@
 		    </thead>
 		    <tbody> 
 		        <c:forEach items="${expenditureItems}" var="expenditureItem">
-                <tr>
-                    <td>${expenditureItem.name }</td>
-                    <td>${expenditureItem.remark }</td>
-                    <td><a href="#" onClick="changeItem('${expenditureItem.id}','${expenditureItem.name }','${expenditureItem.remark }','ex')">修改&nbsp;&nbsp;</a> 
-                    	<a href="#" onClick="delItem('${expenditureItem.id}')">删除</a></td>
-                    <td>上移&nbsp;&nbsp;下移</td>
-                </tr>
+	                <tr>
+	                    <td>${expenditureItem.name }</td>
+	                    <td>${expenditureItem.remark }</td>
+	                    <td>
+	                    	<a href="#" onClick="changeItem('${expenditureItem.id}','${expenditureItem.name }','${expenditureItem.remark }','ex')">修改</a> 
+	                    	&nbsp;&nbsp;
+	                    	<a href="#" onClick="delItem('${expenditureItem.id}')">删除</a>
+	                    </td>
+	                    <td>
+	                    	<a href="#" onClick="upAndDown('item','ex','${expenditureItem.id}','up')">上移</a>
+	                    	&nbsp;&nbsp;
+	                    	<a href="#" onClick="upAndDown('item','ex','${expenditureItem.id}','down')">下移</a>
+	               		</td>
+	                </tr>
           		</c:forEach>
 		    </tbody> 
 		</table>

@@ -1,7 +1,7 @@
 package com.taoxiuxia.util;
 
 public class StringTools {
-
+/*
 	private final static String[] hexDigits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
 
 	private static String byteArrayToHexString(byte[] b) {
@@ -21,7 +21,7 @@ public class StringTools {
 		int d2 = n % 16;
 		return hexDigits[d1] + hexDigits[d2];
 	}
-
+*/
 	/**
 	 * 判断是否为空
 	 * 

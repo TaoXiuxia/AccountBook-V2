@@ -92,7 +92,7 @@
                     								'${history.money}',
                     								'${history.itemId}',
                     								'${history.remark}',
-                    								'${history.type_of_money}',
+                    								escape('${history.type_of_money}'),    <!-- 转义 -->
                     								'${curPage}'
                     								)">修改</a> 
                     	&nbsp;

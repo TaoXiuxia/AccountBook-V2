@@ -71,13 +71,10 @@
     id, user_id, name, in_or_ex, remark, dele
   </sql>
   
-  
-  
-  
   <!-- 查询income项 -->
   <select id="selectIncomeItemByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     SELECT
-		id,name,remark
+		id,name,remark,sort
 	FROM
 		item
 	WHERE
@@ -90,7 +87,7 @@
   <!-- 查询expenditure项 -->  
   <select id="selectExpenditureItemByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     SELECT
-		id,name,remark
+		id,name,remark,sort
 	FROM
 		item
 	WHERE
@@ -100,15 +97,36 @@
 	Order By sort
   </select>
   
-  <insert id="insert" parameterType="com.taoxiuxia.model.Item" >
-    insert into item (user_id, name, in_or_ex, remark, dele)
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.taoxiuxia.model.Item">
+    insert into item (user_id, name, in_or_ex, remark, dele, sort)
     values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, 
-      #{inOrEx,jdbcType=VARCHAR}, #{remark,jdbcType=CHAR}, #{dele,jdbcType=INTEGER})
+      #{inOrEx,jdbcType=VARCHAR}, #{remark,jdbcType=CHAR}, #{dele,jdbcType=INTEGER},  #{sort,jdbcType=INTEGER});
   </insert>
   
-  
-  
-  
+  <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Item" >
+    update item
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=CHAR},
+      </if>
+      <if test="inOrEx != null" >
+        in_or_ex = #{inOrEx,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=CHAR},
+      </if>
+      <if test="dele != null" >
+        dele = #{dele,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
   
   
   
@@ -237,27 +255,9 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Item" >
-    update item
-    <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=CHAR},
-      </if>
-      <if test="inOrEx != null" >
-        in_or_ex = #{inOrEx,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null" >
-        remark = #{remark,jdbcType=CHAR},
-      </if>
-      <if test="dele != null" >
-        dele = #{dele,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+  
+  
+  
   <update id="updateByPrimaryKey" parameterType="com.taoxiuxia.model.Item" >
     update item
     set user_id = #{userId,jdbcType=INTEGER},

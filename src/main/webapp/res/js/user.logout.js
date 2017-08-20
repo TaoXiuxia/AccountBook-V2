@@ -5,13 +5,16 @@ function logout() {
 		data: {
 		},
 		success: function(msg){
-			alert(msg.info);
 			if(msg.info=="注销成功"){
-				window.location.href="../incomeController/showIncome";
+				layer.msg(msg.info);
+				setTimeout(function(){
+					window.location.href="../userController/showUserLogin";
+				},1500);
+			
 			}
 		},
 		error: function () {
-			alert("登录失败from前台");
+			layer.msg("登录失败");
 		} 
 	});
 }

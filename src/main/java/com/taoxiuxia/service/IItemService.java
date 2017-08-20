@@ -22,7 +22,7 @@ public interface IItemService {
 	 * 增加项，income or expenditure
 	 * @param inOrEx
 	 */
-	void addItem(String itemName, String remark, String inOrEx);
+	void addItem(int userId, String itemName, String remark, String inOrEx);
 	
 	/**
 	 * 修改item
@@ -38,4 +38,14 @@ public interface IItemService {
 	 * @param itemId
 	 */
 	void deleItem(int itemId);
+	
+	/**
+	 * 上移下移item
+	 * @param userId
+	 * @param itemId
+	 * @param inOrEx
+	 * @param upAndDown
+	 * @return
+	 */
+	String upAndDownItem(int userId, int itemId,  String inOrEx, String upAndDown);
 }

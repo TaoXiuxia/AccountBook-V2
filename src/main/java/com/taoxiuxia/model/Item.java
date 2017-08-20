@@ -13,7 +13,17 @@ public class Item {
 
     private int dele;
     
-    public int getUserId() {
+    private int sort;
+    
+    public int getSort() {
+		return sort;
+	}
+
+	public void setSort(int sort) {
+		this.sort = sort;
+	}
+
+	public int getUserId() {
 		return userId;
 	}
 

@@ -70,14 +70,14 @@ function search(page){
 								msg.dateList[i]  +"','"+
 								msg.list[i].money  +"','"+
 								msg.list[i].itemId +"','"+
-								msg.list[i].remark +"','"+
+								escape(msg.list[i].remark) +"','"+    //转义
 								msg.list[i].type_of_money +"','"+
 								page +"'"+
 							")>修改</a>&nbsp;&nbsp;&nbsp;"+ 
 							"<a href='#' onClick=delDetailsItem('"+
 								msg.list[i].itemType +"','"+
 								msg.list[i].id +"','"+
-								page +"'"+
+								page +"',"+
 							")>删除</a>";
 						
 						//处理金额money：如果金额为整数，如10元，则处理为10.0元
@@ -130,6 +130,17 @@ function changeType1(){
 	}
 }
 
+/**
+ * 修改收入或者支出
+ * @param itemType
+ * @param detailsId
+ * @param date
+ * @param money
+ * @param itemId
+ * @param remark
+ * @param type_of_money
+ * @param curPage
+ */
 function changeDetailsItem(itemType, detailsId, date, money, itemId, remark, type_of_money, curPage){
 	layer.confirm(
 		$("#changeDetailsItemLayer").html(),{
@@ -140,7 +151,7 @@ function changeDetailsItem(itemType, detailsId, date, money, itemId, remark, typ
  		   	content.find("#changedMoney").val(money);
  		   	content.find("#changedType").val(itemType);
  		   	content.find("#changedItem").val(itemId);
- 		   	content.find("#changedRemark").val(remark);
+ 		   	content.find("#changedRemark").val(unescape(remark)); //反转义
  		    content.find("#changedtype_of_money").val(type_of_money);
  		    changeType1();
         }
@@ -171,6 +182,13 @@ function changeDetailsItem(itemType, detailsId, date, money, itemId, remark, typ
 		});
 }
 
+/**
+ * 删除收入或者支出
+ * @param itemType
+ * @param historyId
+ * @param itemId
+ * @param curPage
+ */
 function delDetailsItem(itemType,historyId,itemId, curPage){
 	layer.confirm('确认删除？', {
 		  btn: ['删除','返回'] //按钮

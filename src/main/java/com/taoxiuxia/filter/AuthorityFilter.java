@@ -45,10 +45,6 @@ public class AuthorityFilter implements Filter {
 	private IUserService userService;
 	
 	private IUserService getUserService(){
-		/*if(userService==null){
-			userService = new UserServiceImpl();
-			return userService;
-		}*/
 		return userService;
 	}
 	
@@ -101,20 +97,12 @@ public class AuthorityFilter implements Filter {
 	 */
 	private void autoLogin(HttpServletRequest req, HttpServletResponse resp) {
 		
-		//////////////////////////////////////////////////////////////////////////
-		
 		ServletContext sc = req.getSession().getServletContext();
         XmlWebApplicationContext cxt = (XmlWebApplicationContext)WebApplicationContextUtils.getWebApplicationContext(sc);
         
         if(cxt != null && cxt.getBean("userService") != null && userService == null){
             userService = (UserServiceImpl) cxt.getBean("userService");
         }
-        
-        
-        //////////////////////////////////////////////////////////////////////////
-		    
-        
-        
 		
 		try {
 			Cookie cookieInfo = getCookieByName(req, Constants.COOKIE_USER_INFO);
@@ -136,7 +124,7 @@ public class AuthorityFilter implements Filter {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("\n\n\n\n\n\n\n\n\n自动登录失败\n\n\n\n\n\n\n\n\n");
+			logger.info("====> 自动登录失败");
 		}
 	}
 	
