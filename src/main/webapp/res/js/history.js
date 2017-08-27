@@ -31,6 +31,11 @@ function setMonthEnable(){
 	}
 }
 
+/**
+ * 前一页/后一页
+ * @param forOrBackward
+ * @param totalPages
+ */
 function  gotoPage(forOrBackward, totalPages){
 	var page = parseInt($("#curPage").text()) + parseInt(forOrBackward);
 	if(page < 1){
@@ -41,6 +46,10 @@ function  gotoPage(forOrBackward, totalPages){
 	search(page);
 }
 
+/**
+ * 搜索第n页的数据
+ * @param page
+ */
 function search(page){
 	var type = $("#type option:selected").val();
 	var year = $("#year option:selected").val();
@@ -151,7 +160,7 @@ function changeDetailsItem(itemType, detailsId, date, money, itemId, remark, typ
  		   	content.find("#changedMoney").val(money);
  		   	content.find("#changedType").val(itemType);
  		   	content.find("#changedItem").val(itemId);
- 		   	content.find("#changedRemark").val(unescape(remark)); //反转义
+ 		   	content.find("#changedRemark").val(unescape(remark)); //反转义（处理空格）
  		    content.find("#changedtype_of_money").val(type_of_money);
  		    changeType1();
         }

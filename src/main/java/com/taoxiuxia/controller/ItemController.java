@@ -45,7 +45,7 @@ public class ItemController {
 	public String showManageItems(Model model,HttpSession session) {
 		SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
 		int userId = sessionUser.getUserId();
-		List<Item> expenditureItems = itemService.loadExpenditureItems(userId); // 目前只有用户2
+		List<Item> expenditureItems = itemService.loadExpenditureItems(userId); 
 		List<Item> incomeItems = itemService.loadIncomeItems(userId);
 		model.addAttribute("expenditureItems", expenditureItems);
 		model.addAttribute("incomeItems", incomeItems);
@@ -76,7 +76,7 @@ public class ItemController {
 	 */
 	@RequestMapping("/changeItem")
 	public void changeItem(int itemId, String itemName, String remark, String inOrEx) {
-		itemService.changeItem(itemId, itemName, remark, inOrEx);
+		itemService.changeItem(itemId, itemName, remark);
 	}
 	
 	/**

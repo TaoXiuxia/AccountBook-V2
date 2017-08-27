@@ -6,17 +6,6 @@ function fillUpDate(){
 	$("#date").val(myDate);
 }
 
-/**
- * 在“本月实际结余”输入框中填入数值（如果有的话）,并且将其变为不可用
- * @param actualSurplus
- */
-function unenableInput(actualSurplus){ 
-	if(actualSurplus!=-1){ //-1表示没有内容
-		$("#actual_balance").val(actualSurplus);
-		$("#actual_balance").attr("disabled","disabled");
-		$("#submitBalanceButton").attr("disabled","disabled");
-	}
-}
 
 // 来源： http://www.cnblogs.com/zhangpengshou/archive/2012/07/19/2599053.html
 // 对Date的扩展，将 Date转化为指定格式的String

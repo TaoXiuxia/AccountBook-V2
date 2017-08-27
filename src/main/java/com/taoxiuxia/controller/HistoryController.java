@@ -77,13 +77,16 @@ public class HistoryController {
 	 */
 	@RequestMapping("/showhistory")
 	public String showHistory(Model model,HttpSession session) {
+		SessionUser sessionUser= (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
+		int userId = sessionUser.getUserId();
+		
 		// 初始页面，显示当前用户的全部数据
-		int limit = Constants.LIMIT;
-		int totalRecords = historyService.countIncomesAndExpenditure(2, null, -1, -1, null); // 初始条件下 根据条件查到的记录的总条数
+		int limit = Constants.RECORD_NUM_PER_PAGE;
+		int totalRecords = historyService.countIncomesAndExpenditure(userId, null, -1, -1, null); // 初始条件下 根据条件查到的记录的总条数
 		int totalPages = (int) Math.ceil(totalRecords*1.0/limit);  // 初始条件下 总页数
-		List<Map> historys = historyService.loadIncomesAndExpenditure(2, null, -1, -1, null, "date DESC", 1, totalPages );
-		List<Item> incomesItems = itemService.loadIncomeItems(2); // 目前只有用户2
-		List<Item> expenditureItems = itemService.loadExpenditureItems(2); // 目前只有用户2
+		List<Map> historys = historyService.loadIncomesAndExpenditure(userId, null, -1, -1, null, "date DESC", 1, totalPages );
+		List<Item> incomesItems = itemService.loadIncomeItems(userId); 
+		List<Item> expenditureItems = itemService.loadExpenditureItems(userId); 
 		
 		model.addAttribute("incomesItems", incomesItems);
 		model.addAttribute("expenditureItems", expenditureItems);
@@ -92,7 +95,6 @@ public class HistoryController {
 		model.addAttribute("totalRecords", totalRecords);
 		model.addAttribute("curPage", 1);  // 当前页码
 		
-		SessionUser sessionUser= (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
 		model.addAttribute("sessionUser", sessionUser);
 		return "pages/history";
 	}
@@ -111,11 +113,14 @@ public class HistoryController {
 	 * @return
 	 */
 	@RequestMapping(value = "/searchHistory", produces = "application/json;charset=UTF-8")
-	public @ResponseBody Map<String, Object> searchHistory(Model model, String type, int year, int month, String keyword, String sortBy, int curPage) {
+	public @ResponseBody Map<String, Object> searchHistory(HttpSession session, Model model, String type, int year, int month, String keyword, String sortBy, int curPage) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		int limit = Constants.LIMIT;
-		int totalRecords = historyService.countIncomesAndExpenditure(2, type.equals("all") ? null : type, year, month, keyword); // 根据条件查到的记录的总条数
+		SessionUser sessionUser= (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
+		int userId = sessionUser.getUserId();
+		
+		int limit = Constants.RECORD_NUM_PER_PAGE;
+		int totalRecords = historyService.countIncomesAndExpenditure(userId, type.equals("all") ? null : type, year, month, keyword); // 根据条件查到的记录的总条数
 		int totalPages = (int) Math.ceil(totalRecords*1.0/limit);  // 总页数
 		
 		if(totalRecords==0){ //如果查到0条数据，就不需要后序的操作了
@@ -128,7 +133,7 @@ public class HistoryController {
 			return map; // 返回的是已经转化过的json数据
 		}
 		
-		List<Map> historys = historyService.loadIncomesAndExpenditure(2, type.equals("all") ? null : type, year, month, keyword, sortBy, curPage, totalPages);
+		List<Map> historys = historyService.loadIncomesAndExpenditure(userId, type.equals("all") ? null : type, year, month, keyword, sortBy, curPage, totalPages);
 		
 		// 后台处理日期
 		List<String> dateList = new ArrayList<String>();
@@ -171,7 +176,8 @@ public class HistoryController {
 	 */
 	@RequestMapping("/changeHistory")
 	public void changeHistory(String itemType, String changedType, int detailsId, String changedDate,
-			float changedMoney, String changedMoneyType, int changedItem, String changedRemark) {
+			float changedMoney, String changedMoneyType, int changedItem, String changedRemark, HttpSession session) {
+		int userId = (int) session.getAttribute(Constants.USER_ID);
 		
 		if (itemType.equals(changedType)) { // 同一个类目下修改
 			if (itemType.equals("in")) {
@@ -181,11 +187,11 @@ public class HistoryController {
 			}
 		} else { // 不同的类目下，先删除原来的，在添加上新的
 			if (changedType.equals("in")) { // 原来是ex，现在是in
-				incomeService.addIncome(changedDate, changedItem, changedMoney,changedMoneyType, changedRemark);
-				expenditureService.deleExpenditure(detailsId, changedItem);
+				incomeService.addIncome(userId, changedDate, changedItem, changedMoney,changedMoneyType, changedRemark);
+				expenditureService.deleExpenditure(detailsId);
 			}else{ // 原来是in，现在是ex
-				expenditureService.addExpenditure(changedDate, changedItem, changedMoney,changedMoneyType, changedRemark);
-				incomeService.deleIncome(detailsId, changedItem);
+				expenditureService.addExpenditure(userId, changedDate, changedItem, changedMoney,changedMoneyType, changedRemark);
+				incomeService.deleIncome(detailsId);
 			}
 		}
 	}
@@ -196,11 +202,12 @@ public class HistoryController {
 	 * @param itemId
 	 */
 	@RequestMapping("/deleHistory")
-	public void deleteHistory(String itemType, int historyId, int itemId) {
+	public void deleteHistory(String itemType, int historyId, int itemId, HttpSession session) {
+		int userId = (int)session.getAttribute(Constants.USER_ID);
 		if (itemType.equals("in")) { // 删除income
-			incomeService.deleIncome(historyId, itemId);
+			incomeService.deleIncome(historyId);
 		} else { // 删除expenditure
-			expenditureService.deleExpenditure(historyId, itemId);
+			expenditureService.deleExpenditure(historyId);
 		}
 	}
 }

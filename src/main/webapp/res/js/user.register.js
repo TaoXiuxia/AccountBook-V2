@@ -26,9 +26,14 @@ function register() {
 			"checkCode":checkCode
 		},
 		success: function(msg){
-			alert(msg.info);
-			if(msg.info=="注册成功"){
-				window.location.href="../userController/showUserLogin.action";
+			if(msg.info=="注册成功,请登录"){
+				layer.msg(msg.info);
+				setTimeout(function(){
+					window.location.href="../userController/showUserLogin.action";
+				},2000);
+			}
+			if(msg.info=="验证码错误"){
+				layer.msg(msg.info);
 			}
 		},
 		error: function () {

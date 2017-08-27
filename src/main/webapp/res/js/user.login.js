@@ -23,7 +23,7 @@ function login() {
 			if(msg.info=="登录成功"){
 				window.location.href="../expenditureController/showExpenditure";
 			}else{
-				alert(msg.info);
+				layer.msg(msg.info);
 			}
 		},
 		error: function () {

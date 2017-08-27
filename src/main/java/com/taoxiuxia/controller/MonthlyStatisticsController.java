@@ -1,10 +1,13 @@
 package com.taoxiuxia.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.taoxiuxia.service.IMonthlyStatisticsService;
+import com.taoxiuxia.util.Constants;
 
 @Controller
 @RequestMapping("/monthlyStatisticsController")
@@ -21,23 +24,22 @@ public class MonthlyStatisticsController {
 	}
 
 	/**
-	 * 增加item
+	 * 增加Balance
 	 * 
-	 * @param itemName
-	 * @param remark
 	 */
 	@RequestMapping("/addBalance")
-	public void addBalance(float actualBalance) {
-		monthlyStatisticsService.addBalance(actualBalance, 2);
+	public void addBalance(float actualBalance, HttpSession session) {
+		int userId = (int)session.getAttribute(Constants.USER_ID);
+		monthlyStatisticsService.addBalance(actualBalance, userId);
 	}
 
 	/**
-	 * 
+	 * 修改balance
 	 * @param balanceId
 	 * @param actualBalance
 	 */
 	@RequestMapping("/changeBalance")
-	public void changeBalance(String month, float changed_balance) {
-		monthlyStatisticsService.changeBalance(month,changed_balance, 2);
+	public void changeBalance(int balanceId,float changed_balance) {
+		monthlyStatisticsService.changeBalance(balanceId, changed_balance);
 	}
 }

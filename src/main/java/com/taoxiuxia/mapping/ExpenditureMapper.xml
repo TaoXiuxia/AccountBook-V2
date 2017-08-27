@@ -7,6 +7,7 @@
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="money" property="money" jdbcType="REAL" />
     <result column="date" property="date" jdbcType="TIMESTAMP" />
+    <result column="type_of_money" property="type_of_money" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="dele" property="dele" jdbcType="INTEGER" />
   </resultMap>
@@ -72,7 +73,8 @@
     id, item_id, user_id, money, date, remark, dele
   </sql>
   
-  <select id="selectAllExpenditures" resultMap="BaseResultMap">
+  <!-- 在支出页面中显示 -->
+  <select id="selectAllExpenditures" parameterType="java.util.HashMap" resultMap="BaseResultMap">
 	SELECT
 		expenditure.id,
 		expenditure.item_id,
@@ -87,9 +89,11 @@
 		item
 	WHERE
 		expenditure.item_id = item.id
-	AND expenditure.user_id = 2  <!-- 目前只有一个用户，如果需要指定用户的时候再进行修改 -->
-	AND expenditure.dele = 0
-	AND date_format(expenditure.date, '%Y-%m') = date_format(now(), '%Y-%m') <!-- 只查询本月数据 -->
+	AND expenditure.user_id = #{userId,jdbcType=INTEGER}
+	AND expenditure.dele = 1
+	<if test="dataScale != null and dataScale == 'only_this_month'.toString() ">
+		AND date_format(expenditure.date, '%Y-%m') = date_format(now(), '%Y-%m') <!-- 只查询本月数据 -->
+	</if>
 	ORDER BY
 		expenditure.date DESC, expenditure.id DESC
   </select>
@@ -118,10 +122,10 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Expenditure" >
     update expenditure
     <set >
-      <if test="itemId != null" >
+      <if test="itemId != null and itemId != 0" >
         item_id = #{itemId,jdbcType=INTEGER},
       </if>
-      <if test="userId != null" >
+      <if test="userId != null and useId != 0" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="money != null" >
@@ -136,7 +140,7 @@
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="dele != null" >
+      <if test="dele != null and dele != 0" >
         dele = #{dele,jdbcType=INTEGER},
       </if>
     </set>

@@ -21,6 +21,10 @@ public class Expenditure {
 
     private Integer dele;
 
+    
+    
+    
+    
     public Integer getId() {
         return id;
     }

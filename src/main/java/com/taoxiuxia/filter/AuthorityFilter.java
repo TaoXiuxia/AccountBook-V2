@@ -117,6 +117,7 @@ public class AuthorityFilter implements Filter {
 						loginUser.setUserId(user.getId());
 						loginUser.setUserName(user.getName());
 						req.getSession().setAttribute(Constants.SESSION_USER_KEY, loginUser);
+						req.getSession().setAttribute(Constants.USER_ID, user.getId());
 						user.setLastLoginTime(new Date());
 						userService.update(user); 
 					}

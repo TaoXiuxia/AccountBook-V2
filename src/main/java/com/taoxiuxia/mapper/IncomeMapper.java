@@ -8,7 +8,7 @@ import com.taoxiuxia.model.Income;
 
 public interface IncomeMapper {
 
-	List<Income> selectAllIncomes();
+	List<Income> selectAllIncomes(HashMap map);
 	
 	List<Map> selectIncomesAndExpenditure(HashMap map);
 	

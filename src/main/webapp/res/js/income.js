@@ -66,6 +66,10 @@ function changeIncome(incomeId,date,money,itemId,remark,money_type){
 				"remark":remark,
 				"date":date
 			});
+			
+//			test1();
+			
+			//不能刷新页面，应该使用ajax停留在当前的第n页
 			setTimeout('location.reload()', 1000);
 		});
 }
@@ -76,10 +80,15 @@ function changeIncome(incomeId,date,money,itemId,remark,money_type){
  * @param itemId
  */
 function delIncome(incomeId, itemId){
-	$.post("../incomeController/deleIncome",{
-		"incomeId":incomeId,
-		"itemId":itemId
+	layer.confirm('确认删除？', {
+		  btn: ['删除','返回'] //按钮
+	}, function(){
+		$.post("../incomeController/deleIncome",{
+			"incomeId":incomeId,
+			"itemId":itemId
+		});
+		setTimeout('location.reload()', 1000);
+	}, function(){
 	});
-	setTimeout('location.reload()', 1000);
 }
 

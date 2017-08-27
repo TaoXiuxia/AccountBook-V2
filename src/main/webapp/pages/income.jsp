@@ -11,6 +11,7 @@
 <script src="../res/js/income.js"></script>
 <script src="../res/js/monthlyStatistics.js"></script>
 <script src="../res/js/common/common.js"></script>
+<script src="../res/js/common/incomeAndExpenditure.js"></script>
 </head>
 <body>
 <%@ include file="common/top.jsp"%>
@@ -89,7 +90,7 @@
 			<label class="label4">本月初/上月末结余：</label>
 			<label>${balanceInBeginOfMonth}</label>
 			<label class="label3">&nbsp;&nbsp;&nbsp;（未计入花呗与信用卡）</label>
-			<button onclick="changeBalance('last')">修改</button>
+			<button onclick="changeBalance('last', ${balanceInBeginOfMonth},  ${balanceId_InBeginOfMonth})">修改</button>
 		</div>
 		
 		<div class="div3">
@@ -102,7 +103,7 @@
 			<label class="label4">本月实际结余：</label>
 			<input class="input2" placeholder="月末输入" id="actual_balance">&nbsp;&nbsp;
 			<button onclick="submitBalance()" id="submitBalanceButton">提交</button>
-			<button onclick="changeBalance('this')">修改</button>
+			<button onclick="changeBalance('this', ${actualBalance}, ${actualBalanceId})">修改</button>
 		</div>
 	</div>
 </div>

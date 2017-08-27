@@ -34,7 +34,7 @@ public interface BalanceMapper {
 	 * @param userId
 	 * @return
 	 */
-	float selectBalanceInBeginOfMonth(int userId);
+	Balance selectBalanceInBeginOfMonth(int userId);
 	
 	/**
 	 * 查询本月结余，如果有就返回实际值，如果没有就返回null

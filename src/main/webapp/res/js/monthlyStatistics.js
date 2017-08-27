@@ -1,4 +1,16 @@
 /**
+ * 在“本月实际结余”输入框中填入数值（如果有的话）,并且将其变为不可用
+ * @param actualSurplus
+ */
+function unenableInput(actualSurplus){ 
+	if(actualSurplus!=-1){ //-1表示没有内容
+		$("#actual_balance").val(actualSurplus);
+		$("#actual_balance").attr("disabled","disabled");
+		$("#submitBalanceButton").attr("disabled","disabled");
+	}
+}
+
+/**
  * 用在收入和支出页面
  */
 
@@ -14,7 +26,7 @@ function submitBalance(){
  * 修改balance 
  * @param month
  */
-function changeBalance(month){ // 如果参数month为last，表示修改上月balance；如果参数为this，表示修改本月balance
+function changeBalance(month, value1, balanceId){ // 如果参数month为last，表示修改上月balance；如果参数为this，表示修改本月balance
 	layer.confirm(
 		$("#changeBalance").html(),{
 	    btn: ['修改','返回'], //按钮
@@ -25,13 +37,14 @@ function changeBalance(month){ // 如果参数month为last，表示修改上月b
 	    	}else{
 	    		content.find("#month_label").text("修改本月末结余：");
 	    	}
+	    	content.find("#changed_balance").val(value1);
         }
 		}, function(){
 			var content = $(".layui-layer-content");
 			var changed_balance = content.find("#changed_balance").val();
        		$.post("../monthlyStatisticsController/changeBalance",{
 				"changed_balance":changed_balance,
-				"month":month
+				"balanceId":balanceId
 			});
 			setTimeout('location.reload()', 1000);
 		});

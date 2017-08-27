@@ -11,7 +11,7 @@ public interface IExpenditureService {
      * 加载全部支出
      * @return
      */
-	List<Expenditure> loadExpenditures();
+	List<Expenditure> loadExpenditures(int userId);
 	
 	/**
 	 * 增加Expenditure
@@ -19,7 +19,7 @@ public interface IExpenditureService {
 	 * @param money
 	 * @param remark
 	 */
-	void addExpenditure(String date, int item, float money, String moneyType, String remark);
+	void addExpenditure(int userId, String date, int item, float money, String moneyType, String remark);
 	
 	/**
 	 * 修改Expenditure
@@ -36,5 +36,5 @@ public interface IExpenditureService {
 	 * @param ExpenditureId
 	 * @param itemId
 	 */
-	void deleExpenditure(int ExpenditureId,int itemId);
+	void deleExpenditure(int ExpenditureId);
 }

@@ -107,13 +107,11 @@
 		    </tbody> 
 		</table>
 	</div>
-	第<label id="curPage">${curPage}</label>页
-	&nbsp;
-	共<label id="totalPages">${totalPages}</label>页
+	第<label id="curPage">${curPage}</label>/<label id="totalPages">${totalPages}</label>页
 	&nbsp;
 	共<label id="totalRecords">${totalRecords}</label>条
 	&nbsp;
-	每页显示20条
+	每页显示<label>20</label>条
 	&nbsp;
 	<a href="#" onClick="gotoPage(-${totalPages}, ${totalPages})">首页</a> <!-- 首页就往前跳全部页 -->
 	&nbsp;

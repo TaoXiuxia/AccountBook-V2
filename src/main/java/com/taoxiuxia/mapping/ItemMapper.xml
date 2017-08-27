@@ -8,6 +8,7 @@
     <result column="in_or_ex" property="inOrEx" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="CHAR" />
     <result column="dele" property="dele" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -78,9 +79,9 @@
 	FROM
 		item
 	WHERE
-		(user_id = 1 OR user_id = #{id,jdbcType=INTEGER})
+		user_id = #{id,jdbcType=INTEGER}
 	AND in_or_ex = 'in'
-	AND dele = 0
+	AND dele = 1
 	Order By sort
   </select>
   
@@ -91,9 +92,9 @@
 	FROM
 		item
 	WHERE
-		(user_id = 1 OR user_id = #{id,jdbcType=INTEGER})
+		user_id = #{id,jdbcType=INTEGER}
 	AND in_or_ex = 'ex'
-	AND dele = 0
+	AND dele = 1
 	Order By sort
   </select>
   
@@ -106,7 +107,7 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Item" >
     update item
     <set >
-      <if test="userId != null" >
+      <if test="userId != null and userId != 0" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="name != null" >
@@ -118,10 +119,10 @@
       <if test="remark != null" >
         remark = #{remark,jdbcType=CHAR},
       </if>
-      <if test="dele != null" >
+      <if test="dele != null and dele != 0" >
         dele = #{dele,jdbcType=INTEGER},
       </if>
-      <if test="sort != null" >
+      <if test="sort != null and sort != 0" >
         sort = #{sort,jdbcType=INTEGER},
       </if>
     </set>

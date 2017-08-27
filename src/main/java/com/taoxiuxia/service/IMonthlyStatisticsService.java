@@ -34,7 +34,7 @@ public interface IMonthlyStatisticsService {
 	 * @param userId
 	 * @return
 	 */
-	float balanceInBeginOfMonth(int userId);
+	Balance balanceInBeginOfMonth(int userId);
 
 	/**
 	 * 本月结余，如果有就返回实际值，如果没有就返回null
@@ -58,5 +58,5 @@ public interface IMonthlyStatisticsService {
 	 * @param changed_balance
 	 * @param userId
 	 */
-	void changeBalance(String month, float changed_balance, int userId);
+	void changeBalance(int balanceId, float changed_balance);
 }

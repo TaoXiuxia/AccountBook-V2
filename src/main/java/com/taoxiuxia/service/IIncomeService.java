@@ -11,7 +11,7 @@ public interface IIncomeService {
      * 加载全部income
      * @return
      */
-	List<Income> loadIncomes();
+	List<Income> loadIncomes(int userId);
 	
 	/**
 	 * 增加收入
@@ -19,7 +19,7 @@ public interface IIncomeService {
 	 * @param money
 	 * @param remark
 	 */
-	void addIncome(String date, int item, float money, String moneyType, String remark);
+	void addIncome(int userId, String date, int item, float money, String moneyType, String remark);
 	
 	/**
 	 * 修改收入
@@ -35,5 +35,5 @@ public interface IIncomeService {
 	 * @param incomeId
 	 * @param itemId
 	 */
-	void deleIncome(int incomeId,int itemId);
+	void deleIncome(int incomeId);
 }

@@ -75,9 +75,14 @@ function changeExpenditure(expenditureId,date,money,itemId,remark,money_type){
  * @param itemId
  */
 function delExpenditure(expenditureId, itemId){
-	$.post("../expenditureController/deleExpenditure",{
-		"expenditureId":expenditureId,
-		"itemId":itemId
+	layer.confirm('确认删除？', {
+		  btn: ['删除','返回'] //按钮
+	}, function(){
+		$.post("../expenditureController/deleExpenditure",{
+			"expenditureId":expenditureId,
+			"itemId":itemId
+		});
+		setTimeout('location.reload()', 1000);
+	}, function(){
 	});
-	setTimeout('location.reload()', 1000);
 }

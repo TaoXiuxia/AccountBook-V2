@@ -25,17 +25,13 @@ public interface IItemService {
 	void addItem(int userId, String itemName, String remark, String inOrEx);
 	
 	/**
-	 * 修改item
-	 * @param itemId
-	 * @param itemName
-	 * @param remark
-	 * @param inOrEx
+	 * 修改item，能够被修改的项只有itemName remark
+	 * 修改item只需要itemId定位到item就可以了，不需要userId inOrEx sort字段
 	 */
-	void changeItem(int itemId, String itemName, String remark, String inOrEx);
+	void changeItem(int itemId, String itemName, String remark);
 	
 	/**
-	 * 删除item
-	 * @param itemId
+	 * 修改item 只需要itemId定位到item就可以了，其他的字段都不需要
 	 */
 	void deleItem(int itemId);
 	

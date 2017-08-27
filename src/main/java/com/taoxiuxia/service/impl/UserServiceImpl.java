@@ -12,9 +12,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.taoxiuxia.mapper.ItemMapper;
 import com.taoxiuxia.mapper.UserMapper;
+import com.taoxiuxia.model.Item;
 import com.taoxiuxia.model.User;
 import com.taoxiuxia.service.IUserService;
+import com.taoxiuxia.util.Constants;
 import com.taoxiuxia.util.PasswordUtil;
 import com.taoxiuxia.util.StringTools;
 
@@ -34,17 +37,42 @@ public class UserServiceImpl implements IUserService {
 	public void setUserMapper(UserMapper userMapper) {
 		this.userMapper = userMapper;
 	}
+	
+	private ItemMapper itemMapper;
+
+	public ItemMapper getItemMapper() {
+		return itemMapper;
+	}
+
+	@Autowired
+	public void setItemMapper(ItemMapper itemMapper) {
+		this.itemMapper = itemMapper;
+	}
 
 	/**
 	 * 注册用户
 	 */
 	@Override
 	public int register(User user) {
+		//向user表中插入数据
 		user.setPassword(PasswordUtil.geneMD5WithSalt(user.getPassword()));
 		Date curDate = new Date();
 		user.setRegisterTime(curDate);
 		user.setLastLoginTime(curDate);
-		return userMapper.insert(user);
+		int recordNum = userMapper.insert(user); //recordNum为受影响的记录数
+		int userId = user.getId();
+		
+		//向item表中插入初始的item
+		addItem(userId, " ", "空项目", "in");
+		addItem(userId, "工资", " ", "in");
+		addItem(userId, "其他", " ", "in");
+		addItem(userId, " ", "空项目", "ex");
+		addItem(userId, "餐饮", " ", "ex");
+		addItem(userId, "服饰", " ", "ex");
+		addItem(userId, "医疗", " ", "ex");
+		addItem(userId, "其他", " ", "ex");
+		
+		return 0;
 	}
 
 	@Override
@@ -100,7 +128,6 @@ public class UserServiceImpl implements IUserService {
 		}
 		System.out.println("userMapper ==> "+userMapper);
 		List<User>list = userMapper.findUserByUserName(map);
-		System.out.println("findUserByUserName.size ==> "+list.size());
 		if(list.size()==1){
 			return list.get(0);
 		}
@@ -114,5 +141,20 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public void update(User user) {
 		// TODO Auto-generated method stub
+	}
+	
+	/**
+	 * 添加item,复制了ItemServiceImpl中的addItem方法
+	 */
+	public void addItem(int userId, String itemName, String remark, String inOrEx) {
+		Item item = new Item();
+		item.setUserId(userId);
+		item.setName(itemName);
+		item.setInOrEx(inOrEx);
+		item.setRemark(remark);
+		item.setDele(Constants.NOT_DELE);
+		itemMapper.insert(item);
+		item.setSort(item.getId());
+		itemMapper.updateByPrimaryKeySelective(item);
 	}
 }

@@ -25,9 +25,12 @@ public class HistoryServiceImpl implements IHistoryService {
 		this.incomeMapper = incomeMapper;
 	}
 
+	/**
+	 * 根据条件查询全部的收入和支出
+	 */
 	@Override
 	public List<Map> loadIncomesAndExpenditure(int userId,String inOrEx, int year, int month, String keyword, String sortBy, int curPage, int totalPages)  {
-		int limit = Constants.LIMIT;
+		int limit = Constants.RECORD_NUM_PER_PAGE;
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		if(year!=-1){
@@ -58,12 +61,15 @@ public class HistoryServiceImpl implements IHistoryService {
 	    	curPage = totalPages;  
 	    } 
 	    map.put("sortBy", sortBy);
-		map.put("beginRecord", (curPage-1)*limit);
+		map.put("beginRecord", (curPage-1) * limit < 0 ? 0 : (curPage-1)*limit);
 		map.put("limit", limit);
 		List<Map>list = incomeMapper.selectIncomesAndExpenditure(map);
 		return list;
 	}
 	
+	/**
+	 * 根据条件查询全部的收入和支出 的记录总数
+	 */
 	@Override
 	public int countIncomesAndExpenditure(int userId,String inOrEx,int year, int month, String keyword){
 		HashMap<String, Object> map = new HashMap<String, Object>();

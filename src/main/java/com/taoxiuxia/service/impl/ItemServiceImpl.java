@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.taoxiuxia.mapper.ItemMapper;
 import com.taoxiuxia.model.Item;
 import com.taoxiuxia.service.IItemService;
+import com.taoxiuxia.util.Constants;
 
 @Service("itemService")
 public class ItemServiceImpl implements IItemService {
@@ -24,16 +25,25 @@ public class ItemServiceImpl implements IItemService {
 		this.itemMapper = itemMapper;
 	}
 
+	/**
+	 * 加载income项
+	 */
 	@Override
 	public List<Item> loadIncomeItems(int id) {
 		return itemMapper.selectIncomeItemByUserId(id);
 	}
 
+	/**
+	 * 加载expenditure项
+	 */
 	@Override
 	public List<Item> loadExpenditureItems(int id) {
 		return itemMapper.selectExpenditureItemByUserId(id);
 	}
 
+	/**
+	 * 添加item
+	 */
 	@Override
 	public void addItem(int userId, String itemName, String remark, String inOrEx) {
 		Item item = new Item();
@@ -41,31 +51,33 @@ public class ItemServiceImpl implements IItemService {
 		item.setName(itemName);
 		item.setInOrEx(inOrEx);
 		item.setRemark(remark);
-		item.setDele(0);
-		item.setSort(0);
-		int itemId = itemMapper.insert(item);
+		item.setDele(Constants.NOT_DELE);
+		itemMapper.insert(item);
 		item.setSort(item.getId());
 		itemMapper.updateByPrimaryKeySelective(item);
 	}
 
+	/**
+	 * 修改item，能够被修改的项只有itemName remark
+	 * 修改item只需要itemId定位到item就可以了，不需要userId inOrEx sort字段
+	 */
 	@Override
-	public void changeItem(int itemId, String itemName, String remark, String inOrEx) {
+	public void changeItem(int itemId, String itemName, String remark) {
 		Item item = new Item();
 		item.setId(itemId);
-		item.setUserId(2);
 		item.setName(itemName);
-		item.setInOrEx(inOrEx);
 		item.setRemark(remark);
-		item.setDele(0);
 		itemMapper.updateByPrimaryKeySelective(item);
 	}
 
+	/**
+	 * 修改item 只需要itemId定位到item就可以了，其他的字段都不需要
+	 */
 	@Override
 	public void deleItem(int itemId) {
 		Item item = new Item();
 		item.setId(itemId);
-		item.setUserId(2);
-		item.setDele(1);
+		item.setDele(Constants.DELE); // 删除
 		itemMapper.updateByPrimaryKeySelective(item);
 	}
 
@@ -137,13 +149,11 @@ public class ItemServiceImpl implements IItemService {
 	public void exchange(int userId, int itemId1, int sort1, int itemId2, int sort2){
 		Item item = new Item();
 		item.setId(itemId1);
-		item.setUserId(userId);
 		item.setSort(sort2);
 		itemMapper.updateByPrimaryKeySelective(item);
 		
 		item.setId(itemId2);
 		item.setSort(sort1);
-		item.setUserId(userId);
 		itemMapper.updateByPrimaryKeySelective(item);
 	}
 }

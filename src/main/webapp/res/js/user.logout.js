@@ -10,7 +10,6 @@ function logout() {
 				setTimeout(function(){
 					window.location.href="../userController/showUserLogin";
 				},1500);
-			
 			}
 		},
 		error: function () {

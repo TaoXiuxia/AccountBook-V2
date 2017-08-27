@@ -1,12 +1,13 @@
 package com.taoxiuxia.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.taoxiuxia.model.Expenditure;
 
 public interface ExpenditureMapper {
 
-	List<Expenditure> selectAllExpenditures();
+	List<Expenditure> selectAllExpenditures(HashMap map);
 
 	int updateByPrimaryKeySelective(Expenditure record);
 
