@@ -17,7 +17,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />  
         <property name="url" value="jdbc:mysql://127.0.0.1:3306/account_v2" />  
         <property name="username" value="root" />  
-        <property name="password" value="Psw_123456" />     <!-- 服务器数据库密码 -->
+        <property name="password" value="XXXXXX" />
         <property name="initialSize" value="1" />  
         <property name="minIdle" value="1" />   
         <property name="maxActive" value="20" />  

@@ -17,10 +17,7 @@
 
 <div class="col-xs-10">
 	
-	<label>收入，支出加分页：</label><br>
-	<label>收入支出 方式：</label>应该有一个单独的页面，与项目管理类似的<br>
-	<label>日历功能：</label><br>
-	<label>搜索功能增强</label><br>
+	
 	
 </div>
 <%@ include file="common/bottom.jsp"%>
