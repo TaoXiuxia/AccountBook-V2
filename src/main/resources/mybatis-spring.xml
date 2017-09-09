@@ -15,9 +15,9 @@
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
         <!-- 基本属性 url、user、password -->  
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />  
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/account_v2" />  
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/DB" />  
         <property name="username" value="root" />  
-        <property name="password" value="XXXXXX" />
+        <property name="password" value="XXXX" />
         <property name="initialSize" value="1" />  
         <property name="minIdle" value="1" />   
         <property name="maxActive" value="20" />  
