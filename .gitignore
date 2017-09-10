@@ -10,5 +10,5 @@ org.eclipse.wst.common.project.facet.core.xml
 org.eclipse.wst.jsdt.ui.superType.container
 org.eclipse.wst.jsdt.ui.superType.name
 org.eclipse.wst.validation.prefs
-src\main\resources\mybatis-spring.xml
 mybatis-spring.xml
+/src/main/resources/mybatis-spring.xml
