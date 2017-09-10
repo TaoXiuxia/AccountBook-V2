@@ -32,6 +32,9 @@
 
 <b>登录页</b><br>
 http://59.110.231.132:8080/AccountBook-V2/userController/showUserLogin.action
+<b>项目搭建方法</b><br>
+http://blog.csdn.net/taoxiuxia/article/details/77902197
+
 
 ##想做但是还没有做的功能
  - 收入，支出 分页显示
