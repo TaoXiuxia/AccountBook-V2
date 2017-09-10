@@ -12,3 +12,4 @@ org.eclipse.wst.jsdt.ui.superType.name
 org.eclipse.wst.validation.prefs
 mybatis-spring.xml
 /src/main/resources/mybatis-spring.xml
+mysqldb.properties
