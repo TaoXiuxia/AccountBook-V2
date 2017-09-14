@@ -21,11 +21,17 @@ public class Expenditure {
 
     private Integer dele;
 
+    private String payMethodName;
     
-    
-    
-    
-    public Integer getId() {
+	public String getPayMethodName() {
+		return payMethodName;
+	}
+
+	public void setPayMethodName(String payMethodName) {
+		this.payMethodName = payMethodName;
+	}
+
+	public Integer getId() {
         return id;
     }
 

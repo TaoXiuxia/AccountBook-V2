@@ -90,8 +90,3 @@ function search(page){
 	});
 }
 
-function test1(){
-	alert("000");
-}
-
-

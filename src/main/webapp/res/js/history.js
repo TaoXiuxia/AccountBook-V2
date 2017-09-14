@@ -7,6 +7,8 @@ function setLeftColumn(){
 	$("#history").addClass("left-column-button-active-font");
 	$("#itemsManagement").addClass("left-column-button-inactive");
 	$("#itemsManagement").addClass("left-column-button-inactive-font");
+	$("#payMethodsManagement").addClass("left-column-button-inactive");
+	$("#payMethodsManagement").addClass("left-column-button-inactive-font");
 	$("#about").addClass("left-column-button-inactive");
 	$("#about").addClass("left-column-button-inactive-font");
 }
@@ -80,7 +82,7 @@ function search(page){
 								msg.list[i].money  +"','"+
 								msg.list[i].itemId +"','"+
 								escape(msg.list[i].remark) +"','"+    //转义
-								msg.list[i].type_of_money +"','"+
+								msg.list[i].payMethodId +"','"+
 								page +"'"+
 							")>修改</a>&nbsp;&nbsp;&nbsp;"+ 
 							"<a href='#' onClick=delDetailsItem('"+
@@ -102,7 +104,7 @@ function search(page){
 				            "    <td>"+ msg.dateList[i] +"</td>"+
 				            "    <td>"+ msg.typeList[i] +"</td>"+
 				            "    <td>"+ msg.list[i].itemName +"</td>"+
-				            "    <td>"+ msg.list[i].type_of_money +"</td>"+
+				            "    <td>"+ msg.list[i].payMethodName +"</td>"+
 				            "    <td>"+ money +"</td>"+
 				            "    <td>"+ msg.list[i].remark +"</td>"+
 				            "    <td>"+ operation +"</td>"+
@@ -160,6 +162,7 @@ function changeDetailsItem(itemType, detailsId, date, money, itemId, remark, typ
  		   	content.find("#changedMoney").val(money);
  		   	content.find("#changedType").val(itemType);
  		   	content.find("#changedItem").val(itemId);
+ 		    remark = replaceEnter2Space(remark);
  		   	content.find("#changedRemark").val(unescape(remark)); //反转义（处理空格）
  		    content.find("#changedtype_of_money").val(type_of_money);
  		    changeType1();
@@ -198,14 +201,13 @@ function changeDetailsItem(itemType, detailsId, date, money, itemId, remark, typ
  * @param itemId
  * @param curPage
  */
-function delDetailsItem(itemType,historyId,itemId, curPage){
+function delDetailsItem(itemType,historyId, curPage){
 	layer.confirm('确认删除？', {
 		  btn: ['删除','返回'] //按钮
 	}, function(){
 		  $.post("../historyController/deleHistory",{
 				"itemType":itemType,
 				"historyId":historyId,
-				"itemId":itemId,
 			});
 			
 			setTimeout(function(){

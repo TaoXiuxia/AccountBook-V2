@@ -38,13 +38,9 @@
 
 			<div class="addIncome_div1"><label class="label2">收入方式：</label>
 				<select class="add-select" id="money-type">
-					 <option value=""></option>
-		             <option value="支付宝">支付宝</option>
-		             <option value="微信">微信</option>
-		             <option value="现金">现金</option>
-		             <option value="银行卡">银行卡</option>
-		             <option value="信用卡">信用卡</option>
-		             <option value="其他">其他</option>
+		             <c:forEach items="${payMethods}" var="payMethod">
+		                 <option value=${payMethod.id }>${payMethod.name}</option>
+		      		 </c:forEach>
 				</select>
 			</div><br>
 			
@@ -76,9 +72,8 @@
 		</div>
 		
 		<div class="div3">
-			<label class="label4">其中花呗与信用卡：</label>
-			<label>${huaBeiAndCreditCard}</label>
-			<label class="label3">&nbsp;&nbsp;&nbsp;（次月还）</label>
+			<label class="label4">非本月实际支出：</label>
+			<label>${notActualExpenditure}</label>
 		</div>
 		
 		<div class="div3">
@@ -88,15 +83,13 @@
 		
 		<div class="div3">
 			<label class="label4">本月初/上月末结余：</label>
-			<label>${balanceInBeginOfMonth}</label>
-			<label class="label3">&nbsp;&nbsp;&nbsp;（未计入花呗与信用卡）</label>
+			<label>${balanceInBeginOfMonth}</label>&nbsp;&nbsp;&nbsp;&nbsp;
 			<button onclick="changeBalance('last', ${balanceInBeginOfMonth},  ${balanceId_InBeginOfMonth})">修改</button>
 		</div>
 		
 		<div class="div3">
 			<label class="label4">本月应结余：</label>
 			<label>${balanceShould}</label>
-			<label class="label3">&nbsp;&nbsp;&nbsp;（花呗/信用卡不计入本月支出）</label>
 		</div>
 		
 		<div class="div3">
@@ -126,11 +119,13 @@
                     <td><fmt:formatDate value="${income.date}" pattern="yyyy-MM-dd"/></td> 
                     <td>${income.itemName }</td>
                     <td>${income.money }</td>
-                    <td>${income.type_of_money }</td>
+                    <td>${income.payMethodName }</td>
                     <td>${income.remark }</td>
-                    <td><a href="#" onClick="changeIncome('${income.id}','<fmt:formatDate value="${income.date}" pattern="yyyy-MM-dd"/>','${income.money }','${income.itemId }','${income.remark }','${income.type_of_money }')">修改</a> 
+                    <td>
+                    	<a href="#" onClick="changeIncome('${income.id}','<fmt:formatDate value="${income.date}" pattern="yyyy-MM-dd"/>','${income.money }','${income.itemId }','${income.remark }','${income.type_of_money }')">修改</a> 
                     	&nbsp;
-                    	<a href="#" onClick="delIncome('${income.id}','${income.itemId}')">删除</a></td>
+                    	<a href="#" onClick="delIncome('${income.id}')">删除</a>
+                    </td>
                 </tr>
           		</c:forEach>
 		    </tbody> 
@@ -158,13 +153,9 @@
 	<div class="addIncome_div1">
 		<label class="label2">收入方式：</label>
 		<select class="add-select" id="changed-money-type">
-			 <option value=""></option>
-             <option value="支付宝">支付宝</option>
-             <option value="微信">微信</option>
-             <option value="现金">现金</option>
-             <option value="银行卡">银行卡</option>
-             <option value="信用卡">信用卡</option>
-             <option value="其他">其他</option>
+		     <c:forEach items="${payMethods}" var="payMethod">
+                 <option value=${payMethod.id }>${payMethod.name}</option>
+      		 </c:forEach>
 		</select>
 	</div><br>
 	

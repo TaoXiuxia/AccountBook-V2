@@ -53,6 +53,8 @@
 		</table>
 	</div>
 	
+	<br>
+	
 	<div class="total"> 
 		<label class="total-label1"><span class="tableTitle">支出项</span></label>
 		&nbsp;&nbsp;&nbsp;&nbsp;

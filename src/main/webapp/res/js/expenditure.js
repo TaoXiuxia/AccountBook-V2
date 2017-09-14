@@ -7,6 +7,8 @@ function setLeftColumn(){
 	$("#history").addClass("left-column-button-inactive-font");
 	$("#itemsManagement").addClass("left-column-button-inactive");
 	$("#itemsManagement").addClass("left-column-button-inactive-font");
+	$("#payMethodsManagement").addClass("left-column-button-inactive");
+	$("#payMethodsManagement").addClass("left-column-button-inactive-font");
 	$("#about").addClass("left-column-button-inactive");
 	$("#about").addClass("left-column-button-inactive-font");
 }
@@ -20,6 +22,7 @@ function addMoney(){
 	var money = $("#money").val();
 	var moneyType = $("#money-type option:selected").val();
 	var remark = $("#remarkForExpenditure").val();
+	remark = replaceEnter2Space(remark);
 	$.post("addExpenditure",{
 		"date":date,
 		"item":item,
@@ -57,6 +60,7 @@ function changeExpenditure(expenditureId,date,money,itemId,remark,money_type){
        		var changed_money_type = content.find("#changed-money-type").val();
        		var itemId = content.find("#changedItem option:selected").val();
        		var remark = content.find("#changedRemark").val();
+       		remark = replaceEnter2Space(remark);
 			$.post("../expenditureController/changeExpenditure",{
 				"expenditureId":expenditureId,
 				"money":money,
@@ -74,13 +78,12 @@ function changeExpenditure(expenditureId,date,money,itemId,remark,money_type){
  * @param expenditureId
  * @param itemId
  */
-function delExpenditure(expenditureId, itemId){
+function delExpenditure(expenditureId){
 	layer.confirm('确认删除？', {
 		  btn: ['删除','返回'] //按钮
 	}, function(){
 		$.post("../expenditureController/deleExpenditure",{
 			"expenditureId":expenditureId,
-			"itemId":itemId
 		});
 		setTimeout('location.reload()', 1000);
 	}, function(){

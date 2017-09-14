@@ -83,14 +83,17 @@
 		expenditure.money,
 		expenditure.type_of_money,
 		expenditure.remark,
-		item.name as itemName
+		item.name as itemName,
+		pay_method.NAME AS payMethodName
 	FROM
 		expenditure,
-		item
+		item,
+		pay_method
 	WHERE
 		expenditure.item_id = item.id
 	AND expenditure.user_id = #{userId,jdbcType=INTEGER}
 	AND expenditure.dele = 1
+	AND expenditure.type_of_money = pay_method.id
 	<if test="dataScale != null and dataScale == 'only_this_month'.toString() ">
 		AND date_format(expenditure.date, '%Y-%m') = date_format(now(), '%Y-%m') <!-- 只查询本月数据 -->
 	</if>

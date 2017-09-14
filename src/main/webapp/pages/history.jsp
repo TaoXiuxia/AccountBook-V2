@@ -82,7 +82,7 @@
                     <td><fmt:formatDate value="${history.date}" pattern="yyyy-MM-dd"/></td>
                     <td><c:if test="${history.itemType =='in'}">收入</c:if><c:if test="${history.itemType =='ex'}">支出</c:if></td>
                     <td>${history.itemName }</td>
-                    <td>${history.type_of_money }</td>
+                    <td>${history.payMethodName }</td>
                     <td>${history.money }</td>
                     <td>${history.remark }</td>
                     <td><a href="#" onClick="changeDetailsItem(
@@ -91,15 +91,14 @@
                     								'${history.date}',
                     								'${history.money}',
                     								'${history.itemId}',
-                    								'${history.remark}',
-                    								escape('${history.type_of_money}'),    <!-- 转义 -->
+                    								escape('${history.remark}'), <!-- 转义 -->
+                    								'${history.payMethodId}',    
                     								'${curPage}'
                     								)">修改</a> 
                     	&nbsp;
                     	<a href="#" onClick="delDetailsItem(
 						                    		'${history.itemType}',
 													'${history.id }',
-													'${history.itemId}',
                     								'${curPage}'
 						                    		)">删除</a></td>
                 </tr>
@@ -129,7 +128,7 @@
 <div id="changeDetailsItemLayer" class="hidden">
     <div class="layout_div_Style">
         <label class="change-label">日期</label>
-        <input class="change-text Wdate add-data"      type="text" onClick="WdatePicker()" id="changedDate" placeholder="日期" >
+        <input class="change-text Wdate add-data" type="text" onClick="WdatePicker()" id="changedDate" placeholder="日期" >
     </div>
 	<div class="layout_div_Style">
         <label class="change-label">类型</label>
@@ -154,21 +153,12 @@
 	<div class="layout_div_Style">
         <label class="change-label">收入/支出方式</label>
         <select class="change-text" id="changedtype_of_money">
-		    <option class="in" value=""></option>
-		    <option class="in" value="支付宝">支付宝</option>
-		    <option class="in" value="微信">微信</option>
-		    <option class="in" value="现金">现金</option>
-		    <option class="in" value="银行卡">银行卡</option>
-		    <option class="in" value="信用卡">信用卡</option>
-		    <option class="in" value="其他">其他</option>
-		    <option class="ex" value=""></option>
-            <option class="ex" value="支付宝">支付宝</option>
-            <option class="ex" value="花呗">花呗</option>
-            <option class="ex" value="信用卡">信用卡</option>
-            <option class="ex" value="微信">微信</option>
-            <option class="ex" value="现金">现金</option>
-            <option class="ex" value="银行卡">银行卡</option>
-            <option class="ex" value="其他">其他</option>
+		    <c:forEach items="${incomePayMethods}" var="incomePayMethod">
+            	<option class="in" value=${incomePayMethod.id }>${incomePayMethod.name}</option>
+      		</c:forEach>
+      		<c:forEach items="${expendturePayMethods}" var="expendturePayMethod">
+            	<option class="ex" value=${expendturePayMethod.id }>${expendturePayMethod.name}</option>
+      		</c:forEach>
 		</select>
 	</div>
 	<div class="layout_div_Style">

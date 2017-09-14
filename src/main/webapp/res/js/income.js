@@ -7,6 +7,8 @@ function setLeftColumn(){
 	$("#history").addClass("left-column-button-inactive-font");
 	$("#itemsManagement").addClass("left-column-button-inactive");
 	$("#itemsManagement").addClass("left-column-button-inactive-font");
+	$("#payMethodsManagement").addClass("left-column-button-inactive");
+	$("#payMethodsManagement").addClass("left-column-button-inactive-font");
 	$("#about").addClass("left-column-button-inactive");
 	$("#about").addClass("left-column-button-inactive-font");
 }
@@ -20,6 +22,8 @@ function addMoney(){
 	var money = $("#money").val();
 	var moneyType = $("#money-type option:selected").val();
 	var remark = $("#remarkForIncome").val();
+	remark = replaceEnter2Space(remark);
+	alert(remark);
 	$.post("addIncome",{
 		"date":date,
 		"item":item,
@@ -58,6 +62,7 @@ function changeIncome(incomeId,date,money,itemId,remark,money_type){
        		var changed_money_type = content.find("#changed-money-type").val();
        		var itemId = content.find("#changedItem option:selected").val();
        		var remark = content.find("#changedRemark").val();
+       		remark = replaceEnter2Space(remark);
 			$.post("../incomeController/changeIncome",{
 				"incomeId":incomeId,
 				"money":money,
@@ -66,8 +71,6 @@ function changeIncome(incomeId,date,money,itemId,remark,money_type){
 				"remark":remark,
 				"date":date
 			});
-			
-//			test1();
 			
 			//不能刷新页面，应该使用ajax停留在当前的第n页
 			setTimeout('location.reload()', 1000);
@@ -79,13 +82,12 @@ function changeIncome(incomeId,date,money,itemId,remark,money_type){
  * @param incomeId
  * @param itemId
  */
-function delIncome(incomeId, itemId){
+function delIncome(incomeId){
 	layer.confirm('确认删除？', {
 		  btn: ['删除','返回'] //按钮
 	}, function(){
 		$.post("../incomeController/deleIncome",{
 			"incomeId":incomeId,
-			"itemId":itemId
 		});
 		setTimeout('location.reload()', 1000);
 	}, function(){

@@ -35,16 +35,16 @@ function upAndDown(type, inOrex, id, upAndDown){
 	var target;
 	if(type == "item"){
 		targetUrl = "../itemController/upAndDownItem";
-	}else if(type == "typeOfMoney"){
-		targetUrl = "...urlurlurlurlurl";   // 收入支出方式的url
+	}else if(type == "payMethod"){
+		targetUrl = "../payMethodController/upAndDownPayMethod";   // 收入支出方式的url
 	}
-	
 	$.ajax({
 		type: "POST",
 		url: targetUrl,
 		data: {
 			"inOrEx":inOrex,
 			"itemId":id,
+			"payMethodId":id,
 			"upAndDown":upAndDown
 		},
 		success: function(msg){
@@ -57,4 +57,10 @@ function upAndDown(type, inOrex, id, upAndDown){
 			alert("请求失败");
 		} 
 	});
+}
+
+function replaceEnter2Space(str){
+	str = str.replace(/\r\n/g," ");  //将回车符和换行符替换成空格，否则页面会报错
+	str = str.replace(/\n/g," ");   
+	return str;
 }

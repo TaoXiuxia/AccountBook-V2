@@ -91,16 +91,20 @@
 	AND date_format(expenditure.date, '%Y-%m') = date_format(now(), '%Y-%m')
   </select>
   
+  <!-- 查询不计入本月支出的金额 -->
   <select id="selectHuaBeiAndCreditCard" resultType="java.lang.Float" parameterType="java.lang.Integer" >
     SELECT
-		ifnull(SUM(expenditure.money), 0)
+		ifnull(SUM(ex.money), 0)
 	FROM
-		expenditure
+		expenditure ex,
+		pay_method pm
 	WHERE
-		user_id = #{user_id,jdbcType=INTEGER}
-	AND dele = 1
-	AND date_format(expenditure.date, '%Y-%m') = date_format(now(), '%Y-%m')
-	AND (type_of_money = '花呗' OR type_of_money = '信用卡')
+		ex.user_id = #{user_id,jdbcType=INTEGER}
+	AND pm.user_id = #{user_id,jdbcType=INTEGER}
+	AND ex.dele = 1
+	AND date_format(ex.date, '%Y-%m') = date_format(now(), '%Y-%m')
+	AND ex.type_of_money = pm.id
+	AND pm.is_count_in_this_month_ex = 0
   </select>
   
   <!-- 查询月初的balance -->

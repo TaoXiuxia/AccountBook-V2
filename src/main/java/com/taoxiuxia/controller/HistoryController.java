@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.taoxiuxia.model.Item;
+import com.taoxiuxia.model.PayMethod;
 import com.taoxiuxia.model.SessionUser;
 import com.taoxiuxia.service.IExpenditureService;
 import com.taoxiuxia.service.IHistoryService;
 import com.taoxiuxia.service.IIncomeService;
 import com.taoxiuxia.service.IItemService;
+import com.taoxiuxia.service.IPayMethodService;
 import com.taoxiuxia.util.Constants;
 import com.taoxiuxia.util.MyDateFormat;
 
@@ -32,42 +34,10 @@ public class HistoryController {
 	private IExpenditureService expenditureService;
 	private IItemService itemService;
 	private IHistoryService historyService;
+	private IPayMethodService payMethodService;
 
-	public IHistoryService getHistoryService() {
-		return historyService;
-	}
-
-	@Autowired
-	public void setHistoryService(IHistoryService historyService) {
-		this.historyService = historyService;
-	}
-
-	public IExpenditureService getExpenditureService() {
-		return expenditureService;
-	}
-
-	@Autowired
-	public void setExpenditureService(IExpenditureService expenditureService) {
-		this.expenditureService = expenditureService;
-	}
-
-	public IIncomeService getIncomeService() {
-		return incomeService;
-	}
-
-	@Autowired
-	public void setIncomeService(IIncomeService incomeService) {
-		this.incomeService = incomeService;
-	}
-
-	public IItemService getItemService() {
-		return itemService;
-	}
-
-	@Autowired
-	public void setItemService(IItemService itemService) {
-		this.itemService = itemService;
-	}
+	
+	
 
 	/**
 	 * history页面
@@ -87,9 +57,13 @@ public class HistoryController {
 		List<Map> historys = historyService.loadIncomesAndExpenditure(userId, null, -1, -1, null, "date DESC", 1, totalPages );
 		List<Item> incomesItems = itemService.loadIncomeItems(userId); 
 		List<Item> expenditureItems = itemService.loadExpenditureItems(userId); 
+		List<PayMethod> incomePayMethods = payMethodService.loadPayMethods(userId, "in");
+		List<PayMethod> expendturePayMethods = payMethodService.loadPayMethods(userId, "ex"); 
 		
 		model.addAttribute("incomesItems", incomesItems);
 		model.addAttribute("expenditureItems", expenditureItems);
+		model.addAttribute("incomePayMethods", incomePayMethods);
+		model.addAttribute("expendturePayMethods", expendturePayMethods);
 		model.addAttribute("historys", historys);
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("totalRecords", totalRecords);
@@ -202,12 +176,61 @@ public class HistoryController {
 	 * @param itemId
 	 */
 	@RequestMapping("/deleHistory")
-	public void deleteHistory(String itemType, int historyId, int itemId, HttpSession session) {
-		int userId = (int)session.getAttribute(Constants.USER_ID);
+	public void deleteHistory(String itemType, int historyId) {
 		if (itemType.equals("in")) { // 删除income
 			incomeService.deleIncome(historyId);
 		} else { // 删除expenditure
 			expenditureService.deleExpenditure(historyId);
 		}
 	}
+	
+	
+	// ==============下面是get和set方法=================
+	
+	public IHistoryService getHistoryService() {
+		return historyService;
+	}
+
+	@Autowired
+	public void setHistoryService(IHistoryService historyService) {
+		this.historyService = historyService;
+	}
+
+	public IExpenditureService getExpenditureService() {
+		return expenditureService;
+	}
+
+	@Autowired
+	public void setExpenditureService(IExpenditureService expenditureService) {
+		this.expenditureService = expenditureService;
+	}
+
+	public IIncomeService getIncomeService() {
+		return incomeService;
+	}
+
+	@Autowired
+	public void setIncomeService(IIncomeService incomeService) {
+		this.incomeService = incomeService;
+	}
+
+	public IItemService getItemService() {
+		return itemService;
+	}
+
+	@Autowired
+	public void setItemService(IItemService itemService) {
+		this.itemService = itemService;
+	}
+
+	public IPayMethodService getPayMethodService() {
+		return payMethodService;
+	}
+	
+	@Autowired
+	public void setPayMethodService(IPayMethodService payMethodService) {
+		this.payMethodService = payMethodService;
+	}
+
+	
 }

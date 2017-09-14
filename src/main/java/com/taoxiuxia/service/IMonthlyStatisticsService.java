@@ -26,7 +26,7 @@ public interface IMonthlyStatisticsService {
 	 * @param userId
 	 * @return
 	 */
-	float huaBeiAndCreditCard(int userId);
+	float notActualExpenditure(int userId);
 
 	/**
 	 * 查询月初结余，即上月末结余

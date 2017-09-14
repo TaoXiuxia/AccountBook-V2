@@ -11,6 +11,7 @@
     <result column="type_of_money" property="type_of_money" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="dele" property="dele" jdbcType="INTEGER" />
+    
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -81,6 +82,7 @@
 		income.item_id = item.id
 	AND income.user_id = #{userId,jdbcType=INTEGER}
 	AND income.dele = 1
+	AND income.type_of_money = pay_method.id
 		<if test="beginDate!=null">
 			AND date_format(income.date, '%Y-%m') &gt;= date_format(#{beginDate}, '%Y-%m')
 		</if>
@@ -106,6 +108,7 @@
 		expenditure.item_id = item.id
 	AND expenditure.user_id = #{userId,jdbcType=INTEGER}
 	AND expenditure.dele = 1
+	AND expenditure.type_of_money = pay_method.id
 		<if test="beginDate!=null">
 			AND date_format(expenditure.date, '%Y-%m') &gt;= date_format(#{beginDate}, '%Y-%m')
 		</if>
@@ -125,22 +128,24 @@
   
   <select id="selectAllIncomes" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
 	SELECT
-		income.id,
-		income.item_id,
-		income.user_id,
-		income.date,
-		income.money,
-		income.type_of_money,
-		income.remark,
-		item.name as itemName
-	FROM
-		income,
-		item
-	WHERE
-		income.item_id = item.id
-	AND income.user_id = #{userId,jdbcType=INTEGER}
-	AND income.dele = 1
-	
+		 income.id,
+		 income.item_id,
+		 income.user_id,
+		 income.date,
+		 income.money,
+		 income.type_of_money,
+		 income.remark,
+		 item. NAME AS itemName,
+		 pay_method.NAME AS payMethodName
+		FROM
+			income,
+			item,
+			pay_method
+		WHERE
+			income.item_id = item.id
+		AND income.user_id = 11
+		AND income.dele = 1
+		AND income.type_of_money = pay_method.id
 	<if test="dataScale != null and dataScale == 'only_this_month'.toString() ">
 		AND date_format(income.date, '%Y-%m') = date_format(now(), '%Y-%m') <!-- 只查询本月数据 -->
 	</if>
@@ -157,7 +162,8 @@
 			count(*)
 		FROM
 			income,
-			item
+			item,
+			pay_method
 		<include refid="where_statement_for_income_search" />
 	)
 	+
@@ -166,7 +172,8 @@
 			count(*)
 		FROM
 			expenditure,
-			item
+			item,
+			pay_method
 		<include refid="where_statement_for_expenditure_search" />
 	) AS count
   </select>
@@ -184,10 +191,13 @@
 		income.remark,
 		item.id AS itemId,
 		item.name AS itemName,
-		item.in_or_ex AS itemType
+		item.in_or_ex AS itemType,
+		pay_method.name as payMethodName,
+		pay_method.id as payMethodId
 	FROM
 		income,
-		item
+		item,
+		pay_method
 	<include refid="where_statement_for_income_search" />
 	
 	UNION
@@ -203,10 +213,13 @@
 		expenditure.remark,
 		item.id AS itemId,
 		item.name AS itemName,
-		item.in_or_ex AS itemType
+		item.in_or_ex AS itemType,
+		pay_method.name as payMethodName,
+		pay_method.id as payMethodId
 	FROM
 		expenditure,
-		item
+		item,
+		pay_method
 	<include refid="where_statement_for_expenditure_search" />
 	ORDER BY ${sortBy}, sortId ASC
 	LIMIT #{beginRecord, jdbcType=INTEGER}, #{limit, jdbcType=INTEGER}

@@ -7,6 +7,8 @@ function setLeftColumn(){
 	$("#history").addClass("left-column-button-inactive-font");
 	$("#itemsManagement").addClass("left-column-button-active");
 	$("#itemsManagement").addClass("left-column-button-active-font");
+	$("#payMethodsManagement").addClass("left-column-button-inactive");
+	$("#payMethodsManagement").addClass("left-column-button-inactive-font");
 	$("#about").addClass("left-column-button-inactive");
 	$("#about").addClass("left-column-button-inactive-font");
 }
@@ -52,8 +54,13 @@ function changeItem(itemId, itemName,remark,inOrEx){
 }
 
 function delItem(itemId){
-	$.post("../itemController/deleItem",{
-		"itemId":itemId,
+	layer.confirm('确认删除？', {
+		  btn: ['删除','返回'] //按钮
+	}, function(){
+		$.post("../itemController/deleItem",{
+			"itemId":itemId,
+		});
+		setTimeout('location.reload()', 1000);
+	}, function(){
 	});
-	setTimeout('location.reload()', 1000);
 }

@@ -10,5 +10,6 @@
 		<mapper resource="com/taoxiuxia/mapping/ExpenditureMapper.xml" />
 		<mapper resource="com/taoxiuxia/mapping/UserMapper.xml" />
 		<mapper resource="com/taoxiuxia/mapping/BalanceMapper.xml" />
+		<mapper resource="com/taoxiuxia/mapping/PayMethodMapper.xml" />
 	</mappers>
 </configuration> 

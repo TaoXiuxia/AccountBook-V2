@@ -39,7 +39,7 @@ public class MonthlyStatisticsServiceImpl implements IMonthlyStatisticsService {
 	}
 
 	@Override
-	public float huaBeiAndCreditCard(int userId) {
+	public float notActualExpenditure(int userId) {
 		return balanceMapper.selectHuaBeiAndCreditCard(userId);
 	}
 	

@@ -31,7 +31,7 @@ public interface IItemService {
 	void changeItem(int itemId, String itemName, String remark);
 	
 	/**
-	 * 修改item 只需要itemId定位到item就可以了，其他的字段都不需要
+	 * 删除item 只需要itemId定位到item就可以了，其他的字段都不需要
 	 */
 	void deleItem(int itemId);
 	

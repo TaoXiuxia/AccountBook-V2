@@ -21,6 +21,26 @@ public class Income {
 	private String remark;
 
 	private int dele;
+	
+	private String payMethodName;
+
+	private int payMethodId;
+	
+	public int getPayMethodId() {
+		return payMethodId;
+	}
+
+	public void setPayMethodId(int payMethodId) {
+		this.payMethodId = payMethodId;
+	}
+
+	public String getPayMethodName() {
+		return payMethodName;
+	}
+
+	public void setPayMethodName(String payMethodName) {
+		this.payMethodName = payMethodName;
+	}
 
 	public int getItemId() {
 		return itemId;

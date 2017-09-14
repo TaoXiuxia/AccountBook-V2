@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.taoxiuxia.model.Balance;
 import com.taoxiuxia.model.Expenditure;
 import com.taoxiuxia.model.Item;
+import com.taoxiuxia.model.PayMethod;
 import com.taoxiuxia.model.SessionUser;
 import com.taoxiuxia.service.IExpenditureService;
 import com.taoxiuxia.service.IItemService;
 import com.taoxiuxia.service.IMonthlyStatisticsService;
+import com.taoxiuxia.service.IPayMethodService;
 import com.taoxiuxia.util.Constants;
 import com.taoxiuxia.util.MyDateFormat;
 import com.taoxiuxia.util.NumberFormat;
@@ -29,11 +31,11 @@ public class ExpenditureController {
 	private IExpenditureService expenditureService;
 	private IItemService itemService;
 	private IMonthlyStatisticsService monthlyStatisticsService;
+	private IPayMethodService payMethodService;
 
 	public IExpenditureService getExpenditureService() {
 		return expenditureService;
 	}
-
 	@Autowired
 	public void setExpenditureService(IExpenditureService expenditureService) {
 		this.expenditureService = expenditureService;
@@ -42,7 +44,6 @@ public class ExpenditureController {
 	public IItemService getItemService() {
 		return itemService;
 	}
-
 	@Autowired
 	public void setItemService(IItemService itemService) {
 		this.itemService = itemService;
@@ -51,13 +52,19 @@ public class ExpenditureController {
 	public IMonthlyStatisticsService getMonthlyStatisticsService() {
 		return monthlyStatisticsService;
 	}
-
 	@Autowired
 	public void setMonthlyStatisticsService(IMonthlyStatisticsService monthlyStatisticsService) {
 		this.monthlyStatisticsService = monthlyStatisticsService;
 	}
 	
-	
+	public IPayMethodService getPayMethodService() {
+		return payMethodService;
+	}
+	@Autowired
+	public void setPayMethodService(IPayMethodService payMethodService) {
+		this.payMethodService = payMethodService;
+	}
+
 	/**
 	 * expenditure页面
 	 * 
@@ -71,7 +78,7 @@ public class ExpenditureController {
 		//页面上的统计信息
 		model.addAttribute("totalIncome", NumberFormat.save2Decimals(map.get("monthlyIncome")));
 		model.addAttribute("totalExpenditure", NumberFormat.save2Decimals(map.get("monthlyExpenditure")));
-		model.addAttribute("huaBeiAndCreditCard", NumberFormat.save2Decimals(map.get("huaBeiAndCreditCard")));
+		model.addAttribute("notActualExpenditure", NumberFormat.save2Decimals(map.get("notActualExpenditure")));
 		model.addAttribute("balanceInBeginOfMonth", NumberFormat.save2Decimals(map.get("balanceInBeginOfMonth")));
 		model.addAttribute("balanceId_InBeginOfMonth", NumberFormat.save2Decimals(map.get("balanceId_InBeginOfMonth")));
 		model.addAttribute("balanceShould", NumberFormat.save2Decimals(map.get("balanceShould")));
@@ -81,15 +88,20 @@ public class ExpenditureController {
 		
 		SessionUser sessionUser= (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
 		model.addAttribute("sessionUser", sessionUser);
+		int userId = sessionUser.getUserId();
 		
 		// Expenditure list
-		List<Expenditure> expenditures = expenditureService.loadExpenditures(sessionUser.getUserId());
+		List<Expenditure> expenditures = expenditureService.loadExpenditures(userId);
 		model.addAttribute("expenditures", expenditures);
 
 		// Expenditure项 list 
-		List<Item> items = itemService.loadExpenditureItems(sessionUser.getUserId());
+		List<Item> items = itemService.loadExpenditureItems(userId);
 		model.addAttribute("items", items);
 		
+		//收入方式list
+		List<PayMethod> payMethods = payMethodService.loadPayMethods(userId, "ex");
+		model.addAttribute("payMethods", payMethods);
+				
 		return "pages/expenditure";
 	}
 
@@ -116,7 +128,6 @@ public class ExpenditureController {
 	 */
 	@RequestMapping("/changeExpenditure")
 	public void changeExpenditures(int expenditureId, float money, String moneyType, int itemId, String remark,String date, HttpSession session) {
-		int userId = (int)session.getAttribute(Constants.USER_ID);
 		expenditureService.changeExpenditure(expenditureId, money, moneyType, itemId, remark,MyDateFormat.dateFormat(date));
 	}
 
@@ -127,8 +138,7 @@ public class ExpenditureController {
 	 * @param itemId
 	 */
 	@RequestMapping("/deleExpenditure")
-	public void deleExpenditure(int expenditureId, int itemId, HttpSession session) {
-		int userId= (int) session.getAttribute(Constants.USER_ID);
+	public void deleExpenditure(int expenditureId) {
 		expenditureService.deleExpenditure(expenditureId);
 	}
 	
@@ -152,11 +162,11 @@ public class ExpenditureController {
 		map.put("monthlyExpenditure", monthlyExpenditure);
 		
 		// 月支出中花呗与信用卡的数额
-		float huaBeiAndCreditCard = monthlyStatisticsService.huaBeiAndCreditCard(userId);
-		map.put("huaBeiAndCreditCard", huaBeiAndCreditCard);
+		float notActualExpenditure = monthlyStatisticsService.notActualExpenditure(userId);
+		map.put("notActualExpenditure", notActualExpenditure);
 		
 		// 本月实际支出 
-		float actualExpenditure = monthlyExpenditure - huaBeiAndCreditCard;
+		float actualExpenditure = monthlyExpenditure - notActualExpenditure;
 		map.put("actualExpenditure", actualExpenditure);
 		
 		// 本月初（上月末）结余
@@ -166,7 +176,7 @@ public class ExpenditureController {
 		map.put("balanceId_InBeginOfMonth", balance_InBeginOfMonth.getId() + 0f); 
 		
 		// 本月应结余 ==> 月初结余+月收入- (月支出-花呗/信用卡)
-		float balanceShould = actualBalance_InBeginOfMonth + monthlyIncome - (monthlyExpenditure - huaBeiAndCreditCard);
+		float balanceShould = actualBalance_InBeginOfMonth + monthlyIncome - (monthlyExpenditure - notActualExpenditure);
 		map.put("balanceShould", balanceShould);
 		
 		// 本月实际结余

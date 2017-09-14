@@ -37,10 +37,19 @@
 						</div>
 					</div>
 				</a>
+				
 				<a href="../itemController/showManageItems">
 					<div id="itemsManagement" class="breadcrumb">
 						<div>
 							项目管理
+						</div>
+					</div>
+				</a>
+				
+				<a href="../payMethodController/showManagePayMethods">
+					<div id="payMethodsManagement" class="breadcrumb">
+						<div>
+							收支方式管理
 						</div>
 					</div>
 				</a>
