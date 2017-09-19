@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.taoxiuxia.mapper.PayMethodMapper;
-import com.taoxiuxia.model.Item;
 import com.taoxiuxia.model.PayMethod;
 import com.taoxiuxia.service.IPayMethodService;
 import com.taoxiuxia.util.Constants;

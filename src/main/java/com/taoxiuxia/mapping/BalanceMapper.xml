@@ -92,7 +92,7 @@
   </select>
   
   <!-- 查询不计入本月支出的金额 -->
-  <select id="selectHuaBeiAndCreditCard" resultType="java.lang.Float" parameterType="java.lang.Integer" >
+  <select id="selectNotActualExpenditure" resultType="java.lang.Float" parameterType="java.lang.Integer" >
     SELECT
 		ifnull(SUM(ex.money), 0)
 	FROM

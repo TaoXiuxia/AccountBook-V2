@@ -3,7 +3,6 @@ package com.taoxiuxia.service.impl;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,7 @@ public class IncomeServiceImpl implements IIncomeService {
 	 */
 	@Override
 	public List<Income> loadIncomes(int userId) {
-		HashMap map = new HashMap();
+		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("userId", userId);
 		map.put("dataScale", Constants.ONLY_THIS_MONTH);
 		return incomeMapper.selectAllIncomes(map);

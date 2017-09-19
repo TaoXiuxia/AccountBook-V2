@@ -61,7 +61,7 @@ public class HistoryServiceImpl implements IHistoryService {
 	    	curPage = totalPages;  
 	    } 
 	    map.put("sortBy", sortBy);
-		map.put("beginRecord", (curPage-1) * limit < 0 ? 0 : (curPage-1)*limit);
+		map.put("beginRecord", (curPage - 1) * limit < 0 ? 0 : (curPage - 1)*limit);
 		map.put("limit", limit);
 		List<Map>list = incomeMapper.selectIncomesAndExpenditure(map);
 		return list;

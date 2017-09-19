@@ -2,7 +2,6 @@ package com.taoxiuxia.service;
 
 import java.util.List;
 
-import com.taoxiuxia.model.Item;
 import com.taoxiuxia.model.PayMethod;
 
 public interface IPayMethodService {

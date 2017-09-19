@@ -3,8 +3,6 @@ package com.taoxiuxia.service.impl;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.temporal.TemporalAdjusters;
-import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +38,7 @@ public class MonthlyStatisticsServiceImpl implements IMonthlyStatisticsService {
 
 	@Override
 	public float notActualExpenditure(int userId) {
-		return balanceMapper.selectHuaBeiAndCreditCard(userId);
+		return balanceMapper.selectNotActualExpenditure(userId);
 	}
 	
 	/**

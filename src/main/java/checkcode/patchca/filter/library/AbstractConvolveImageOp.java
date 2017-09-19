@@ -52,7 +52,7 @@ public abstract class AbstractConvolveImageOp extends AbstractImageOp {
 						sum[3] += m * (pixel & 0xff);
 					}
 				}
-				outPixels[x + y * width] = (limitByte((int)sum[0]) << 24) | (limitByte((int)sum[1]) << 16) | (limitByte((int)sum[2]) << 8) | (limitByte((int)sum[3]));				
+				outPixels[x + y * width] = (limitByte((int)sum[0]) << 24) | (limitByte((int) sum[1]) << 16) | (limitByte((int)sum[2]) << 8) | (limitByte((int)sum[3]));				
 			}
 		}
 		long time2 = System.currentTimeMillis() - time1;

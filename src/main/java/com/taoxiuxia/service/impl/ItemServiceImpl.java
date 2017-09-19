@@ -121,18 +121,18 @@ public class ItemServiceImpl implements IItemService {
 		if(curI == 0 && "up".equals(upAndDown)){
 			return "已经是第一个了，无法上移";
 		}
-		if(curI == (listSize-1) && "down".equals(upAndDown)){
+		if(curI == (listSize - 1) && "down".equals(upAndDown)){
 			return "已经是最后一个了，无法下移";
 		}
 		
 		// 将该item的sort与其上一个的item sort互换
 		if("up".equals(upAndDown)){
-			exchange(userId,itemIdArray[curI], sortArray[curI],itemIdArray[curI-1], sortArray[curI-1]);
+			exchange(userId,itemIdArray[curI], sortArray[curI],itemIdArray[curI - 1], sortArray[curI - 1]);
 			return "上移成功";
 		}
 		// 将该item的sort与其下一个的item sort互换
 		if("down".equals(upAndDown)){
-			exchange(userId,itemIdArray[curI], sortArray[curI],itemIdArray[curI+1], sortArray[curI+1]);
+			exchange(userId,itemIdArray[curI], sortArray[curI],itemIdArray[curI + 1], sortArray[curI + 1]);
 			return "下移成功";
 		}
 		

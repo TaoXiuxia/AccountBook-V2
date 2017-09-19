@@ -8,6 +8,7 @@
 <title>Account Book v2 收入</title>
 <%@ include file="common/common.jsp" %> 
 <script src="../res/js/about.js"></script>
+<link href="../res/css/about.css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="common/top.jsp"%>
@@ -16,8 +17,21 @@
 </script>
 
 <div class="col-xs-10">
-	
-	
-	
+	<div class="col-xs-10 label1">一毛钱，您买不了吃亏，一毛钱，您也买不了上当</div>
+	<br><br>
+	<div class="col-xs-5 label1">
+		<img class="money-image" src="../images/wechat0.1.png"/>
+	</div>
+	<div class="col-xs-5 label1">
+		<img class="money-image" src="../images/alipay0.1.png"/>
+	</div>
+
+	<div class="col-xs-10 label2">您老随意</div>
+	<div class="col-xs-5 label1">
+		<img class="money-image" src="../images/wechat.png"/>
+	</div>
+	<div class="col-xs-5 label1">
+		<img class="money-image" src="../images/alipay.png"/>
+	</div>
 </div>
 <%@ include file="common/bottom.jsp"%>

@@ -32,7 +32,7 @@ public class ExpenditureServiceImpl implements IExpenditureService {
 	 */
 	@Override
 	public List<Expenditure> loadExpenditures(int userId) {
-		HashMap map = new HashMap();
+		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("userId", userId);
 		map.put("dataScale", Constants.ONLY_THIS_MONTH);
 		return expenditureMapper.selectAllExpenditures(map);

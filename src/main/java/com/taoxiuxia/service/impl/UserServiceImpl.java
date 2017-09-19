@@ -60,7 +60,10 @@ public class UserServiceImpl implements IUserService {
 		user.setRegisterTime(curDate);
 		user.setLastLoginTime(curDate);
 		int recordNum = userMapper.insert(user); //recordNum为受影响的记录数
-		int userId = user.getId();
+		int userId = 0;
+		if(recordNum == 1){
+			userId = user.getId();
+		}
 		
 		//向item表中插入初始的item
 		addItem(userId, " ", "空项目", "in");
