@@ -98,11 +98,24 @@
 	Order By sort
   </select>
   
-  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.taoxiuxia.model.Item">
+  <!-- <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.taoxiuxia.model.Item">
     insert into item (user_id, name, in_or_ex, remark, dele, sort)
     values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, 
       #{inOrEx,jdbcType=VARCHAR}, #{remark,jdbcType=CHAR}, #{dele,jdbcType=INTEGER},  #{sort,jdbcType=INTEGER});
-  </insert>
+  </insert> -->
+  
+  <select id="insert" parameterMap="itemParaMap" statementType="CALLABLE">
+    CALL insertItem(?,?,?,?,?,?)
+  </select>
+    
+  <parameterMap type="java.util.Map" id="itemParaMap">
+     <parameter property="userId" mode="IN" jdbcType="INTEGER"/>
+     <parameter property="itemName" mode="IN" jdbcType="VARCHAR"/>
+     <parameter property="remark" mode="IN" jdbcType="VARCHAR"/>
+     <parameter property="inOrEx" mode="IN" jdbcType="VARCHAR"/>
+     <parameter property="dele" mode="IN" jdbcType="INTEGER"/>
+     <parameter property="result" mode="OUT" jdbcType="INTEGER"/>
+  </parameterMap>
   
   <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.Item" >
     update item

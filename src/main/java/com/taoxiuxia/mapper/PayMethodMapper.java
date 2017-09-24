@@ -28,7 +28,7 @@ public interface PayMethodMapper {
 	 * @param record
 	 * @return
 	 */
-	int insert(PayMethod record);
+	Map<String, Object> insert(Map<String, Object> map);
 	
 	
 	

@@ -38,16 +38,14 @@ public class PayMethodServiceImpl implements IPayMethodService {
 
 	@Override
 	public void addPayMethod(int userId, String payMethodName, int isCountInThisMonthEx, String inOrEx, String remark) {
-		PayMethod payMethod  = new PayMethod();
-		payMethod.setName(payMethodName);
-		payMethod.setInOrEx(inOrEx);
-		payMethod.setDele(Constants.NOT_DELE);
-		payMethod.setIsCountInThisMonthEx(isCountInThisMonthEx==-1?null:isCountInThisMonthEx);
-		payMethod.setRemark(remark);
-		payMethod.setUserId(userId);
-		payMethodMapper.insert(payMethod); //在插入数据时，payMethod的id被注入
-		payMethod.setSort(payMethod.getId());
-		payMethodMapper.updateByPrimaryKeySelective(payMethod);
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("userId", userId);
+		parameterMap.put("name", payMethodName);
+		parameterMap.put("isCountInThisMonthEx", isCountInThisMonthEx==-1?null:isCountInThisMonthEx);
+		parameterMap.put("inOrEx", inOrEx);
+		parameterMap.put("remark", remark);
+		parameterMap.put("dele", Constants.NOT_DELE);
+		payMethodMapper.insert(parameterMap);
 	}
 
 	@Override

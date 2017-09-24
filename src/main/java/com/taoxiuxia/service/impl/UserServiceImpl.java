@@ -28,7 +28,7 @@ public class UserServiceImpl implements IUserService {
 	
 	@Resource
 	private UserMapper userMapper;
-
+	
 	public UserMapper getUserMapper() {
 		return userMapper;
 	}
@@ -38,6 +38,7 @@ public class UserServiceImpl implements IUserService {
 		this.userMapper = userMapper;
 	}
 	
+	@Resource
 	private ItemMapper itemMapper;
 
 	public ItemMapper getItemMapper() {
@@ -64,18 +65,7 @@ public class UserServiceImpl implements IUserService {
 		if(recordNum == 1){
 			userId = user.getId();
 		}
-		
-		//向item表中插入初始的item
-		addItem(userId, " ", "空项目", "in");
-		addItem(userId, "工资", " ", "in");
-		addItem(userId, "其他", " ", "in");
-		addItem(userId, " ", "空项目", "ex");
-		addItem(userId, "餐饮", " ", "ex");
-		addItem(userId, "服饰", " ", "ex");
-		addItem(userId, "医疗", " ", "ex");
-		addItem(userId, "其他", " ", "ex");
-		
-		return 0;
+		return userId;
 	}
 
 	@Override
@@ -144,20 +134,5 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public void update(User user) {
 		// TODO Auto-generated method stub
-	}
-	
-	/**
-	 * 添加item,复制了ItemServiceImpl中的addItem方法
-	 */
-	public void addItem(int userId, String itemName, String remark, String inOrEx) {
-		Item item = new Item();
-		item.setUserId(userId);
-		item.setName(itemName);
-		item.setInOrEx(inOrEx);
-		item.setRemark(remark);
-		item.setDele(Constants.NOT_DELE);
-		itemMapper.insert(item);
-		item.setSort(item.getId());
-		itemMapper.updateByPrimaryKeySelective(item);
 	}
 }

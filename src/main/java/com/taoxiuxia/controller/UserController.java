@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.taoxiuxia.model.SessionUser;
 import com.taoxiuxia.model.User;
+import com.taoxiuxia.service.IItemService;
+import com.taoxiuxia.service.IPayMethodService;
 import com.taoxiuxia.service.IUserService;
 import com.taoxiuxia.util.Constants;
 import com.taoxiuxia.util.StringTools;
@@ -36,15 +38,11 @@ public class UserController {
 	private Logger logger=LoggerFactory.getLogger(UserController.class);
 	
 	private IUserService userService;
+	
+	private IItemService itemService;
 
-	public IUserService getUserService() {
-		return userService;
-	}
-
-	@Autowired
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
-	}
+	private IPayMethodService payMethodService;
+	
 
 	/**
 	 * 注册页面
@@ -85,11 +83,16 @@ public class UserController {
 		if (!sessionCheckCode.equalsIgnoreCase(checkCode)) {
 			map.put("info", "验证码错误");
 		} else {
+			// 注册用户
 			User user= new User();
 			user.setName(userName);
 			user.setEmail(email);
 			user.setPassword(password);
-			userService.register(user);
+			int userId = userService.register(user);
+			
+			// 插入初始数据（item payMethod）
+			initItem(userId);
+			initPayMethod(userId);
 			
 			SessionUser sessionUser = new SessionUser();
 			sessionUser.setUserId(user.getId());
@@ -208,5 +211,65 @@ public class UserController {
 		String code = EncoderHelper.getChallangeAndWriteImage(cs, "png", response.getOutputStream());
 		session.setAttribute(Constants.check_code_key, code);
 	}
+	
+	/**
+	 * 向item表中插入初始的item
+	 * @param userId
+	 */
+	private void initItem(int userId) {
+		itemService.addItem(userId, " ", "空项目", "in");
+		itemService.addItem(userId, "工资", " ", "in");
+		itemService.addItem(userId, "其他", " ", "in");
+		itemService.addItem(userId, " ", "空项目", "ex");
+		itemService.addItem(userId, "餐饮", " ", "ex");
+		itemService.addItem(userId, "服饰", " ", "ex");
+		itemService.addItem(userId, "医疗", " ", "ex");
+		itemService.addItem(userId, "其他", " ", "ex");
+	}
+	
+	/**
+	 * 向pay_method表中插入初始的payMethod
+	 * @param userId
+	 */
+	private void initPayMethod(int userId) {
+		payMethodService.addPayMethod(userId, "余额宝", -1, "in", "");
+		payMethodService.addPayMethod(userId, "现金", -1, "in", "");
+		payMethodService.addPayMethod(userId, "微信", -1, "in", "");
+		payMethodService.addPayMethod(userId, "银行卡", -1, "in", "");
+		
+		payMethodService.addPayMethod(userId, "余额宝", 1, "ex", "");
+		payMethodService.addPayMethod(userId, "现金", 1, "ex", "");
+		payMethodService.addPayMethod(userId, "微信", 1, "ex", "");
+		payMethodService.addPayMethod(userId, "银行卡", 1, "ex", "");
+		payMethodService.addPayMethod(userId, "花呗", 0, "ex", "");
+		payMethodService.addPayMethod(userId, "信用卡", 0, "ex", "");
+	}
+	
+	// ====================== Getter & Setter =========================
+	public IPayMethodService getPayMethodService() {
+		return payMethodService;
+	}
+	@Autowired
+	public void setPayMethodService(IPayMethodService payMethodService) {
+		this.payMethodService = payMethodService;
+	}
 
+	public IUserService getUserService() {
+		return userService;
+	}
+
+	@Autowired
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
+	
+	public IItemService getItemService() {
+		return itemService;
+	}
+	
+	@Autowired
+	public void setItemService(IItemService itemService) {
+		this.itemService = itemService;
+	}
+	
 }

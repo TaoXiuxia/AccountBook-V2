@@ -1,7 +1,9 @@
 package com.taoxiuxia.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,15 +48,13 @@ public class ItemServiceImpl implements IItemService {
 	 */
 	@Override
 	public void addItem(int userId, String itemName, String remark, String inOrEx) {
-		Item item = new Item();
-		item.setUserId(userId);
-		item.setName(itemName);
-		item.setInOrEx(inOrEx);
-		item.setRemark(remark);
-		item.setDele(Constants.NOT_DELE);
-		itemMapper.insert(item);
-		item.setSort(item.getId());
-		itemMapper.updateByPrimaryKeySelective(item);
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("userId", userId);
+		parameterMap.put("itemName", itemName);
+		parameterMap.put("inOrEx", inOrEx);
+		parameterMap.put("remark", remark);
+		parameterMap.put("dele", Constants.NOT_DELE);
+		itemMapper.insert(parameterMap);
 	}
 
 	/**

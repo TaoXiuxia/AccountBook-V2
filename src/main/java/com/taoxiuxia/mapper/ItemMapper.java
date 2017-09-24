@@ -1,9 +1,12 @@
 package com.taoxiuxia.mapper;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.taoxiuxia.model.Item;
 import com.taoxiuxia.model.ItemExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface ItemMapper {
 
@@ -11,8 +14,10 @@ public interface ItemMapper {
 
 	List<Item> selectExpenditureItemByUserId(int id);
 
-	int insert(Item record);
+	/*int insert(Item record);*/
 
+	Map<String, Object> insert(Map<String, Object> map);
+	
 	int updateByPrimaryKeySelective(Item record);
 
 	///////////////////////////////////////////////////////

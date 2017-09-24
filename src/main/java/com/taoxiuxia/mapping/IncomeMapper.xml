@@ -143,7 +143,7 @@
 			pay_method
 		WHERE
 			income.item_id = item.id
-		AND income.user_id = 11
+		AND income.user_id = #{userId,jdbcType=INTEGER}
 		AND income.dele = 1
 		AND income.type_of_money = pay_method.id
 	<if test="dataScale != null and dataScale == 'only_this_month'.toString() ">
