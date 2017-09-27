@@ -1,5 +1,5 @@
 /* 顶部标题栏 */
-.title{height: 80px; background-color: #0664C1;}
+.title{height: 55px; background-color: #0664C1; position: fixed; top: 0; width: 100%; z-index: 1;}
 .title-li{margin-top:10px;}
 .title-text{font-size:30px; color:#ffffff;}
 .userInfo{color: white; font-size: 20px; margin-left: 800px;}

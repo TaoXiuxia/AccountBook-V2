@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="keywords" content="JS代码,菜单导航,JS广告代码,JS特效代码" />
+<meta name="description" content="此代码内容为jQuery的垂直可折叠菜单特效，属于站长常用代码，更多菜单导航代码请访问懒人图库JS代码频道。" />
+<title>jQuery的垂直可折叠菜单特效_懒人图库</title>
+<link rel=stylesheet type=text/css href="css/lrtk.css">
+<script type=text/javascript src="js/jquery.min.js"></script>
+</head>
+<body>
+<!-- 代码 开始 -->
+ <div id="firstpane" class="menu_list">
+    <p class="menu_head current">哲学</p>
+    <div style="display:block" class=menu_body >
+      <a href="#">科学技术哲学</a>
+      <a href="#">宗教学</a>
+      <a href="#">美学</a>
+      <a href="#">伦理学</a>
+      <a href="#">逻辑学</a>
+      <a href="#">外国哲学</a>
+      <a href="#">中国哲学</a>
+      <a href="#">马克思主义哲学</a>
+    </div>
+    <p class="menu_head">经济学</p>
+    <div style="display:none" class=menu_body >
+      <a href="#">应用经济学</a>
+      <a href="#">理论经济学</a>
+      <a href="#">国民经济学</a>
+      <a href="#">区域经济学</a>
+      <a href="#">产业经济学</a>
+      <a href="#">国际贸易学</a>
+      <a href="#">劳动经济学</a>
+      <a href="#">政治经济学</a>
+    </div>
+    <p class="menu_head">法学</p>
+    <div style="display:none" class=menu_body >
+      <a href="#">马克思主义基本原理</a>
+      <a href="#">马克思主义发展史</a>
+      <a href="#">马克思主义中国化研究</a>
+      <a href="#">国外马克思主义研究</a>
+      <a href="#">思想政治教育</a>
+    </div>
+    <p class="menu_head">教育学</p>
+    <div style="display:none" class=menu_body >
+      <a href="#">体育人文社会学</a>
+      <a href="#">体育教育训练学</a>
+      <a href="#">民族传统体育学</a>
+      <a href="#">发展与教育心理学</a>
+      <a href="#">应用心理学</a>
+      <a href="#">教育学原理</a>
+      <a href="#">课程与教学论</a>
+      <a href="#">比较教育学</a>
+      <a href="#">学前教育学</a>
+      <a href="#">高等教育学</a>
+      <a href="#">成人教育学</a>
+      <a href="#">职业技术教育学</a>
+      <a href="#">特殊教育学</a>
+      <a href="#">教育技术学</a>
+    </div>
+    <p class="menu_head">工学</p>
+    <div style="display:none" class=menu_body >
+      <a href="#">一般力学与力学基础</a>
+      <a href="#">固体力学</a>
+      <a href="#">流体力学</a>
+      <a href="#">工程力学</a>
+      <a href="#">机械制造及其自动化</a>
+      <a href="#">机械电子工程</a>
+      <a href="#">机械设计及理论</a>
+      <a href="#">仪器科学与技术</a>
+      <a href="#">精密仪器及机械</a>
+      <a href="#">测试计量技术及仪器</a>
+      <a href="http://www.lanrentuku.com/" target="_blank">懒人图库</a>
+    </div>
+</div>
+<script type=text/javascript>
+$(document).ready(function(){
+	$("#firstpane .menu_body:eq(0)").show();
+	$("#firstpane p.menu_head").click(function(){
+		$(this).addClass("current").next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+		$(this).siblings().removeClass("current");
+	});
+	$("#secondpane .menu_body:eq(0)").show();
+	$("#secondpane p.menu_head").mouseover(function(){
+		$(this).addClass("current").next("div.menu_body").slideDown(500).siblings("div.menu_body").slideUp("slow");
+		$(this).siblings().removeClass("current");
+	});
+	
+});
+</script>
+
+<!-- 代码 结束 -->
+<div style="text-align:center;margin:20px 0">
+<p>代码整理：<a href="http://www.lanrentuku.com/" target="_blank">懒人图库</a>　感谢：<a href="http://blog.hexccc.com/service/" target="_blank">wordpress Xcoder</a></p>
+<p>＊尊重他人劳动成果，转载请自觉注明出处！注：此代码仅供学习交流，请勿用于商业用途。</p>
+<p></p>
+<p><p>jQuery的垂直可折叠菜单特效, 使用简单，只需要加载jquery插件。兼容主流浏览器，懒人图库推荐下载！</p><p><br /></p><p>使用方法：</p><p>1、head区域引用文件lrtk.css及jquery库</p><p>2、在文件中加入&lt;!-- 代码 开始 --&gt;&lt;!-- 代码 结束 --&gt;区域代码</p><p>3、复制images文件夹里的图片到相应的路径。</p></p>
+<p style="margin:20px 0"></p>
+</div>
+</body>
+</html>

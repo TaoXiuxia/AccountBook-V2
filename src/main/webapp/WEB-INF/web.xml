@@ -46,11 +46,16 @@
 		<url-pattern>*.css</url-pattern>
 	</servlet-mapping>
 	
-	<!-- 避免png文件被拦截 -->
+	<!-- 避免图片文件被拦截 -->
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.png</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.gif</url-pattern>
+	</servlet-mapping>
+
 
 	<!-- SpringMVC配置 -->
 	<servlet>

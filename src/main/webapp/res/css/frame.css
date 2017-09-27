@@ -1,0 +1,17 @@
+/* 顶部标题栏 */
+.title{height: 50px; background-color: #0664C1; position: fixed; top: 0; width: 97%; z-index: 1; margin-top: 0px; border-radius: 10px;}
+.title-text{font-size:25px; color:#ffffff;}
+.li-style{list-style: none; margin-top: 6px;}
+.userInfo{color: white; font-size: 20px; margin-left: 800px;}
+.logoutLink{color: white; margin-left:10px}
+
+
+
+
+
+
+
+
+
+
+

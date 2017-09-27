@@ -23,7 +23,6 @@ function addMoney(){
 	var moneyType = $("#money-type option:selected").val();
 	var remark = $("#remarkForIncome").val();
 	remark = replaceEnter2Space(remark);
-	alert(remark);
 	$.post("addIncome",{
 		"date":date,
 		"item":item,
