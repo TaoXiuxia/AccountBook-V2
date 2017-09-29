@@ -12,87 +12,88 @@
 <script src="../res/js/common/common.js"></script>
 </head>
 <body>
-<%@ include file="common/top.jsp"%>
-<script language="JavaScript" type="text/JavaScript"> 
-	document.onload = setLeftColumn();
-</script>
-<div class="col-xs-10">
-
-	<div class="total"> 
-		<label class="total-label1"><span class="tableTitle">收入项</span></label>
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		<button class="add-button" onclick="addItem('in')">添加收入项</button>
-	</div>
-	<div>
-		<table class="table table-bordered"> 
-		    <thead> 
-		        <tr> 
-					<th class="col1">项目</th>
-					<th class="col2">备注</th>
-					<th class="col3">操作</th>
-					<th class="col4">排序</th>
-		        </tr>
-		    </thead>
-		    <tbody> 
-		        <c:forEach items="${incomeItems}" var="incomeItem">
-                <tr>
-                    <td>${incomeItem.name }</td>
-                    <td>${incomeItem.remark }</td>
-                    <td>
-                    	<a href="#" onClick="changeItem('${incomeItem.id}','${incomeItem.name }','${incomeItem.remark }','in')">修改</a> 
-                    	&nbsp;&nbsp;
-                    	<a href="#" onClick="delItem('${incomeItem.id}')">删除</a></td>
-                    <td>
-                    	<a href="#" onClick="upAndDown('item','in','${incomeItem.id}','up')">上移</a>
-	                    &nbsp;&nbsp;
-	                    <a href="#" onClick="upAndDown('item','in','${incomeItem.id}','down')">下移</a>
-                    </td>
-                </tr>
-          		</c:forEach>
-		    </tbody> 
-		</table>
-	</div>
-	
-	<br>
-	
-	<div class="total"> 
-		<label class="total-label1"><span class="tableTitle">支出项</span></label>
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		<button class="add-button" onclick="addItem('ex')">添加支出项</button>
-	</div>
-	<div>
-		<table class="table table-bordered"> 
-		    <thead> 
-		        <tr> 
-					<th class="col1">项目</th>
-					<th class="col2">备注</th>
-					<th class="col3">操作</th>
-					<th class="col4">排序</th>
-		        </tr>
-		    </thead>
-		    <tbody> 
-		        <c:forEach items="${expenditureItems}" var="expenditureItem">
-	                <tr>
-	                    <td>${expenditureItem.name }</td>
-	                    <td>${expenditureItem.remark }</td>
-	                    <td>
-	                    	<a href="#" onClick="changeItem('${expenditureItem.id}','${expenditureItem.name }','${expenditureItem.remark }','ex')">修改</a> 
-	                    	&nbsp;&nbsp;
-	                    	<a href="#" onClick="delItem('${expenditureItem.id}')">删除</a>
-	                    </td>
-	                    <td>
-	                    	<a href="#" onClick="upAndDown('item','ex','${expenditureItem.id}','up')">上移</a>
-	                    	&nbsp;&nbsp;
-	                    	<a href="#" onClick="upAndDown('item','ex','${expenditureItem.id}','down')">下移</a>
-	               		</td>
-	                </tr>
-          		</c:forEach>
-		    </tbody> 
-		</table>
+<div class="container-fluid padding-top15">
+	<div class="row">
+		<script language="JavaScript" type="text/JavaScript"> 
+			document.onload = setLeftColumn();
+		</script>
+		<div class="col-xs-10">
+		
+			<div class="total"> 
+				<label class="total-label1"><span class="tableTitle">收入项</span></label>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<button class="add-button" onclick="addItem('in')">添加收入项</button>
+			</div>
+			<div>
+				<table class="table table-bordered"> 
+				    <thead> 
+				        <tr> 
+							<th class="col1">项目</th>
+							<th class="col2">备注</th>
+							<th class="col3">操作</th>
+							<th class="col4">排序</th>
+				        </tr>
+				    </thead>
+				    <tbody> 
+				        <c:forEach items="${incomeItems}" var="incomeItem">
+		                <tr>
+		                    <td>${incomeItem.name }</td>
+		                    <td>${incomeItem.remark }</td>
+		                    <td>
+		                    	<a href="#" onClick="changeItem('${incomeItem.id}','${incomeItem.name }','${incomeItem.remark }','in')">修改</a> 
+		                    	&nbsp;&nbsp;
+		                    	<a href="#" onClick="delItem('${incomeItem.id}')">删除</a></td>
+		                    <td>
+		                    	<a href="#" onClick="upAndDown('item','in','${incomeItem.id}','up')">上移</a>
+			                    &nbsp;&nbsp;
+			                    <a href="#" onClick="upAndDown('item','in','${incomeItem.id}','down')">下移</a>
+		                    </td>
+		                </tr>
+		          		</c:forEach>
+				    </tbody> 
+				</table>
+			</div>
+			
+			<br>
+			
+			<div class="total"> 
+				<label class="total-label1"><span class="tableTitle">支出项</span></label>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<button class="add-button" onclick="addItem('ex')">添加支出项</button>
+			</div>
+			<div>
+				<table class="table table-bordered"> 
+				    <thead> 
+				        <tr> 
+							<th class="col1">项目</th>
+							<th class="col2">备注</th>
+							<th class="col3">操作</th>
+							<th class="col4">排序</th>
+				        </tr>
+				    </thead>
+				    <tbody> 
+				        <c:forEach items="${expenditureItems}" var="expenditureItem">
+			                <tr>
+			                    <td>${expenditureItem.name }</td>
+			                    <td>${expenditureItem.remark }</td>
+			                    <td>
+			                    	<a href="#" onClick="changeItem('${expenditureItem.id}','${expenditureItem.name }','${expenditureItem.remark }','ex')">修改</a> 
+			                    	&nbsp;&nbsp;
+			                    	<a href="#" onClick="delItem('${expenditureItem.id}')">删除</a>
+			                    </td>
+			                    <td>
+			                    	<a href="#" onClick="upAndDown('item','ex','${expenditureItem.id}','up')">上移</a>
+			                    	&nbsp;&nbsp;
+			                    	<a href="#" onClick="upAndDown('item','ex','${expenditureItem.id}','down')">下移</a>
+			               		</td>
+			                </tr>
+		          		</c:forEach>
+				    </tbody> 
+				</table>
+			</div>
+		</div>
 	</div>
 </div>
-<%@ include file="common/bottom.jsp"%>
-
 
 
 <div id="addItemLayer" class="hidden">
@@ -105,5 +106,6 @@
         <input type="text" id="addedItemRemark" placeholder="备注" >
 	</div>
 </div>
-
+</body>
+</html>
 

@@ -14,7 +14,7 @@
 <body>
 
 	<!-- 头 -->
-	<div class="container-fluid padding-top15" style="width:1200px">
+	<div class="container-fluid padding-top15">
 		<div class="row">
 			<div class="col-xs-12">
 				<ol class="breadcrumb title">
@@ -51,8 +51,6 @@
 			<a href="showUserRegister.action" class="link1">注册</a>
 		</div>
 	</div>
-	
-
 
 </body>
 </html>

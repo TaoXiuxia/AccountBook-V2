@@ -137,6 +137,7 @@ public class UserController {
 			sessionUser.setUserName(user.getName());
 			session.setAttribute(Constants.SESSION_USER_KEY, sessionUser);
 			session.setAttribute(Constants.USER_ID, user.getId());
+			
 			// 记住登录状态
 			if (REMEMBERME.equals(rememberMe)) {
 				// 自动登录，保存用户名密码到Cookie

@@ -21,7 +21,7 @@ function login() {
 		},
 		success: function(msg){
 			if(msg.info=="登录成功"){
-				window.location.href="../expenditureController/showExpenditure";
+				window.location.href="../frameController/showframe";
 			}else{
 				layer.msg(msg.info);
 			}

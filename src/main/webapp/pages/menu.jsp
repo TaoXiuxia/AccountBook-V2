@@ -13,7 +13,7 @@
 </head>
 
 <body>
-	<div id="firstpane" class="menu_list">
+	<div id="firstpane" class="menu_list" style="overflow-x: hidden;">
 		<p class="menu_head current">收支</p>
 		<div style="display:block" class=menu_body >
 			<a href="#" onclick="reloadMainContent('../incomeController/showIncome')">收入</a>
@@ -31,6 +31,41 @@
 		<div style="display:none" class=menu_body >
 			<a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
 		</div>
+		
+		
+		
+		<!-- <p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
+		</div> -->
+		
+		
+		
+		
 	</div>
 </body>
 
