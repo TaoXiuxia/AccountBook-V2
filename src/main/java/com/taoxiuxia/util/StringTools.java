@@ -36,6 +36,7 @@ public class StringTools {
 		}
 		return false;
 	} 
+	
 
 	/**
 	 * 校验是否是数字
