@@ -1,7 +1,7 @@
 /* 顶部标题栏 */
-.title{height: 55px; background-color: #0664C1; position: fixed; top: 0; width: 100%; z-index: 1;}
+.title{height: 55px; background-color: #c0c0c0; position: fixed; top: 0; width: 100%; z-index: 1;}
 .title-li{margin-top:10px;}
-.title-text{font-size:30px; color:#ffffff;}
+.title-text{font-size:30px; color:#000000;}
 .userInfo{color: white; font-size: 20px; margin-left: 800px;}
 .logoutLink{color: white; margin-left:10px}
 
@@ -13,9 +13,10 @@
 .left-column-button-inactive-font{font-size:20px; color:#000000;margin-top:3px; }
 
 
-
-
-
+/* 导航栏 */
+.navigation{ height: 30px; background-color: #f0f0f0; width: 100%; margin-top: 8px;}
+.navi-text{font-size: 15px; color: #666464;}
+.navi-li{margin-top: -2px;}
 
 
 

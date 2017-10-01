@@ -17,8 +17,16 @@
 		<script language="JavaScript" type="text/JavaScript"> 
 			document.onload = setLeftColumn();
 		</script>
-		<div class="col-xs-10">
 		
+		<div class="col-xs-12">
+			<ol class="breadcrumb navigation">
+				<li class="navi-li">
+					<span class="navi-text">收支 > 历史收支</span>
+				</li>
+			</ol>
+		</div>
+		
+		<div class="col-xs-12">
 			<div> 
 				<label class="label2">类目</label>
 				<select class="select1" id="type">
