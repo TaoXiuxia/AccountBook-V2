@@ -18,6 +18,14 @@
 		</script>
 		
 		<div class="col-xs-12">
+			<ol class="breadcrumb navigation">
+				<li class="navi-li">
+					<span class="navi-text">关于 > 关于</span>
+				</li>
+			</ol>
+		</div>
+		
+		<div class="col-xs-12">
 			<div class="col-xs-12 label1">一毛钱，您买不了吃亏，一毛钱，您也买不了上当</div>
 			<br><br>
 			<div class="col-xs-6 label1">

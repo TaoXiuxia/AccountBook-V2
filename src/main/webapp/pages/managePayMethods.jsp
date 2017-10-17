@@ -111,6 +111,10 @@
 
 
 <div id="addPayMethodLayer" class="hidden">
+ 您确定要修改吗？<br>
+ 如果修改，将同时修改已添加收入/支出的收支方式!<br>
+     如果不想改变现有数据，<br>
+    可以删除本收支方式，添加新收支方式！
     <div class="addPayMethod">
         <label class="addPayMethod-label">收支方式：&nbsp;&nbsp;</label>
         <input type="text" id="addedPayMethodName" placeholder="收支方式" >

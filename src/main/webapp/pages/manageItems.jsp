@@ -105,6 +105,10 @@
 
 
 <div id="addItemLayer" class="hidden">
+    您确定要修改吗？<br>
+    如果修改，将同时修改已添加收入/支出的收支项目！<br>
+    如果不想改变现有数据，<br>
+    可以删除本项目，添加新项目！
     <div class="addItem">
         <label class="addItem-label">项目名称</label>
         <input type="text" id="addedItemName" placeholder="项目名称" >
