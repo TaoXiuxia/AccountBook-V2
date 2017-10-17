@@ -35,7 +35,8 @@ public class StringTools {
 			return true;
 		}
 		return false;
-	}
+	} 
+	
 
 	/**
 	 * 校验是否是数字

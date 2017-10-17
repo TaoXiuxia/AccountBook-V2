@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : 59DB
 Source Server Version : 50719
 Source Host           : 59.110.231.132:3306
-Source Database       : account_v2_for_test
+Source Database       : xxxx
 
 Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2017-09-14 23:45:27
+Date: 2017-10-01 13:47:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,7 +27,7 @@ CREATE TABLE `balance` (
   PRIMARY KEY (`id`),
   KEY `reference_to_user` (`user_id`),
   CONSTRAINT `reference_to_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for expenditure
@@ -47,7 +47,7 @@ CREATE TABLE `expenditure` (
   KEY `foreignkey_to_user2` (`user_id`),
   CONSTRAINT `foreignkey_to_item2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
   CONSTRAINT `foreignkey_to_user2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for income
@@ -67,7 +67,7 @@ CREATE TABLE `income` (
   KEY `foreignkey_to_item1` (`item_id`),
   CONSTRAINT `foreignkey_to_item1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
   CONSTRAINT `foreignkey_to_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for item
@@ -84,7 +84,7 @@ CREATE TABLE `item` (
   PRIMARY KEY (`id`),
   KEY `foreignkey_to_user` (`user_id`),
   CONSTRAINT `foreignkey_to_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for pay_method
@@ -100,7 +100,7 @@ CREATE TABLE `pay_method` (
   `dele` int(1) NOT NULL COMMENT '-1：删除；1未删除',
   `sort` int(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for user
@@ -118,4 +118,66 @@ CREATE TABLE `user` (
   `last_login_time` datetime NOT NULL,
   `activation_code` char(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Procedure structure for insertItem
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insertItem`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`%` PROCEDURE `insertItem`(
+	IN userId INT,
+	IN itemName VARCHAR(50),
+	IN remark VARCHAR(200),
+	IN inOrEx VARCHAR(3),
+	IN dele INT,
+	OUT result INT
+)
+BEGIN
+
+START TRANSACTION; #开始一个事物
+
+INSERT INTO item ( user_id, name, in_or_ex, remark, dele, sort )
+    VALUES (userId, itemName, inOrEx, remark, dele, 0);
+
+SET result=LAST_INSERT_ID();
+
+UPDATE item set item.sort = result WHERE item.id = result;
+
+COMMIT; #主动提交  
+
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for insertPayMethod
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insertPayMethod`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`%` PROCEDURE `insertPayMethod`(
+	IN userId INT,
+	IN name VARCHAR(50),
+	IN is_count_in_this_month_ex INT,
+	IN remark VARCHAR(200),
+	IN inOrEx VARCHAR(3),
+	IN dele INT,
+	OUT result INT
+)
+BEGIN
+
+START TRANSACTION; #开始一个事物
+
+INSERT INTO pay_method ( user_id, name, is_count_in_this_month_ex, in_or_ex, remark, dele, sort )
+    VALUES (userId, name, is_count_in_this_month_ex, inOrEx, remark, dele, 0);
+
+SET result=LAST_INSERT_ID();
+
+UPDATE pay_method set pay_method.sort = result WHERE pay_method.id = result;
+
+COMMIT; #主动提交  
+
+END
+;;
+DELIMITER ;
+

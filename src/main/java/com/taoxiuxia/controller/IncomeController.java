@@ -118,7 +118,7 @@ public class IncomeController {
 		int userId = (int)session.getAttribute(Constants.USER_ID);
 		incomeService.addIncome(userId, date, item, money, moneyType, remark);
 	}
-
+	
 	/**
 	 * 修改收入
 	 * 

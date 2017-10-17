@@ -17,8 +17,16 @@
 		<script language="JavaScript" type="text/JavaScript"> 
 			document.onload = setLeftColumn();
 		</script>
-		<div class="col-xs-10">
 		
+		<div class="col-xs-12">
+			<ol class="breadcrumb navigation">
+				<li class="navi-li">
+					<span class="navi-text">管理 > 项目管理</span>
+				</li>
+			</ol>
+		</div>
+		
+		<div class="col-xs-12">
 			<div class="total"> 
 				<label class="total-label1"><span class="tableTitle">收入项</span></label>
 				&nbsp;&nbsp;&nbsp;&nbsp;

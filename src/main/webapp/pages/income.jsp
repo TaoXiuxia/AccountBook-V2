@@ -19,8 +19,17 @@
 		<script language="JavaScript" type="text/JavaScript"> 
 			document.onload = setLeftColumn();
 		</script>
-		<div class="col-xs-10">
-			<div class="col-xs-5">
+		
+		<div class="col-xs-12">
+			<ol class="breadcrumb navigation">
+				<li class="navi-li">
+					<span class="navi-text">收支 > 收入</span>
+				</li>
+			</ol>
+		</div>
+		
+		<div class="col-xs-12">
+			<div class="col-xs-6">
 				<div class="add">
 					<label class="add-label">添加收入:</label><br>
 					
@@ -101,7 +110,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-10">
+		<div class="col-xs-12">
 			<div>
 				<table class="table table-bordered"> 
 				    <thead> 
