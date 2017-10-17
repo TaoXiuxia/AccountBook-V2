@@ -17,7 +17,7 @@ function changePayMethod(payMethodId, payMethodName, isCountInThisMonthEx, remar
 	layer.confirm(
 		$("#addPayMethodLayer").html(),{
 	    btn: ['修改','返回'], //按钮
-	    area: ['420px', '260px'], //宽高
+	    area: ['420px', '350px'], //宽高
 		success: function(layero, index){
 			var content = $(".layui-layer-content");
  		   	content.find("#addedPayMethodName").val(payMethodName);

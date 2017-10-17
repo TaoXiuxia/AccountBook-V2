@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Account Book v2 T</title>
+<title>Account Book v2</title>
 </head>
 
 <frameset rows="55px,90%" frameborder="no">
