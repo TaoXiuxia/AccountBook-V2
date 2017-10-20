@@ -1,3 +1,6 @@
+// 设置flag，防止充分点击，多次提交
+var flag = true;
+
 function setLeftColumn(){
 	$("#income").addClass("left-column-button-inactive");
 	$("#income").addClass("left-column-button-inactive-font");
@@ -17,20 +20,23 @@ function setLeftColumn(){
  * 添加支出
  */
 function addMoney(){
-	var date = $("#date").val();
-	var item = $("#item option:selected").val();
-	var money = $("#money").val();
-	var moneyType = $("#money-type option:selected").val();
-	var remark = $("#remarkForExpenditure").val();
-	remark = replaceEnter2Space(remark);
-	$.post("addExpenditure",{
-		"date":date,
-		"item":item,
-		"money":money,
-		"moneyType":moneyType,
-		"remark":remark
-	});
-	setTimeout('location.reload()', 1000);
+	if(flag == true){
+		flag = false;
+		var date = $("#date").val();
+		var item = $("#item option:selected").val();
+		var money = $("#money").val();
+		var moneyType = $("#money-type option:selected").val();
+		var remark = $("#remarkForExpenditure").val();
+		remark = replaceEnter2Space(remark);
+		$.post("addExpenditure",{
+			"date":date,
+			"item":item,
+			"money":money,
+			"moneyType":moneyType,
+			"remark":remark
+		});
+		setTimeout('location.reload()', 1000);
+	}
 }
 
 /**
