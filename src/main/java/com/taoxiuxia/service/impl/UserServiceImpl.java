@@ -18,6 +18,7 @@ import com.taoxiuxia.model.Item;
 import com.taoxiuxia.model.User;
 import com.taoxiuxia.service.IUserService;
 import com.taoxiuxia.util.Constants;
+import com.taoxiuxia.util.DateTimeUtil;
 import com.taoxiuxia.util.PasswordUtil;
 import com.taoxiuxia.util.StringTools;
 
@@ -84,6 +85,10 @@ public class UserServiceImpl implements IUserService {
 			logger.info("用户不存在");
 			return null;
 		}
+		if (user.getIsActive()==Constants.NOT_ACTIVE){
+			logger.info("用户未激活，请前往激活");
+			return null;
+		}
 		if(hasMD5){
 			if (!password.equals(user.getPassword())) {
 				logger.info("密码错误  MD5");
@@ -95,17 +100,60 @@ public class UserServiceImpl implements IUserService {
 				return null;
 			}
 		}
+		user.setLastLoginTime(new Date());
+		userMapper.updateByPrimaryKeySelective(user);
 		return user;
 	}
+
+	@Override
+	public void update(User user) {
+		user.setLastLoginTime(new Date());
+	}
+	
+	@Override
+	public int isEmailRegister(String email){
+		Map<String,String> map = new HashMap<String,String>(); 
+		map.put("email", email);
+		List<User> userlist = userMapper.findUserByEmail(map);
+		if(userlist.size()==0){
+			return 0;
+		}
+		User user = userlist.get(0);
+		if(user.getIsActive()==1){
+			return 2; 
+		}else{
+			return 1;
+		}
+	}
+	
+	@Override
+	public String active(String email, String activationCode) {
+		User user = findUserByEmail(email);
+		if(StringTools.isEmpty(activationCode)){
+			return "激活码为空";
+		}
+		
+		if(DateTimeUtil.compareTimeByMin(user.getActivationCodeTime(), DateTimeUtil.nowTime())>180){
+			return "激活码失效，请重新注册";
+		}
+		
+		int row; // 受影响的行
+		if(activationCode.equals(user.getActivationCode())){
+			user.setIsActive(Constants.ACTIVE);
+			row = userMapper.updateByPrimaryKeySelective(user);
+			if(row == 1){
+				return "激活成功";
+			}
+		}
+ 		return "激活失败";
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public User findUserByEmail(String email) {
 		Map<String,String> map = new HashMap<String,String>(); 
 		map.put("email", email);
-		if(userMapper==null){
-			userMapper = getUserMapper();
-		}
 		List<User>list = userMapper.findUserByEmail(map);
-		System.out.println("findUserByEmail.size ==> "+list.size());
 		if(list.size()==1){
 			return list.get(0);
 		}
@@ -127,12 +175,5 @@ public class UserServiceImpl implements IUserService {
 		return null;
 	}
 
-	/**
-	 * 更新用户，用的比较多，主要是更新最后登陆时间
-	 * @param user
-	 */
-	@Override
-	public void update(User user) {
-		// TODO Auto-generated method stub
-	}
+	
 }

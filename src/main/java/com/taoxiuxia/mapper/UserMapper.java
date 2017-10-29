@@ -16,7 +16,10 @@ public interface UserMapper {
 	List<User> findUserByUserName(Map map);
 	
 	List<User> findUserByEmail(Map map);
-
+	
+	int updateByPrimaryKeySelective(User record);
+	
+	
 	////////////////////////////////////////////////////////////////////////////////////
 
 	int countByExample(UserExample example);
@@ -34,8 +37,6 @@ public interface UserMapper {
 	int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
 	int updateByExample(@Param("record") User record, @Param("example") UserExample example);
-
-	int updateByPrimaryKeySelective(User record);
 
 	int updateByPrimaryKey(User record);
 }

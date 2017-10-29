@@ -13,7 +13,7 @@ public interface IUserService {
 	/**
 	 * @param account 帐号可以是用户名或者邮箱
 	 * @param password
-	 * @return TODO
+	 * @return User
 	 * @throws BusinessException
 	 */
 	public User login(String account, String password, boolean hasMD5);
@@ -24,4 +24,19 @@ public interface IUserService {
 	 */
 	public void update(User user);
 
+	/**
+	 * 根据邮箱判断用户是否已经注册
+	 * @param email
+	 * @return 	0:未注册
+	 * 			1:已注册，未激活
+	 * 			2:已注册，已激活
+	 */
+	public int isEmailRegister(String email);
+
+	/**
+	 * 激活用户邮箱
+	 * @param user
+	 * @return
+	 */
+	public String active(String email, String activationCode);
 }

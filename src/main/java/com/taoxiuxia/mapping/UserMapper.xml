@@ -11,7 +11,9 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
     <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
-    <result column="activation_code" property="activationCode" jdbcType="CHAR" />
+    <result column="is_active" property="isActive" jdbcType="INTEGER" />
+    <result column="activation_code" property="activationCode" jdbcType="VARCHAR" />
+    <result column="activation_code_time" property="activationCodeTime" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -78,11 +80,13 @@
   <insert id="insert" parameterType="com.taoxiuxia.model.User" useGeneratedKeys="true" keyProperty="id">
     insert into user (id, name, email, 
       password, age, sex, remark, 
-      register_time, last_login_time, activation_code
+      register_time, last_login_time, activation_code, 
+      is_active, activation_code_time
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{registerTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{activationCode,jdbcType=CHAR}
+      #{registerTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{activationCode,jdbcType=CHAR},
+      #{isActive,jdbcType=INTEGER}, #{activationCodeTime,jdbcType=VARCHAR}
       )
   </insert>
   
@@ -103,6 +107,47 @@
 	WHERE
 		user.email = #{email}
   </select>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.User" >
+    update user
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activationCode != null" >
+        activation_code = #{activationCode,jdbcType=CHAR},
+      </if>
+      <if test="isActive != null" >
+        is_active = #{isActive,jdbcType=INTEGER},
+      </if>
+      <if test="activationCodeTime != null" >
+        activation_code_time = #{activationCodeTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
   
   <!-- ///////////////////////////////////////////////////////////////////////////////// -->
   
@@ -262,42 +307,10 @@
       register_time = #{record.registerTime,jdbcType=TIMESTAMP},
       last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
       activation_code = #{record.activationCode,jdbcType=CHAR}
+
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.taoxiuxia.model.User" >
-    update user
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null" >
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null" >
-        age = #{age,jdbcType=INTEGER},
-      </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=CHAR},
-      </if>
-      <if test="remark != null" >
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="registerTime != null" >
-        register_time = #{registerTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastLoginTime != null" >
-        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="activationCode != null" >
-        activation_code = #{activationCode,jdbcType=CHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.taoxiuxia.model.User" >
     update user

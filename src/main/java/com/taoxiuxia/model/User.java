@@ -21,9 +21,29 @@ public class User {
 
     private Date lastLoginTime;
 
+    private Integer isActive;
+    
     private String activationCode;
+    
+    private String activationCodeTime;
 
-    public Integer getId() {
+    public Integer getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
+	}
+
+	public String getActivationCodeTime() {
+		return activationCodeTime;
+	}
+
+	public void setActivationCodeTime(String activationCodeTime) {
+		this.activationCodeTime = activationCodeTime;
+	}
+
+	public Integer getId() {
         return id;
     }
 

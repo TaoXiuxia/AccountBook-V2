@@ -31,7 +31,7 @@
 		</div>
 		<div class="div1">
 			<label class="label1">邮箱：</label>
-			<input class="input1" id="email" placeholder="用于取回密码，请填写正确的常用邮箱">
+			<input class="input1" id="email" placeholder="请填写正确的常用邮箱">
 		</div>
 		<div class="div1">
 			<label class="label1">登录密码：</label>
@@ -42,13 +42,8 @@
 			<input class="input1" type="password" id="repassword" placeholder="请再次输入密码">
 		</div>
 		<div class="div1">
-			<label class="label1">验证码：</label>
-			<input class="input2" type="text" id="checkCode" placeholder="请输入验证码">
-			<a onclick="refreshCheckCodeButton()" href="#" id="refreshCheckCode"><img src="checkCode.action"></a>
-		</div>
-		<div class="div1">
-			<button class="btn1" onclick="register()">注册</button>
-			<a href="showUserLogin" class="link1">登录</a>
+			<button class="btn1" onclick="register()">下一步</button>
+			<a href="showUserLogin" class="link1">已有账号，登录</a>
 		</div>
 	</div>
 

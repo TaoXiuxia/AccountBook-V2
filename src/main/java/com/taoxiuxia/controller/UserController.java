@@ -25,6 +25,8 @@ import com.taoxiuxia.service.IItemService;
 import com.taoxiuxia.service.IPayMethodService;
 import com.taoxiuxia.service.IUserService;
 import com.taoxiuxia.util.Constants;
+import com.taoxiuxia.util.DateTimeUtil;
+import com.taoxiuxia.util.EmailUtil;
 import com.taoxiuxia.util.StringTools;
 
 import checkcode.patchca.color.SingleColorFactory;
@@ -55,6 +57,16 @@ public class UserController {
 	}
 	
 	/**
+	 * 激活页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/showUserActive")
+	public String showUserActive(Model model) {
+		return "pages/userActive";
+	}
+	
+	/**
 	 * 登陆界面
 	 * @param model
 	 * @return
@@ -65,7 +77,10 @@ public class UserController {
 	}
 
 	/**
-	 * 注册
+	 * 注册第一步，判断是否已经注册（根据邮箱），
+	 * 		已注册 已激活  -> 请直接登录
+	 * 		已注册 未激活  -> 请前往激活
+	 * 		未注册 		-> 向数据库中插入数据
 	 * @param session
 	 * @param userName
 	 * @param email
@@ -74,33 +89,51 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/register.action", produces = "application/json;charset=UTF-8")
-	public @ResponseBody Map<String ,Object> register(HttpSession session, String userName, String email, String password,
-			String checkCode) {
+	public @ResponseBody Map<String ,Object> register(HttpSession session, String userName, String email, String password) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		String sessionCheckCode = session.getAttribute(Constants.check_code_key).toString();
 		
-		if (!sessionCheckCode.equalsIgnoreCase(checkCode)) {
-			map.put("info", "验证码错误");
-		} else {
+		// 0:未注册;1:已注册，未激活;2:已注册，已激活
+		int emailState = userService.isEmailRegister(email);
+		if(emailState == 0){
+			String activationCode = EmailUtil.sendEmail(email); 
+			
 			// 注册用户
 			User user= new User();
 			user.setName(userName);
 			user.setEmail(email);
 			user.setPassword(password);
+			user.setIsActive(Constants.NOT_ACTIVE);
+			user.setActivationCode(activationCode);
+			user.setActivationCodeTime(DateTimeUtil.nowTime());
+			
 			int userId = userService.register(user);
 			
 			// 插入初始数据（item payMethod）
 			initItem(userId);
 			initPayMethod(userId);
+			session.setAttribute(Constants.EMAIL, email);
+			map.put("info", "下一步");
+			return map;
+		}else if(emailState == 1){
 			
-			SessionUser sessionUser = new SessionUser();
-			sessionUser.setUserId(user.getId());
-			sessionUser.setUserName(user.getName());
-			session.setAttribute(Constants.SESSION_USER_KEY, sessionUser);
-			session.setAttribute(Constants.USER_ID, user.getId());
-			map.put("info", "注册成功,请登录");
 		}
+
+		
+//		session.setAttribute(Constants.USER_ID, user.getId());
+//		map.put("info", "注册成功,请登录");
+		
+		return map;
+	}
+	
+	/**
+	 * 注册第二步，激活邮箱，
+	 */
+	@RequestMapping(value = "/active.action", produces = "application/json;charset=UTF-8")
+	public @ResponseBody Map<String ,Object> active(User user){
+		String result = userService.active(user.getEmail(), user.getActivationCode());
+		Map<String ,Object> map = new HashMap<String ,Object>();
+		map.put("info", result);
 		return map;
 	}
 	

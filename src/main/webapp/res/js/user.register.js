@@ -5,7 +5,6 @@ function refreshCheckCodeButton(){
 
 // 注册
 function register() {
-	
 	var userName = $("#userName").val();
 	var email = $("#email").val();
 	var password = $("#password").val();
@@ -16,6 +15,12 @@ function register() {
 		alert("两次输入的密码不一致");
 		return;
 	}
+	
+	// loading
+	var index = layer.load(1, {
+	  shade: [0.8,'#fff'] //0.1透明度的白色背景
+	});
+	
 	$.ajax({
 		type: "POST",
 		url: "register.action",
@@ -26,19 +31,19 @@ function register() {
 			"checkCode":checkCode
 		},
 		success: function(msg){
+			if(msg.info=="下一步"){
+				window.location.href="../userController/showUserActive.action";
+			}
 			if(msg.info=="注册成功,请登录"){
 				layer.msg(msg.info);
 				setTimeout(function(){
 					window.location.href="../userController/showUserLogin.action";
 				},2000);
 			}
-			if(msg.info=="验证码错误"){
-				layer.msg(msg.info);
-			}
 		},
 		error: function () {
-			alert("注册失败from前台");
-		} 
+			alert("注册失败");
+		}
 	});
 }
 
@@ -49,3 +54,30 @@ $(document).keyup(function(event) {
 		register();
 	}
 })
+
+// 激活用户
+function active(){
+	$.ajax({
+		type : 'POST',  
+	    url : 'active.action',  
+	    contentType: "application/json; charset=utf-8",   
+	    data : $("#User").serializeArray(),
+	    contentType: "application/x-www-form-urlencoded",  
+		success: function(msg){
+			if(msg.info=="激活成功"){
+				alert("激活成功,请登录");
+				window.location.href="../userController/showUserLogin.action";
+			}else if(msg.info=="激活码失效，请重新注册"){
+				alert("激活码失效，请重新注册");
+				window.location.href="../userController/showUserRegister.action";
+			}else if(msg.info=="激活码为空"){
+				alert("激活码为空,请输入激活码");
+			}else{
+				alert("激活失败")
+			}
+		},
+		error: function () {
+			alert("注册失败");
+		}
+	});
+}

@@ -27,6 +27,11 @@
 			<a href="#" onclick="reloadMainContent('../payMethodController/showManagePayMethods')">收支方式管理</a>
 		</div>
 		
+		<p class="menu_head">日程</p>
+		<div style="display:none" class=menu_body >
+			<a href="#" onclick="">日历</a>
+		</div>
+		
 		<p class="menu_head">关于</p>
 		<div style="display:none" class=menu_body >
 			<a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
