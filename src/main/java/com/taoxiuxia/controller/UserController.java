@@ -163,7 +163,11 @@ public class UserController {
 			User user = userService.login(account, password, false); 
 			if(user==null){
 				map.put("info", "用户不存在或密码错误");
-				logger.info("用户不存在或密码错误. account==> "+account+"; password ==> "+password);
+				return map;
+			}
+			if(user.getIsActive() == 0){
+				map.put("info", "该邮箱尚未激活，请重新注册并激活");
+				return map;
 			}
 			SessionUser sessionUser = new SessionUser();
 			sessionUser.setUserId(user.getId());

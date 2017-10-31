@@ -92,7 +92,7 @@
 		<if test="keyword!=null">
 			AND (
 				item.name like concat('%', #{keyword}, '%')
-				OR income.type_of_money like concat('%', #{keyword}, '%')
+				OR pay_method.name like concat('%', #{keyword}, '%')
 				OR income.remark like concat('%', #{keyword}, '%')
 				)
 		</if>
@@ -117,7 +117,7 @@
 		</if>
 		<if test="keyword!=null">
 			AND (item.name like concat('%', #{keyword}, '%')
-			OR expenditure.type_of_money like concat('%', #{keyword}, '%')
+			OR pay_method.name like concat('%', #{keyword}, '%')
 			OR expenditure.remark like concat('%', #{keyword}, '%'))
 		</if>
 		<if test="inOrEx!=null">

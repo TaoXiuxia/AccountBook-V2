@@ -85,10 +85,6 @@ public class UserServiceImpl implements IUserService {
 			logger.info("用户不存在");
 			return null;
 		}
-		if (user.getIsActive()==Constants.NOT_ACTIVE){
-			logger.info("用户未激活，请前往激活");
-			return null;
-		}
 		if(hasMD5){
 			if (!password.equals(user.getPassword())) {
 				logger.info("密码错误  MD5");

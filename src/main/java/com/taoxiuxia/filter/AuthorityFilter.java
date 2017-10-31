@@ -2,6 +2,7 @@ package com.taoxiuxia.filter;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -83,13 +84,21 @@ public class AuthorityFilter implements Filter {
 		if(!action_ext.equals(type)){
 			sessionUserObj = session.getAttribute(Constants.SESSION_USER_KEY);
 			if(null==sessionUserObj){
-				response.sendRedirect("/AccountBook-V2/userController/showUserLogin.action");
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();  
+		        out.println("<html>");      
+		        out.println("<script>"); 
+		        out.println("alert('您的登录已过期，请重新登录')"); 
+		        out.println("parent.location.href = ('"+request.getContextPath()+"/userController/showUserLogin.action')");      
+		        out.println("</script>");      
+		        out.println("</html>");   
 				return;
 			}
 		}
 		chain.doFilter(request, resp);
 		return;
 	}
+	//http://127.0.0.1:8080/AccountBook-V2/frameController/showframe
 
 	/**
 	 * 自动登录功能

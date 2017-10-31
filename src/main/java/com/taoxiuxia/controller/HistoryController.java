@@ -36,9 +36,6 @@ public class HistoryController {
 	private IHistoryService historyService;
 	private IPayMethodService payMethodService;
 
-	
-	
-
 	/**
 	 * history页面
 	 * 
