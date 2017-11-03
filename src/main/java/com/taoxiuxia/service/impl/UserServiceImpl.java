@@ -155,7 +155,7 @@ public class UserServiceImpl implements IUserService {
 			userMapper = getUserMapper();
 		}
 		List<User>list = userMapper.findUserByUserName(map);
-		if(list.size()==1){
+		if(list.size()>=1){
 			return list.get(0);
 		}
 		return null;

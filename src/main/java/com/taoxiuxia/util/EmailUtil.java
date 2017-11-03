@@ -4,8 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
-import java.util.Random;
-
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
@@ -35,21 +33,19 @@ public class EmailUtil {
 	private static List<FileDataSource> files = new LinkedList<FileDataSource>();// 存放附件文件
 
 		
-	public static String sendEmail(String emailTo) {
+	public static String sendEmail(String emailTo) {  //收件人，多个收件人以半角逗号分隔
 		String userName = "accountbookv2@163.com"; // 发件人邮箱
 		String password = "accountbookv212"; // 发件人密码
 		String smtpHost = "smtp.163.com"; // 邮件服务器
 
-//		String to = "762417862@qq.com"; // 收件人，多个收件人以半角逗号分隔
-		String subject = "这是邮件的主题"; // 主题
+		String subject = "account_v2激活码"; // 主题
 		String activationCode = activationCode();
-		String body = "您正在注册accountbookv2<br>这是您的激活码，3小时内有效<br><b>"+activationCode+"</b>"; // 正文，可以用html格式的哟
+		String body = "您正在注册accountbookv2<br>这是您的激活码，3小时内有效<br><b>"+activationCode+"</b>"; // 正文，html格式
 
 		EmailUtil email = EmailUtil.entity(smtpHost, userName, password, emailTo, subject, body);
 		try{
 			email.send(); // 发送！
 		}catch(Exception e){
-			// TODO
 		}
 		return activationCode;
 	}

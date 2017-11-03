@@ -98,14 +98,14 @@ public class UserController {
 		
 		// 0:未注册;1:已注册，未激活;2:已注册，已激活
 		int emailState = userService.isEmailRegister(email);
-		if(emailState == 0){
-			User user = userService.findUserByUserName(userName);
-			if(user!=null){
+		if(emailState == 0 || emailState == 1){
+			
+			User userChecked = userService.findUserByUserName(userName);
+			if(userChecked != null){
 				map.put("info", "用户名被占用，请修改用户名");
 				return map;
 			}
-		}
-		if(emailState == 0 || emailState == 1){
+			
 			String activationCode = EmailUtil.sendEmail(email); 
 			
 			User user= new User();
