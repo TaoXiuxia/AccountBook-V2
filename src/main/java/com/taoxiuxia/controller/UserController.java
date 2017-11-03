@@ -3,6 +3,7 @@ package com.taoxiuxia.controller;
 import java.awt.Color;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.taoxiuxia.exception.BusinessException;
 import com.taoxiuxia.model.SessionUser;
 import com.taoxiuxia.model.User;
 import com.taoxiuxia.service.IItemService;
@@ -27,6 +29,7 @@ import com.taoxiuxia.service.IUserService;
 import com.taoxiuxia.util.Constants;
 import com.taoxiuxia.util.DateTimeUtil;
 import com.taoxiuxia.util.EmailUtil;
+import com.taoxiuxia.util.PasswordUtil;
 import com.taoxiuxia.util.StringTools;
 
 import checkcode.patchca.color.SingleColorFactory;
@@ -96,33 +99,43 @@ public class UserController {
 		// 0:未注册;1:已注册，未激活;2:已注册，已激活
 		int emailState = userService.isEmailRegister(email);
 		if(emailState == 0){
+			User user = userService.findUserByUserName(userName);
+			if(user!=null){
+				map.put("info", "用户名被占用，请修改用户名");
+				return map;
+			}
+		}
+		if(emailState == 0 || emailState == 1){
 			String activationCode = EmailUtil.sendEmail(email); 
 			
-			// 注册用户
 			User user= new User();
 			user.setName(userName);
 			user.setEmail(email);
 			user.setPassword(password);
 			user.setIsActive(Constants.NOT_ACTIVE);
 			user.setActivationCode(activationCode);
+			user.setPassword(PasswordUtil.geneMD5WithSalt(user.getPassword()));
+			user.setRegisterTime(new Date());
+			user.setLastLoginTime(new Date());
 			user.setActivationCodeTime(DateTimeUtil.nowTime());
+			if(emailState == 0){ // 注册用户
+				int userId = userService.register(user);
+				// 插入初始数据（item payMethod）
+				initItem(userId);
+				initPayMethod(userId);
+			}else if(emailState == 1){ // 更新新注册用户
+				int userId = userService.findUserByEmail(email).getId();
+				user.setId(userId);
+				userService.update(user);
+			}
 			
-			int userId = userService.register(user);
-			
-			// 插入初始数据（item payMethod）
-			initItem(userId);
-			initPayMethod(userId);
 			session.setAttribute(Constants.EMAIL, email);
 			map.put("info", "下一步");
 			return map;
-		}else if(emailState == 1){
-			
+		}else if(emailState == 2){  // 已注册，请登录
+			map.put("info", "邮箱已经注册，请登录");
+			return map;
 		}
-
-		
-//		session.setAttribute(Constants.USER_ID, user.getId());
-//		map.put("info", "注册成功,请登录");
-		
 		return map;
 	}
 	
@@ -154,6 +167,11 @@ public class UserController {
 		
 		try {
 			String sessionCheckCode = String.valueOf(session.getAttribute(Constants.check_code_key));
+			if(StringTools.isEmpty(sessionCheckCode)){
+				map.put("info", "验证码已过期，请刷新页面重试");
+				logger.info("验证码已过期，请刷新页面重试");
+				return map;
+			}
 			if (!StringTools.isEmpty(sessionCheckCode) && !sessionCheckCode.equalsIgnoreCase(checkCode)) {
 				map.put("info", "验证码错误");
 				logger.info("验证码错误");
@@ -161,14 +179,6 @@ public class UserController {
 			}
 			
 			User user = userService.login(account, password, false); 
-			if(user==null){
-				map.put("info", "用户不存在或密码错误");
-				return map;
-			}
-			if(user.getIsActive() == 0){
-				map.put("info", "该邮箱尚未激活，请重新注册并激活");
-				return map;
-			}
 			SessionUser sessionUser = new SessionUser();
 			sessionUser.setUserId(user.getId());
 			sessionUser.setUserName(user.getName());
@@ -195,7 +205,13 @@ public class UserController {
 				cookie.setMaxAge(0);
 				response.addCookie(cookie);
 			}
-		} catch (Exception e) {
+		}catch(BusinessException e){
+			if(map.get("info")==null){
+				map.put("info", e.getMessage());
+				logger.info("登录失败: "+ e.getMessage());
+				return map;
+			}
+		}catch (Exception e) {
 			if(map.get("info")==null){
 				map.put("info", "登录失败");
 				logger.info("登录失败");

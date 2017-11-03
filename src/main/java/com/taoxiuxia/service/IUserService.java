@@ -14,15 +14,17 @@ public interface IUserService {
 	 * @param account 帐号可以是用户名或者邮箱
 	 * @param password
 	 * @return User
+	 * @throws Exception 
 	 * @throws BusinessException
 	 */
-	public User login(String account, String password, boolean hasMD5);
+	public User login(String account, String password, boolean hasMD5) throws Exception;
 	
 	/**
-	 * 更新用户，用的比较多，主要是更新最后登陆时间
+	 * 更新用户
 	 * @param user
 	 */
 	public void update(User user);
+	
 
 	/**
 	 * 根据邮箱判断用户是否已经注册
@@ -39,4 +41,18 @@ public interface IUserService {
 	 * @return
 	 */
 	public String active(String email, String activationCode);
+
+	/**
+	 * 根据email查找user
+	 * @param email
+	 * @return
+	 */
+	User findUserByEmail(String email);
+
+	/**
+	 * 根据username查找user
+	 * @param email
+	 * @return
+	 */
+	User findUserByUserName(String userName);
 }

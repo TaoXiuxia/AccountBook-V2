@@ -40,6 +40,14 @@ function register() {
 					window.location.href="../userController/showUserLogin.action";
 				},2000);
 			}
+			if(msg.info=="邮箱已经注册，请登录"){
+				alert(msg.info);
+				window.location.href="../userController/showUserLogin.action";
+			}
+			if(msg.info=="用户名被占用，请修改用户名"){
+				alert(msg.info);
+				window.location.reload();
+			}
 		},
 		error: function () {
 			alert("注册失败");

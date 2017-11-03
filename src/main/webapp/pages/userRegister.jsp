@@ -27,7 +27,7 @@
 	<div class="register">
 		<div class="div1">
 			<label class="label1">帐号：</label>
-			<input class="input1" id="userName" placeholder="长度1-20位字符，中文、数字、_ 、字母">
+			<input class="input1" id="userName" name="userName" placeholder="长度1-20位字符，中文、数字、_ 、字母">
 		</div>
 		<div class="div1">
 			<label class="label1">邮箱：</label>
@@ -43,7 +43,7 @@
 		</div>
 		<div class="div1">
 			<button class="btn1" onclick="register()">下一步</button>
-			<a href="showUserLogin" class="link1">已有账号，登录</a>
+			<a href="showUserLogin.action" class="link1">已有账号，登录</a>
 		</div>
 	</div>
 
