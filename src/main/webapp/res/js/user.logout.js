@@ -10,7 +10,7 @@ function logout() {
 				setTimeout(function(){
 					//此处不能使用window.location.href,
 					//因为window.location.href是页内跳转，在frameset框架下会出错
-					window.top.location.href="../userController/showUserLogin"; 
+					window.top.location.href="../userController/showUserLogin.action"; 
 				},1500);
 			}
 		},

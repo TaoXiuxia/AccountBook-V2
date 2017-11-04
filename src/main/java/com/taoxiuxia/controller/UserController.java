@@ -101,8 +101,8 @@ public class UserController {
 		if(emailState == 0 || emailState == 1){
 			
 			User userChecked = userService.findUserByUserName(userName);
-			if(userChecked != null){
-				map.put("info", "用户名被占用，请修改用户名");
+			if(userChecked != null && !userChecked.getEmail().equals(email)){ // 用户名已存在  且  用户名不与该email匹配就是被占用
+				map.put("info", "用户名被占用，请修改用户名"); 
 				return map;
 			}
 			
