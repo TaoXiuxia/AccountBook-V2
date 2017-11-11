@@ -17,6 +17,9 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
+
+
+
 public class EmailUtil {
 	private static String defaultSenderName = "";// 默认的发件人用户名，defaultEntity用得到
 	private static String defaultSenderPass = "";// 默认的发件人密码，defaultEntity用得到
@@ -32,7 +35,8 @@ public class EmailUtil {
 	private static Multipart mp;// 附件添加的组件
 	private static List<FileDataSource> files = new LinkedList<FileDataSource>();// 存放附件文件
 
-		
+	final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+	 
 	public static String sendEmail(String emailTo) {  //收件人，多个收件人以半角逗号分隔
 		String userName = "accountbookv2@163.com"; // 发件人邮箱
 		String password = "accountbookv212"; // 发件人密码
@@ -54,9 +58,15 @@ public class EmailUtil {
 		if (props == null) {
 			props = System.getProperties();
 		}
-		props.put("mail.smtp.host", smtpHost);
-		props.put("mail.smtp.auth", "true"); // 需要身份验证
 		session = Session.getDefaultInstance(props, null);
+		props.setProperty("mail.smtp.host", smtpHost);
+        props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+        props.setProperty("mail.smtp.socketFactory.fallback", "false");
+        //邮箱发送服务器端口,这里设置为465端口
+        props.setProperty("mail.smtp.port", "465");
+        props.setProperty("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.auth", "true");
+		
 		// 置true可以在控制台（console)上看到发送邮件的过程
 		session.setDebug(true);
 		// 用session对象来创建并初始化邮件对象
