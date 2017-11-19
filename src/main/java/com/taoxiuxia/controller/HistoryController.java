@@ -24,6 +24,7 @@ import com.taoxiuxia.service.IIncomeService;
 import com.taoxiuxia.service.IItemService;
 import com.taoxiuxia.service.IPayMethodService;
 import com.taoxiuxia.util.Constants;
+import com.taoxiuxia.util.DateTimeUtil;
 import com.taoxiuxia.util.MyDateFormat;
 
 @Controller
@@ -69,10 +70,57 @@ public class HistoryController {
 		model.addAttribute("sessionUser", sessionUser);
 		return "pages/history";
 	}
+	
+	/**
+	 * 图表展示页面
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/showChartStatistics")
+	public String showChartStatistics(Model model,HttpSession session) {
+		String startdate = DateTimeUtil.firstDayOfThisMonth();
+		String enddate = DateTimeUtil.lastDayOfThisMonth();
+		
+		SessionUser sessionUser= (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
+		int userId = sessionUser.getUserId();
+		
+		List<Map> incomeList = historyService.last12Income(userId);
+		List<Map> expenditureList = historyService.last12Expenditure(userId);
+		model.addAttribute("last12Income", incomeList);
+		model.addAttribute("last12Expenditure", expenditureList);
+		
+		List<Map> incomeGroupByItemName = historyService.selectIncomeGroupByItemName(userId, startdate, enddate);
+		List<Map> expenditureGroupByItemName = historyService.selectExpenditureGroupByItemName(userId, startdate, enddate);
+		model.addAttribute("inGroupByItemName", incomeGroupByItemName);
+		model.addAttribute("exGroupByItemName", expenditureGroupByItemName);
+		
+		return "pages/chartStatistics";
+	}
+	
+	/**
+	 * 图表展示页面的搜索
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/searchChartStatistics", produces = "application/json;charset=UTF-8")
+	public @ResponseBody Map<String, Object> searchChartStatistics(Model model,HttpSession session, String startdate, String enddate) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		SessionUser sessionUser= (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
+		int userId = sessionUser.getUserId();
+		List<Map> incomeGroupByItemName = historyService.selectIncomeGroupByItemName(userId, startdate, enddate);
+		List<Map> expenditureGroupByItemName = historyService.selectExpenditureGroupByItemName(userId, startdate, enddate);
+		map.put("inGroupByItemName", incomeGroupByItemName);
+		map.put("exGroupByItemName", expenditureGroupByItemName);
+		return map;
+	}
+	
+	
 
 	/**
 	 * 
-	 * 搜索，返回json数据
+	 * 历史页搜索，返回json数据
 	 * 
 	 * @param model
 	 * @param type 支出/收入 ex/in

@@ -2,6 +2,8 @@ package com.taoxiuxia.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
 public class DateTimeUtil {
@@ -27,5 +29,25 @@ public class DateTimeUtil {
 			e.printStackTrace();
 		}  
 		return hours;
+	}
+	
+	/**
+	 * 本月第一天
+	 * @return
+	 */
+	public static String firstDayOfThisMonth(){
+		LocalDate today = LocalDate.now();
+        LocalDate firstday = LocalDate.of(today.getYear(),today.getMonth(),1);
+        return firstday + "";	// 默认格式YYYY-MM-dd
+	}
+	
+	/**
+	 * 本月最后一天
+	 * @return
+	 */
+	public static String lastDayOfThisMonth(){
+		LocalDate today = LocalDate.now();
+        LocalDate lastDay =today.with(TemporalAdjusters.lastDayOfMonth());
+        return lastDay + "";
 	}
 }

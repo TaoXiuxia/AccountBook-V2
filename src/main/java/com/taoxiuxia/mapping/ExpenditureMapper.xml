@@ -150,6 +150,41 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
+  <select id="searchLast12Expenditure" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    SELECT
+		DATE_FORMAT(t.date, '%Y-%m') month,
+		sum(money) sumMoney
+	FROM
+		expenditure t
+	WHERE
+		t.dele = 1
+	AND t.user_Id = #{userId,jdbcType=INTEGER}
+	AND DATE_FORMAT(date, '%Y-%m') > DATE_FORMAT(
+		date_sub(curdate(), INTERVAL 12 MONTH),
+		'%Y-%m'
+	)
+	GROUP BY
+		month
+  </select>
+  
+  <!-- 搜索一段时间内的支出，按照item name分组 -->
+  <select id="selectExpenditureGroupByItemName" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    SELECT
+		i.name,
+		sum(money) sumMoney
+	FROM
+		item i,
+		expenditure t
+	WHERE
+		i.id = t.item_id
+	AND t.dele = 1
+	AND t.user_id = #{userId,jdbcType=INTEGER}
+	AND DATE_FORMAT(date, '%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime,jdbcType=VARCHAR}, '%Y-%m-%d')
+	AND DATE_FORMAT(date, '%Y-%m-%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=VARCHAR}, '%Y-%m-%d')
+	GROUP BY
+		name
+  </select>
+  
   
   <!-- //////////////////////////////////////////////////////////// -->
   

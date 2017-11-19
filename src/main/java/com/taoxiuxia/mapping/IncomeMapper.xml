@@ -273,6 +273,48 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+ 
+  <!-- 最近12个月的收入 -->
+  <select id="searchLast12Income" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    SELECT
+		DATE_FORMAT(t.date, '%Y-%m') month,
+		sum(money) sumMoney
+	FROM
+		income t
+	WHERE
+		t.dele = 1
+	AND t.user_Id = #{userId,jdbcType=INTEGER}
+	AND DATE_FORMAT(date, '%Y-%m') > DATE_FORMAT(
+		date_sub(curdate(), INTERVAL 12 MONTH),
+		'%Y-%m'
+	)
+	GROUP BY
+		month
+  </select>
+  
+  <!-- 搜索一段时间内的收入，按照item name分组 -->
+  <select id="selectIncomeGroupByItemName" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    SELECT
+		i.name,
+		sum(money) sumMoney
+	FROM
+		item i,
+		income t
+	WHERE
+		i.id = t.item_id
+	AND t.dele = 1
+	AND t.user_id = #{userId,jdbcType=INTEGER}
+	AND DATE_FORMAT(date, '%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime,jdbcType=VARCHAR}, '%Y-%m-%d')
+	AND DATE_FORMAT(date, '%Y-%m-%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=VARCHAR}, '%Y-%m-%d')
+	GROUP BY
+		name
+  </select>
+  
+  
+  
+  
+  
+  
   
   
   <!-- 以下是自动生成的,以下的内容可能用不到，但是可以模仿这种代码方式，尽量减少代码冗余 -->

@@ -18,6 +18,10 @@ public interface IncomeMapper {
 
 	int insert(Income record);
 	
+	List<Map> searchLast12Income(Map map);
+	
+	List<Map> selectIncomeGroupByItemName(Map map);
+	
 	/////////////////////////////////////////////////////////
 
 	int deleteByPrimaryKey(Integer id);

@@ -98,12 +98,6 @@
 	Order By sort
   </select>
   
-  <!-- <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.taoxiuxia.model.Item">
-    insert into item (user_id, name, in_or_ex, remark, dele, sort)
-    values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, 
-      #{inOrEx,jdbcType=VARCHAR}, #{remark,jdbcType=CHAR}, #{dele,jdbcType=INTEGER},  #{sort,jdbcType=INTEGER});
-  </insert> -->
-  
   <select id="insert" parameterMap="itemParaMap" statementType="CALLABLE">
     CALL insertItem(?,?,?,?,?,?)
   </select>

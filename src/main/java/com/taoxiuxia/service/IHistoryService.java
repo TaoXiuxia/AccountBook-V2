@@ -26,4 +26,34 @@ public interface IHistoryService {
 	 * @return
 	 */
 	int countIncomesAndExpenditure(int userId,String inOrEx,int year, int month, String keyword);
+	
+	/**
+	 * 查询过去12个月的每月收入
+	 * @return
+	 */
+	List<Map> last12Income(int userId);
+	
+	/**
+	 * 查询过去12个月的每月支出
+	 * @return
+	 */
+	List<Map> last12Expenditure(int userId);
+	
+	/**
+	 * 按照日期搜索income，并按照item name分组
+	 * @param userId
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	List<Map> selectIncomeGroupByItemName(int userId, String startTime, String endTime);
+	
+	/**
+	 * 按照日期搜索expenditure，并按照item name分组
+	 * @param userId
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	List<Map> selectExpenditureGroupByItemName(int userId, String startTime, String endTime);
 }

@@ -1,18 +1,3 @@
-function setLeftColumn(){
-	$("#income").addClass("left-column-button-inactive");
-	$("#income").addClass("left-column-button-inactive-font");
-	$("#expenditure").addClass("left-column-button-inactive");
-	$("#expenditure").addClass("left-column-button-inactive-font");
-	$("#history").addClass("left-column-button-active");
-	$("#history").addClass("left-column-button-active-font");
-	$("#itemsManagement").addClass("left-column-button-inactive");
-	$("#itemsManagement").addClass("left-column-button-inactive-font");
-	$("#payMethodsManagement").addClass("left-column-button-inactive");
-	$("#payMethodsManagement").addClass("left-column-button-inactive-font");
-	$("#about").addClass("left-column-button-inactive");
-	$("#about").addClass("left-column-button-inactive-font");
-}
-
 //设置年份，从2016年到今年
 function setYear(){
 	var nowDate = new Date().Format("yyyy-MM-dd");

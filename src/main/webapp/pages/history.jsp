@@ -14,10 +14,6 @@
 <body>
 <div class="container-fluid padding-top15">
 	<div class="row">
-		<script language="JavaScript" type="text/JavaScript"> 
-			document.onload = setLeftColumn();
-		</script>
-		
 		<div class="col-xs-12">
 			<ol class="breadcrumb navigation">
 				<li class="navi-li">
@@ -70,6 +66,8 @@
 				
 				&nbsp;&nbsp;&nbsp;
 				<button onclick="search(1)">筛选</button>
+				
+				<a style="float: right; margin-right: 20px;" href="showChartStatistics">图表展示</a>
 			</div>
 			<br>
 			<div>
