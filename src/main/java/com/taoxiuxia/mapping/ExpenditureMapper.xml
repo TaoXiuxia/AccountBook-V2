@@ -154,17 +154,21 @@
     SELECT
 		DATE_FORMAT(t.date, '%Y-%m') month,
 		sum(money) sumMoney
-	FROM
-		expenditure t
-	WHERE
-		t.dele = 1
-	AND t.user_Id = #{userId,jdbcType=INTEGER}
-	AND DATE_FORMAT(date, '%Y-%m') > DATE_FORMAT(
-		date_sub(curdate(), INTERVAL 12 MONTH),
-		'%Y-%m'
-	)
-	GROUP BY
-		month
+	  FROM
+        expenditure t,
+        pay_method p
+    WHERE
+        t.dele = 1
+    AND t.type_of_money = p.id
+    AND p.in_or_ex = 'ex'
+    AND p.is_count_in_this_month_ex = 1
+    AND t.user_Id = #{userId,jdbcType=INTEGER}
+    AND DATE_FORMAT(date, '%Y-%m') > DATE_FORMAT(
+        date_sub(curdate(), INTERVAL 12 MONTH),
+        '%Y-%m'
+    )
+    GROUP BY
+        month
   </select>
   
   <!-- 搜索一段时间内的支出，按照item name分组 -->

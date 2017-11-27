@@ -36,11 +36,17 @@ public class Balance {
         this.month = month;
     }
 
-    public Float getActualBalance() {
+	public Float getActualBalance() {
         return actualBalance;
     }
 
     public void setActualBalance(Float actualBalance) {
         this.actualBalance = actualBalance;
     }
+    
+    @Override
+  	public String toString() {
+  		return "Balance [id=" + id + ", userId=" + userId + ", month=" + month + ", actualBalance=" + actualBalance
+  				+ "]";
+  	}
 }

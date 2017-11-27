@@ -41,7 +41,7 @@ public class PayMethodServiceImpl implements IPayMethodService {
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("userId", userId);
 		parameterMap.put("name", payMethodName);
-		parameterMap.put("isCountInThisMonthEx", isCountInThisMonthEx==-1?null:isCountInThisMonthEx);
+		parameterMap.put("isCountInThisMonthEx", isCountInThisMonthEx == -1 ? null : isCountInThisMonthEx);
 		parameterMap.put("inOrEx", inOrEx);
 		parameterMap.put("remark", remark);
 		parameterMap.put("dele", Constants.NOT_DELE);
