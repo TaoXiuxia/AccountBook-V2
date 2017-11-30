@@ -174,14 +174,17 @@
   <!-- 搜索一段时间内的支出，按照item name分组 -->
   <select id="selectExpenditureGroupByItemName" parameterType="java.util.HashMap" resultType="java.util.HashMap">
     SELECT
-		i.name,
-		sum(money) sumMoney
-	FROM
-		item i,
-		expenditure t
-	WHERE
-		i.id = t.item_id
-	AND t.dele = 1
+        i.name,
+        sum(money) sumMoney
+    FROM
+        item i,
+        expenditure t,
+        pay_method p
+    WHERE
+        i.id = t.item_id
+    AND t.type_of_money = p.id
+    AND p.is_count_in_this_month_ex = 1
+    AND t.dele = 1
 	AND t.user_id = #{userId,jdbcType=INTEGER}
 	AND DATE_FORMAT(date, '%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime,jdbcType=VARCHAR}, '%Y-%m-%d')
 	AND DATE_FORMAT(date, '%Y-%m-%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=VARCHAR}, '%Y-%m-%d')

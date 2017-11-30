@@ -179,7 +179,7 @@ public class HistoryServiceImpl implements IHistoryService {
 		return list;
 	}
 	
-	///////////////////////////    getter and setter   //////////////////////
+	//------------------ getter and setter ----------------------
 	public IncomeMapper getIncomeMapper() {
 		return incomeMapper;
 	}

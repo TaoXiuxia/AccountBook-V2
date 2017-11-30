@@ -174,8 +174,8 @@
     
     var option3 = {
         title:{
-            text:'支出项目比例'
-        },            
+            text:'实际支出项目比例'
+        }, 
         series:[{
             name:'访问量',
             type:'pie',    
