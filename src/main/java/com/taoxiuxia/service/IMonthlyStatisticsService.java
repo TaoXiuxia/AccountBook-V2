@@ -27,7 +27,7 @@ public interface IMonthlyStatisticsService {
 	 * @return
 	 */
 	float notActualExpenditure(int userId);
-
+	
 	/**
 	 * 查询月初结余，即上月末结余
 	 * 

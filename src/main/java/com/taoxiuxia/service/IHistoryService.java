@@ -49,11 +49,20 @@ public interface IHistoryService {
 	List<Map> selectIncomeGroupByItemName(int userId, String startTime, String endTime);
 	
 	/**
-	 * 按照日期搜索expenditure，并按照item name分组
+	 * 按照日期搜索expenditure，并按照item name分组,本月花呗与信用卡算入下月支出
 	 * @param userId
 	 * @param startTime
 	 * @param endTime
 	 * @return
 	 */
 	List<Map> selectExpenditureGroupByItemName(int userId, String startTime, String endTime);
+	
+	/**
+	 * 按照日期搜索expenditure，并按照item name分组，本月花呗与信用卡算入本月支出，同时上月花呗与信用卡也算入本月支出（还款）
+	 * @param userId
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	List<Map> selectAllExpenditureGroupByItemName(int userId, String startTime, String endTime);
 }

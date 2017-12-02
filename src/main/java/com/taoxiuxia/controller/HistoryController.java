@@ -92,8 +92,10 @@ public class HistoryController {
 		
 		List<Map> incomeGroupByItemName = historyService.selectIncomeGroupByItemName(userId, startdate, enddate);
 		List<Map> expenditureGroupByItemName = historyService.selectExpenditureGroupByItemName(userId, startdate, enddate);
+		List<Map> allExpenditureGroupByItemName = historyService.selectAllExpenditureGroupByItemName(userId, startdate, enddate);
 		model.addAttribute("inGroupByItemName", incomeGroupByItemName);
 		model.addAttribute("exGroupByItemName", expenditureGroupByItemName);
+		model.addAttribute("allExGroupByItemName", allExpenditureGroupByItemName);
 		
 		return "pages/chartStatistics";
 	}

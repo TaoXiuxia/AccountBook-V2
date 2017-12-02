@@ -46,7 +46,9 @@
 				</div>
 				<br>
 				<div id="chartmain2" style="width:600px; height: 400px; float:left"></div>
-				<div id="chartmain3" style="width:600px; height: 400px; float:left; margin-left: 200px;"></div>
+				<div id="chartmainPlaceholder" style="width:600px; height: 400px; float:left; margin-left: 200px;"></div>
+				<div id="chartmain3" style="width:600px; height: 400px; float:left"></div>
+                <div id="chartmain4" style="width:600px; height: 400px; float:left; margin-left: 200px;"></div>
 			</div>
 		</div>
 	</div>
@@ -74,7 +76,7 @@
 	        trigger: 'axis'
 	    },
 	    legend: {
-	        data:['收入','支出']  // 这里是折线图的图例，需要与下面的series中的name对应
+	        data:['收入','实际支出']  // 这里是折线图的图例，需要与下面的series中的name对应
 	    },
 	    toolbox: {
 	        show: true,
@@ -117,7 +119,7 @@
 	            }
 	        },
 	        {
-	            name:'支出',
+	            name:'实际支出',
 	            type:'line',
 	            data: expenditureArr,  // 支出
 	            markPoint: {
@@ -149,14 +151,6 @@
 		})
 	</c:forEach> 
 		
-	var exDataArr = new Array();
-	<c:forEach items="${exGroupByItemName}" var="t">  
-		exDataArr.push({
-			name: "${t.name}"+" : "+"${t.sumMoney}",
-		    value: "${t.sumMoney}"
-		})
-	</c:forEach> 
-	
     var option2 = {
         title:{
             text:'收入项目比例'
@@ -172,9 +166,18 @@
     var myChart2 = echarts.init(document.getElementById('chartmain2'));
     myChart2.setOption(option2);
     
+    // 实际支出项目比例
+    var exDataArr = new Array();
+    <c:forEach items="${exGroupByItemName}" var="t">  
+        exDataArr.push({
+            name: "${t.name}"+" : "+"${t.sumMoney}",
+            value: "${t.sumMoney}"
+        })
+    </c:forEach>
     var option3 = {
         title:{
-            text:'实际支出项目比例'
+            text:'实际支出项目比例',
+            subtext:'花呗等支出算入下月的消费',
         }, 
         series:[{
             name:'访问量',
@@ -185,6 +188,29 @@
     };
     var myChart3 = echarts.init(document.getElementById('chartmain3'));
     myChart3.setOption(option3);
+    
+    // 实际支出项目比例
+    var allExDataArr = new Array();
+    <c:forEach items="${allExGroupByItemName}" var="t">  
+        allExDataArr.push({
+            name: "${t.name}"+" : "+"${t.sumMoney}",
+            value: "${t.sumMoney}"
+        })
+    </c:forEach>
+    var option4 = {
+        title:{
+            text:'支出项目比例',
+            subtext:'上月花呗算入本月还款，本月花呗也计入本月支出(实际上花呗支出被计算了2次)',
+        }, 
+        series:[{
+            name:'访问量',
+            type:'pie',    
+            radius:'60%', 
+            data:allExDataArr
+        }]
+    };
+    var myChart4 = echarts.init(document.getElementById('chartmain4'));
+    myChart4.setOption(option4);
 </script>
 
 <script type="text/javascript">

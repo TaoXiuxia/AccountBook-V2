@@ -17,6 +17,8 @@ public interface ExpenditureMapper {
 	List<Map> searchLast12Expenditure(Map map);
 	
 	List<Map> selectExpenditureGroupByItemName(Map map);
+	
+	List<Map> selectAllExpenditureGroupByItemName(Map map);
 
 	////////////////////////////////////////////////////////////////
 

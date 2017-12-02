@@ -171,7 +171,7 @@
         month
   </select>
   
-  <!-- 搜索一段时间内的支出，按照item name分组 -->
+  <!-- 搜索一段时间内的支出，按照item name分组，本月花呗与信用卡算入下月支出 -->
   <select id="selectExpenditureGroupByItemName" parameterType="java.util.HashMap" resultType="java.util.HashMap">
     SELECT
         i.name,
@@ -190,6 +190,24 @@
 	AND DATE_FORMAT(date, '%Y-%m-%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=VARCHAR}, '%Y-%m-%d')
 	GROUP BY
 		name
+  </select>
+  
+   <!-- 搜索一段时间内的支出，按照item name分组，本月花呗与信用卡算入本月支出，上月花呗与信用卡也算入本月支出（还款） -->
+  <select id="selectAllExpenditureGroupByItemName" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    SELECT
+        i.name,
+        sum(money) sumMoney
+    FROM
+        item i,
+        expenditure t
+    WHERE
+        i.id = t.item_id
+    AND t.dele = 1
+    AND t.user_id = #{userId,jdbcType=INTEGER}
+    AND DATE_FORMAT(date, '%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime,jdbcType=VARCHAR}, '%Y-%m-%d')
+    AND DATE_FORMAT(date, '%Y-%m-%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=VARCHAR}, '%Y-%m-%d')
+    GROUP BY
+        name
   </select>
   
   

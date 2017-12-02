@@ -179,6 +179,16 @@ public class HistoryServiceImpl implements IHistoryService {
 		return list;
 	}
 	
+	@Override
+	public List<Map> selectAllExpenditureGroupByItemName(int userId, String startTime, String endTime) {
+		Map<String, String>paraMap = new HashMap<String, String>();
+		paraMap.put("userId", userId+"");
+		paraMap.put("startTime", startTime);
+		paraMap.put("endTime", endTime);
+		List<Map> list= expenditureMapper.selectAllExpenditureGroupByItemName(paraMap);
+		return list;
+	}
+	
 	//------------------ getter and setter ----------------------
 	public IncomeMapper getIncomeMapper() {
 		return incomeMapper;
