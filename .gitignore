@@ -2,5 +2,6 @@
 /.settings/
 .project
 .classpath
-mybatis-spring.xml
+.checkstyle
+/src/main/resources/mybatis-spring.xml
 mysqldb.properties
