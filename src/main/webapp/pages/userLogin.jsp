@@ -12,8 +12,6 @@
 
 </head>
 <body>
-
-	<!-- 头 -->
 	<div class="container-fluid padding-top15">
 		<div class="row">
 			<div class="col-xs-12">
@@ -27,17 +25,17 @@
 	<div class="register">
 		<div class="div1">
 			<label class="label1">帐号/邮箱：</label>
-			<input class="input1" id="account" placeholder="帐号/邮箱">
+			<input class="input1" id="account" placeholder="帐号/邮箱" maxlength="12">
 		</div>
 		
 		<div class="div1">
 			<label class="label1">登录密码：</label>
-			<input class="input1" type="password" id="password" placeholder="密码长度6-16位字符，由数字、字母组成">
+			<input class="input1" type="password" id="password" placeholder="密码"  maxlength="12">
 		</div>
 		
 		<div class="div1">
 			<label class="label1">验证码：</label>
-			<input class="input2" type="text" id="checkCode" placeholder="请输入验证码">
+			<input class="input2" id="checkCode" placeholder="请输入验证码" maxlength="4">
 			<a onclick="refreshCheckCodeButton()" href="#" id="refreshCheckCode"><img src="checkCode.action"></a>
 		</div>
 		

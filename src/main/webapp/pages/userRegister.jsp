@@ -12,8 +12,6 @@
 
 </head>
 <body>
-
-	<!-- 头 -->
 	<div class="container-fluid padding-top15">
 		<div class="row">
 			<div class="col-xs-12">
@@ -27,7 +25,7 @@
 	<div class="register">
 		<div class="div1">
 			<label class="label1">帐号：</label>
-			<input class="input1" id="userName" name="userName" placeholder="长度1-20位字符，中文、数字、_ 、字母">
+			<input class="input1" id="userName" name="userName" placeholder="长度1-12位，由数字、字母组成"  maxlength="12"> 
 		</div>
 		<div class="div1">
 			<label class="label1">邮箱：</label>
@@ -35,11 +33,11 @@
 		</div>
 		<div class="div1">
 			<label class="label1">登录密码：</label>
-			<input class="input1" type="password" id="password" placeholder="密码长度6-16位字符，由数字、字母组成">
+			<input class="input1" type="password" id="password" placeholder="长度6-12位，由数字、字母组成"  maxlength="12">
 		</div>
 		<div class="div1">
 			<label class="label1">确认登录密码：</label>
-			<input class="input1" type="password" id="repassword" placeholder="请再次输入密码">
+			<input class="input1" type="password" id="repassword" placeholder="请再次输入密码"  maxlength="12">
 		</div>
 		<div class="div1">
 			<button class="btn1" onclick="register()">下一步</button>

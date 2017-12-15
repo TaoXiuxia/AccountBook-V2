@@ -1,33 +1,24 @@
 // 设置flag，防止充分点击，多次提交
 var flag = true;
 
-function setLeftColumn(){
-	$("#income").addClass("left-column-button-active");
-	$("#income").addClass("left-column-button-active-font");
-	$("#expenditure").addClass("left-column-button-inactive");
-	$("#expenditure").addClass("left-column-button-inactive-font");
-	$("#history").addClass("left-column-button-inactive");
-	$("#history").addClass("left-column-button-inactive-font");
-	$("#itemsManagement").addClass("left-column-button-inactive");
-	$("#itemsManagement").addClass("left-column-button-inactive-font");
-	$("#payMethodsManagement").addClass("left-column-button-inactive");
-	$("#payMethodsManagement").addClass("left-column-button-inactive-font");
-	$("#about").addClass("left-column-button-inactive");
-	$("#about").addClass("left-column-button-inactive-font");
-}
-
 /**
  * 增加收入
  */
 function addMoney(){
 	if(flag==true){
-		flag=false;
 		var date = $("#date").val();
 		var item = $("#item option:selected").val();
 		var money = $("#money").val();
 		var moneyType = $("#money-type option:selected").val();
 		var remark = $("#remarkForIncome").val();
-		remark = replaceEnter2Space(remark);
+		remark = $.trim(replaceEnter2Space(remark));
+		if(!validateNotEmpty(money, "请输入金额")){
+			return false;
+		}
+		if(!validateLength(remark, 0, 199, "备注不能超过199个字符")){
+			return false;
+		}
+		flag = false;
 		$.post("addIncome",{
 			"date":date,
 			"item":item,
@@ -67,7 +58,14 @@ function changeIncome(incomeId,date,money,itemId,remark,money_type){
        		var changed_money_type = content.find("#changed-money-type").val();
        		var itemId = content.find("#changedItem option:selected").val();
        		var remark = content.find("#changedRemark").val();
-       		remark = replaceEnter2Space(remark);
+       		remark = $.trim(replaceEnter2Space(remark));
+    		if(!validateNotEmpty(money, "请输入金额")){
+    			return false;
+    		}
+    		if(!validateLength(remark, 0, 199, "备注不能超过199个字符")){
+    			return false;
+    		}
+       		
 			$.post("../incomeController/changeIncome",{
 				"incomeId":incomeId,
 				"money":money,

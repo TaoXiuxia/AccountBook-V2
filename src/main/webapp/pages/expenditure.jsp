@@ -15,10 +15,6 @@
 <body>
 <div class="container-fluid padding-top15">
 	<div class="row">
-		<script language="JavaScript" type="text/JavaScript"> 
-			document.onload = setLeftColumn();
-		</script>
-		
 		<div class="col-xs-12">
 			<ol class="breadcrumb navigation">
 				<li class="navi-li">
@@ -55,7 +51,7 @@
 					
 					<div class="addIncome_div1">
 						<label class="label2">金额：</label>
-						<input class="add-money" placeholder="金额" id="money">
+						<input class="add-money" placeholder="金额" id="money" onkeyup="this.value=this.value.replace(/[^0-9.-]+/,'');">
 					</div><br>
 					
 					<div class="addIncome_div2">
@@ -103,7 +99,7 @@
 				
 				<div class="div3">
 					<label class="label4">本月实际结余：</label>
-					<input class="input2" placeholder="月末输入" id="actual_balance">&nbsp;&nbsp;
+					<input class="input2" placeholder="月末输入" id="actual_balance" onkeyup="this.value=this.value.replace(/[^0-9.-]+/,'');">&nbsp;&nbsp;
 					<button onclick="submitBalance()" id="submitBalanceButton">提交</button>
 					<button onclick="changeBalance('this', ${actualBalance}, ${actualBalanceId})">修改</button>
 				</div>
@@ -171,7 +167,7 @@
 	
 	<div class="addIncome_div1">
 		<label class="label2">金额：</label>
-		<input class="add-money" id="changedMoney">
+		<input class="add-money" id="changedMoney" onkeyup="this.value=this.value.replace(/[^0-9.-]+/,'');">
 	</div><br>
 	
 	<div class="addIncome_div2">
@@ -185,7 +181,7 @@
 	<div><label id="month_label"></label></div><br>
 	<div class="addIncome_div1">
 		<label class="label5">金额：</label>
-		<input class="input2" id="changed_balance">
+		<input class="input2" id="changed_balance" onkeyup="this.value=this.value.replace(/[^0-9.-]+/,'');">
 	</div><br>
 </div>
 

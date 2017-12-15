@@ -4,7 +4,9 @@ function refreshCheckCodeButton(){
 }
 
 // 登录
-function login() {
+// 登录不对输入做校验，只注册才校验
+function login() 
+{
 	var account = $("#account").val();
 	var password = $("#password").val();
 	var checkCode = $("#checkCode").val();
@@ -39,3 +41,5 @@ $(document).keyup(function(event) {
 		login();
 	}
 })
+
+

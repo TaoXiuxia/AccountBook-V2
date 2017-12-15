@@ -5,6 +5,7 @@
 <script language="javascript" type="text/javascript" src="../res/My97DatePicker/WdatePicker.js"></script>
 <link href="../res/css/public.css" rel="stylesheet">
 <script src="../res/js/user.logout.js"></script>
+<script src="../res/js/common/common.js"></script>
 
 <!-- 可折叠菜单的引入 -->
 <link rel=stylesheet type=text/css href="../res/foldingMenu/css/lrtk.css">

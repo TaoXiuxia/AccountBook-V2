@@ -5,16 +5,15 @@ function refreshCheckCodeButton(){
 
 // 注册
 function register() {
+	if(!validator()){
+		return;
+	}
+	
 	var userName = $("#userName").val();
 	var email = $("#email").val();
 	var password = $("#password").val();
 	var repassword = $("#repassword").val();
 	var checkCode = $("#checkCode").val();
-	
-	if (password != repassword) {
-		alert("两次输入的密码不一致");
-		return;
-	}
 	
 	// loading
 	var index = layer.load(1, {
@@ -65,6 +64,7 @@ $(document).keyup(function(event) {
 
 // 激活用户
 function active(){
+	
 	$.ajax({
 		type : 'POST',  
 	    url : 'active.action',  
@@ -88,4 +88,31 @@ function active(){
 			alert("注册失败");
 		}
 	});
+}
+
+function validator() {
+	var userName = document.getElementById("userName").value;
+	if(!validateAccount(userName)){
+		return false;
+	}
+	
+	var email = document.getElementById("email").value;
+	if(!validateEmail(email)){
+		return false;
+	}
+	
+	var password = document.getElementById("password").value;
+	if(!validatePassword(password)){
+		return false;
+	}
+	var repassword = document.getElementById("repassword").value;
+	if(!validatePassword(repassword)){
+		return false;
+	}
+	if (password != repassword) {
+		alert("两次输入的密码不一致");
+		return false;
+	}
+	
+	return true;
 }

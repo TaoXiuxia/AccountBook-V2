@@ -14,10 +14,6 @@
 <body>
 <div class="container-fluid padding-top15">
 	<div class="row">
-		<script language="JavaScript" type="text/JavaScript"> 
-			document.onload = setLeftColumn();
-		</script>
-		
 		<div class="col-xs-12">
 			<ol class="breadcrumb navigation">
 				<li class="navi-li">

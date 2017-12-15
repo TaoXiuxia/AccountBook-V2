@@ -12,8 +12,6 @@
 
 </head>
 <body>
-
-	<!-- 头 -->
 	<div class="container-fluid padding-top15">
 		<div class="row">
 			<div class="col-xs-12">
@@ -40,7 +38,7 @@
 				
 				<div class="div1">
 					<label class="label1">激活码：</label>
-					<input class="input2" type="text" name="activationCode" placeholder="请输入激活码">
+					<input class="input2" type="text" name="activationCode" placeholder="请输入激活码" maxlength="6" onkeyup="this.value=this.value.replace(/[^0-9-]+/,'');" >
 				</div>
 				
 				<div class="div1">
