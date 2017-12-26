@@ -16,6 +16,9 @@ function unenableInput(actualSurplus){
 
 function submitBalance(){
 	var actualBalance = $("#actual_balance").val();
+	if(!validateNumOnly(actualBalance, "金额只能是数字")){
+		return false;
+	}
 	$.post("../monthlyStatisticsController/addBalance",{
 		"actualBalance":actualBalance
 	});
@@ -42,6 +45,9 @@ function changeBalance(month, value1, balanceId){ // 如果参数month为last，
 		}, function(){
 			var content = $(".layui-layer-content");
 			var changed_balance = content.find("#changed_balance").val();
+			if(!validateNumOnly(changed_balance, "金额只能是数字")){
+				return false;
+			}
        		$.post("../monthlyStatisticsController/changeBalance",{
 				"changed_balance":changed_balance,
 				"balanceId":balanceId

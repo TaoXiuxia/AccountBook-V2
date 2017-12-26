@@ -6,6 +6,7 @@
 <link href="../res/css/public.css" rel="stylesheet">
 <script src="../res/js/user.logout.js"></script>
 <script src="../res/js/common/common.js"></script>
+<script src="../res/js/common/validator.js"></script>
 
 <!-- 可折叠菜单的引入 -->
 <link rel=stylesheet type=text/css href="../res/foldingMenu/css/lrtk.css">

@@ -1,18 +1,3 @@
-function setLeftColumn(){
-	$("#income").addClass("left-column-button-inactive");
-	$("#income").addClass("left-column-button-inactive-font");
-	$("#expenditure").addClass("left-column-button-inactive");
-	$("#expenditure").addClass("left-column-button-inactive-font");
-	$("#history").addClass("left-column-button-inactive");
-	$("#history").addClass("left-column-button-inactive-font");
-	$("#itemsManagement").addClass("left-column-button-active");
-	$("#itemsManagement").addClass("left-column-button-active-font");
-	$("#payMethodsManagement").addClass("left-column-button-inactive");
-	$("#payMethodsManagement").addClass("left-column-button-inactive-font");
-	$("#about").addClass("left-column-button-inactive");
-	$("#about").addClass("left-column-button-inactive-font");
-}
-
 function addItem(inOrEx){
 	layer.confirm(
 		$("#addItemLayer").html(),{
@@ -21,6 +6,17 @@ function addItem(inOrEx){
 			var content = $(".layui-layer-content");
        		var itemName = content.find("#addedItemName").val();
        		var remark = content.find("#addedItemRemark").val();
+       		
+       		if(!validateNotEmpty(itemName, "项目名称不能为空")){
+    			return false;
+    		}
+       		if(!validateLength(itemName, 0, 199, "项目名称不能超过199个字符")){
+    			return false;
+    		}
+       		if(!validateLength(remark, 0, 199, "备注不能超过199个字符")){
+    			return false;
+    		}
+       		
 			$.post("../itemController/addItem",{
 				"itemName":itemName,
 				"remark":remark,
@@ -43,6 +39,15 @@ function changeItem(itemId, itemName,remark,inOrEx){
 		var content = $(".layui-layer-content");
 		var itemName = content.find("#addedItemName").val();
 		var remark = content.find("#addedItemRemark").val();
+		if(!validateNotEmpty(itemName, "项目名称不能为空")){
+			return false;
+		}
+   		if(!validateLength(itemName, 0, 199, "项目名称不能超过199个字符")){
+			return false;
+		}
+   		if(!validateLength(remark, 0, 199, "备注不能超过199个字符")){
+			return false;
+		}
 		$.post("../itemController/changeItem",{
 			"itemId":itemId,
 			"itemName":itemName,

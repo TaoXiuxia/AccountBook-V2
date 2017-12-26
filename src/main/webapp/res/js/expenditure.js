@@ -1,21 +1,6 @@
 // 设置flag，防止充分点击，多次提交
 var flag = true;
 
-function setLeftColumn(){
-	$("#income").addClass("left-column-button-inactive");
-	$("#income").addClass("left-column-button-inactive-font");
-	$("#expenditure").addClass("left-column-button-active");
-	$("#expenditure").addClass("left-column-button-active-font");
-	$("#history").addClass("left-column-button-inactive");
-	$("#history").addClass("left-column-button-inactive-font");
-	$("#itemsManagement").addClass("left-column-button-inactive");
-	$("#itemsManagement").addClass("left-column-button-inactive-font");
-	$("#payMethodsManagement").addClass("left-column-button-inactive");
-	$("#payMethodsManagement").addClass("left-column-button-inactive-font");
-	$("#about").addClass("left-column-button-inactive");
-	$("#about").addClass("left-column-button-inactive-font");
-}
-
 /**
  * 添加支出
  */
@@ -28,6 +13,9 @@ function addMoney(){
 		var remark = $("#remarkForExpenditure").val();
 		remark = $.trim(replaceEnter2Space(remark));
 		if(!validateNotEmpty(money, "请输入金额")){
+			return false;
+		}
+		if(!validateNumOnly(money, "金额只能是数字")){
 			return false;
 		}
 		if(!validateLength(remark, 0, 199, "备注不能超过199个字符")){
@@ -74,6 +62,9 @@ function changeExpenditure(expenditureId,date,money,itemId,remark,money_type){
        		var remark = content.find("#changedRemark").val();
        		remark = $.trim(replaceEnter2Space(remark));
        		if(!validateNotEmpty(money, "请输入金额")){
+    			return false;
+    		}
+       		if(!validateNumOnly(money, "金额只能是数字")){
     			return false;
     		}
     		if(!validateLength(remark, 0, 199, "备注不能超过199个字符")){

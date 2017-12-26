@@ -10,7 +10,7 @@
 <link href="../res/css/history.css" rel="stylesheet">
 <script src="../res/js/history.js"></script>
 <script src="../res/js/common/common.js"></script>
-<script type="text/javascript" src="../res/echarts/echarts.js"></script>
+<script type="text/javascript" src="../res/echarts/echarts.min.js"></script>
 </head>
 <body>
 

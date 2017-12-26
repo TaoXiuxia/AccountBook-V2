@@ -1,18 +1,3 @@
-function setLeftColumn(){
-	$("#income").addClass("left-column-button-inactive");
-	$("#income").addClass("left-column-button-inactive-font");
-	$("#expenditure").addClass("left-column-button-inactive");
-	$("#expenditure").addClass("left-column-button-inactive-font");
-	$("#history").addClass("left-column-button-inactive");
-	$("#history").addClass("left-column-button-inactive-font");
-	$("#itemsManagement").addClass("left-column-button-inactive");
-	$("#itemsManagement").addClass("left-column-button-inactive-font");
-	$("#payMethodsManagement").addClass("left-column-button-active");
-	$("#payMethodsManagement").addClass("left-column-button-active-font");
-	$("#about").addClass("left-column-button-inactive");
-	$("#about").addClass("left-column-button-inactive-font");
-}
-
 function changePayMethod(payMethodId, payMethodName, isCountInThisMonthEx, remark, inOrEx){
 	layer.confirm(
 		$("#addPayMethodLayer").html(),{
@@ -37,6 +22,15 @@ function changePayMethod(payMethodId, payMethodName, isCountInThisMonthEx, remar
 			var isCountInThisMonthEx = -1;
 		}
 		var remark = content.find("#addedPayMethodRemark").val();
+		if(!validateNotEmpty(payMethodName, "收支方式名称不能为空")){
+			return false;
+		}
+   		if(!validateLength(payMethodName, 0, 199, "收支方式名称不能超过199个字符")){
+			return false;
+		}
+   		if(!validateLength(remark, 0, 199, "备注不能超过199个字符")){
+			return false;
+		}
 		$.post("../payMethodController/changePayMethod",{
 			"payMethodId":payMethodId,
 			"payMethodName":payMethodName,
@@ -63,7 +57,7 @@ function addPayMethod(inOrEx){
 	layer.confirm(
 		$("#addPayMethodLayer").html(),{
 	    btn: ['添加','返回'], //按钮
-		area: ['420px', '260px'], //宽高
+		area: ['420px', '350px'], //宽高
 		success: function(layero, index){
 			var content = $(".layui-layer-content");
  		   	if(inOrEx == "in"){  //收入
@@ -79,6 +73,17 @@ function addPayMethod(inOrEx){
 			var isCountInThisMonthEx = -1;
 		}
 		var remark = content.find("#addedPayMethodRemark").val();
+		
+		if(!validateNotEmpty(payMethodName, "收支方式名称不能为空")){
+			return false;
+		}
+   		if(!validateLength(payMethodName, 0, 199, "收支方式名称不能超过199个字符")){
+			return false;
+		}
+   		if(!validateLength(remark, 0, 199, "备注不能超过199个字符")){
+			return false;
+		}
+		
 		$.post("../payMethodController/addPayMethod",{
 			"payMethodName":payMethodName,
 			"isCountInThisMonthEx":isCountInThisMonthEx,

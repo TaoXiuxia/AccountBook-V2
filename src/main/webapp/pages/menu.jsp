@@ -29,48 +29,13 @@
 		
 		<p class="menu_head">日程</p>
 		<div style="display:none" class=menu_body >
-			<a href="#" onclick="">日历</a>
+			<a href="#" onclick="">日历（还没做）</a>
 		</div>
 		
 		<p class="menu_head">关于</p>
 		<div style="display:none" class=menu_body >
 			<a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
 		</div>
-		
-		
-		
-		<!-- <p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div><p class="menu_head">关于</p><div style="display:none" class=menu_body ><a href="#" onclick="reloadMainContent('../aboutController/showAbout')">关于</a>
-		</div> -->
-		
-		
-		
-		
 	</div>
 </body>
 

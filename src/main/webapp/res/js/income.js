@@ -15,6 +15,9 @@ function addMoney(){
 		if(!validateNotEmpty(money, "请输入金额")){
 			return false;
 		}
+		if(!validateNumOnly(money, "金额只能是数字")){
+			return false;
+		}
 		if(!validateLength(remark, 0, 199, "备注不能超过199个字符")){
 			return false;
 		}
@@ -62,10 +65,12 @@ function changeIncome(incomeId,date,money,itemId,remark,money_type){
     		if(!validateNotEmpty(money, "请输入金额")){
     			return false;
     		}
+    		if(!validateNumOnly(money, "金额只能是数字")){
+    			return false;
+    		}
     		if(!validateLength(remark, 0, 199, "备注不能超过199个字符")){
     			return false;
     		}
-       		
 			$.post("../incomeController/changeIncome",{
 				"incomeId":incomeId,
 				"money":money,
@@ -74,7 +79,6 @@ function changeIncome(incomeId,date,money,itemId,remark,money_type){
 				"remark":remark,
 				"date":date
 			});
-			
 			//不能刷新页面，应该使用ajax停留在当前的第n页
 			setTimeout('location.reload()', 1000);
 		});

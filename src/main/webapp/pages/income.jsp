@@ -31,7 +31,7 @@
 					
 					<div class="addIncome_div1">
 						<label class="label2">日期：</label>
-						<input class="Wdate add-data" type="text" onClick="WdatePicker()" id="date">
+						<input class="Wdate add-data" type="text" readonly="true" onClick="WdatePicker()" id="date">
 					</div><br>
 					
 					<div class="addIncome_div1"><label class="label2">项目：</label>
@@ -52,7 +52,7 @@
 					
 					<div class="addIncome_div1">
 						<label class="label2">金额：</label>
-						<input class="add-money" placeholder="金额" id="money" onkeyup="this.value=this.value.replace(/[^0-9.-]+/,'');">
+						<input class="add-money" placeholder="金额" id="money">
 					</div><br>
 					
 					<div class="addIncome_div2">
@@ -100,7 +100,7 @@
 				
 				<div class="div3">
 					<label class="label4">本月实际结余：</label>
-					<input class="input2" placeholder="月末输入" id="actual_balance" onkeyup="this.value=this.value.replace(/[^0-9.-]+/,'');">&nbsp;&nbsp;
+					<input class="input2" placeholder="月末输入" id="actual_balance">&nbsp;&nbsp;
 					<button onclick="submitBalance()" id="submitBalanceButton">提交</button>
 					<button onclick="changeBalance('this', ${actualBalance}, ${actualBalanceId})">修改</button>
 				</div>
@@ -141,12 +141,11 @@
 	</div>
 </div>
 
-
-
+<!-- 弹出框 -->
 <div id="addContent" class="hidden">
 	<div class="addIncome_div1">
 		<label class="label2">日期：</label>
-		<input class="Wdate add-data" type="text" onClick="WdatePicker()" id="changedDate">
+		<input class="Wdate add-data" type="text" onClick="WdatePicker()" id="changedDate" readonly="true">
 	</div><br>
 	
 	<div class="addIncome_div1">
@@ -169,7 +168,7 @@
 	
 	<div class="addIncome_div1">
 		<label class="label2">金额：</label>
-		<input class="add-money" id="changedMoney" onkeyup="this.value=this.value.replace(/[^0-9.-]+/,'');">
+		<input class="add-money" id="changedMoney">
 	</div><br>
 	
 	<div class="addIncome_div2">
@@ -183,7 +182,7 @@
 	<div><label id="month_label"></label></div><br>
 	<div class="addIncome_div1">
 		<label class="label5">金额：</label>
-		<input class="input2" id="changed_balance" onkeyup="this.value=this.value.replace(/[^0-9.-]+/,'');">
+		<input class="input2" id="changed_balance">
 	</div><br>
 </div>
 
