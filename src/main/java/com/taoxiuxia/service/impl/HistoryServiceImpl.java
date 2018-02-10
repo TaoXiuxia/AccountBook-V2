@@ -40,10 +40,10 @@ public class HistoryServiceImpl implements IHistoryService {
 					monthStr=""+month;
 				}
 				map.put("beginDate", year+"-"+monthStr+"-01");
-				map.put("endDate", year+"-"+monthStr+"-30");  // 数据库中是按照月份查的，因此最后的日期项无所谓
+				map.put("endDate", year+"-"+monthStr+"-28");  // 数据库中是按照月份查的，因此最后的日期项无所谓
 			}else{ // 只指定了年份，没有指定月份
 				map.put("beginDate", year+"-01-01");
-				map.put("endDate", year+"-12-30");
+				map.put("endDate", year+"-12-28");
 			}
 		}else{ //没有指定时间
 			map.put("beginDate", null);
@@ -80,10 +80,10 @@ public class HistoryServiceImpl implements IHistoryService {
 					monthStr=""+month;
 				}
 				map.put("beginDate", year+"-"+monthStr+"-01");
-				map.put("endDate", year+"-"+monthStr+"-30");  // 数据库中是按照月份查的，因此最后的日期项无所谓
+				map.put("endDate", year+"-"+monthStr+"-28");  // 数据库中是按照月份查的，因此最后的日期项无所谓
 			}else{ // 只指定了年份，没有指定月份
 				map.put("beginDate", year+"-01-01");
-				map.put("endDate", year+"-12-30");
+				map.put("endDate", year+"-12-28");
 			}
 		}else{ //没有指定时间
 			map.put("beginDate", null);
