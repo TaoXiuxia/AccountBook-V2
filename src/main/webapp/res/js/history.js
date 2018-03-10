@@ -20,14 +20,15 @@ function setMonthEnable(){
 
 /**
  * 前一页/后一页
- * @param forOrBackward
+ * @param foreOrBackward
  * @param totalPages
  */
-function  gotoPage(forOrBackward, totalPages){
-	var page = parseInt($("#curPage").text()) + parseInt(forOrBackward);
+function  gotoPage(foreOrBackward){
+	totalPages = $("#totalPages").text();
+	var page = parseInt($("#curPage").text()) + parseInt(foreOrBackward);
 	if(page < 1){
 		page = 1;
-	}else if(page>totalPages){
+	}else if(page > totalPages){
 		page = totalPages;
 	}
 	search(page);
@@ -94,7 +95,8 @@ function search(page){
 				            "    <td>"+ msg.list[i].remark +"</td>"+
 				            "    <td>"+ operation +"</td>"+
 				            "</tr>"
-						)
+						);
+						
 				}
 			}
 			$("#curPage").text(msg.curPage);

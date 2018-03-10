@@ -119,13 +119,13 @@
 			&nbsp;
 			每页显示<label>20</label>条
 			&nbsp;
-			<a href="#" onClick="gotoPage(-${totalPages}, ${totalPages})">首页</a> <!-- 首页就往前跳全部页 -->
+			<a href="#" onClick="gotoPage(-${totalPages})">首页</a> <!-- 首页就往前跳全部页 -->
 			&nbsp;
-			<a href="#" onClick="gotoPage(-1, ${totalPages})">上一页</a>
+			<a href="#" onClick="gotoPage(-1)">上一页</a>
 			&nbsp;
-			<a href="#" onClick="gotoPage(1, ${totalPages})">下一页</a>
+			<a href="#" onClick="gotoPage(1)">下一页</a>
 			&nbsp;
-			<a href="#" onClick="gotoPage(${totalPages}, ${totalPages})">最后一页</a> <!-- 最后一页就往后跳全部页 -->
+			<a href="#" onClick="gotoPage(${totalPages})">最后一页</a> <!-- 最后一页就往后跳全部页 -->
 			<br><br><br>
 		</div>
 	</div>
